@@ -1,37 +1,41 @@
 package cmu.TeamAxis.databean;
 
 public class ProductBean {
-	 private String description;
-     private String price;
-     private String type;
-     
-     public ProductBean(String description, String price, String type) {
-    	 this.description = description;
-    	 this.price = price;
-    	 this.type = type;
-     }
-	
-     public String getDescription() {
-    	 return description;
-     }
+    private long productID;
+    private String productType;
+    private String productDescription;
+    private double price;
 
-     public String getPrice() {
-    	 return price;
-     }
-     
-     public String getType() {
-    	 return type;
-     }
-   
-     public void setDescription(String s) {
-    	 description = s;
-     }
-     
-     public void setPrice(String s) {
-    	 price = s;
-     }
-     
-     public void setType(String s) {
-    	 type = s;
-     }
+    public long getProductID() {
+	return productID;
+    }
+
+    public void setProductID(long productID) {
+	this.productID = productID;
+    }
+
+    public String getProductDescription() {
+	return productDescription;
+    }
+
+    public void setProductDescription(String productDescription) {
+	this.productDescription = productDescription;
+    }
+
+    public String getProductType() {
+	return productType;
+    }
+
+    public void setProductType(String productType) {
+	this.productType = productType;
+    }
+
+    public double getPrice() {
+	return price;
+    }
+
+    public void setPrice(double price) {
+	this.price = price;
+    }
+
 }

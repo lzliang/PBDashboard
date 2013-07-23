@@ -2,8 +2,10 @@ package cmu.TeamAxis.databean;
 
 public class ProductBean {
     private long productID;
+    private String productName;
     private String productType;
     private String productDescription;
+    private String barCode;
     private double price;
 
     public long getProductID() {
@@ -36,6 +38,22 @@ public class ProductBean {
 
     public void setPrice(double price) {
 	this.price = price;
+    }
+
+    public String getProductName() {
+	return productName;
+    }
+
+    public void setProductName(String productName) {
+	this.productName = productName;
+    }
+
+    public String getBarCode() {
+	return barCode;
+    }
+
+    public void setBarCode(String barCode) {
+	this.barCode = barCode;
     }
 
 }

@@ -8,6 +8,19 @@ public class ProductBean {
     private String barCode;
     private double price;
 
+    public ProductBean() {
+    	
+    }
+    
+    public ProductBean(String productName, String productType, String productDescription, 
+    				String barCode, double price) {
+    	this.productName = productName;
+    	this.productType = productType;
+    	this.productDescription = productDescription;
+    	this.barCode = barCode;
+    	this.price = price;
+    }
+    
     public long getProductID() {
 	return productID;
     }

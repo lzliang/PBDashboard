@@ -8,13 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import cmu.TeamAxis.databean.ProductBean;
 import cmu.TeamAxis.formbean.AddProductForm;
+import cmu.TeamAxis.model.DAOException;
 import cmu.TeamAxis.model.Model;
+import cmu.TeamAxis.model.ProductDAO;
 
 public class AddProductAction extends Action {
-
+	private FormBeanFactory<AddProductForm> formBeanFactory = FormBeanFactory.getInstance(AddProductForm.class);
+	private ProductDAO productDAO;
+	
 	public AddProductAction(Model model) {
-		
+		productDAO = model.getProdutDAO();
 	}
 	
 	@Override
@@ -24,7 +29,6 @@ public class AddProductAction extends Action {
 	}
 
 	
-	 private FormBeanFactory<AddProductForm> formBeanFactory = FormBeanFactory.getInstance(AddProductForm.class);
 	
 	@Override
 	public String perform(HttpServletRequest request) {
@@ -47,12 +51,22 @@ public class AddProductAction extends Action {
 	    	return "addProduct.jsp";
 	    }
 	    
-	    //DAO stuff
-	    //form.getDescription();
+	    //Create a productBean
+	    double price = Double.valueOf(form.getPrice());
+	    ProductBean productBean = new ProductBean(form.getProductName(), form.getProductType(),
+	    										form.getProductDescription(), form.getBarCode(),
+	    										price);
 	    
+	    
+	    productDAO.addProduct(productBean);
 		
+	    
 		return "addProduct.jsp";
 		} catch (FormBeanException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "error.jsp";
+		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "error.jsp";

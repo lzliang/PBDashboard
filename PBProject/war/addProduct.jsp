@@ -12,19 +12,29 @@
 		<form method="POST" action="addProduct.do">
 			<table border="0" style="text-align: left" align="center">
 				<tr>
-					<th>Price ($):&nbsp;</th>
-					<td><input type="text" name="price" id="price"
-						value="${form.price}" /></td>
+					<th>Product Name:&nbsp;</th>
+					<td><input type="text" name="productName" id="productName"
+						value="${form.productName}" /></td>
 				</tr>
 				<tr>
-					<th>Product Type :&nbsp;</th>
-					<td><input type="text" name="type" id="type"
-						value="${form.type}" /></td>
+					<th>Product Type:&nbsp;</th>
+					<td><input type="text" name="productType" id="productType"
+						value="${form.productType}" /></td>
 				</tr>
 				<tr>
 					<th>Description :&nbsp;</th>
-					<td><input type="text" name="description" id="description"
-						value="${form.description}" /></td>
+					<td><input type="text" name="productDescription" id="productDescription"
+						value="${form.productDescription}" /></td>
+				</tr>
+				<tr>
+					<th>Barcode :&nbsp;</th>
+					<td><input type="text" name="barCode" id="barCode"
+						value="${form.barCode}" /></td>
+				</tr>
+				<tr>
+					<th>Price ($):&nbsp;</th>
+					<td><input type="text" name="price" id="price"
+						value="${form.price}" /></td>
 				</tr>
 				<tr>
 					<td>

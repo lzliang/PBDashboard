@@ -7,6 +7,7 @@ public class RequestBean {
     private int storeID;
     private int aisleNum;
     private String queryType;
+    private String query;
     private long productID;
     private String timeStamp;
     private String status;
@@ -81,6 +82,14 @@ public class RequestBean {
 
     public void setStatus(String status) {
 	this.status = status;
+    }
+
+    public String getQuery() {
+	return query;
+    }
+
+    public void setQuery(String query) {
+	this.query = query;
     }
 
 }

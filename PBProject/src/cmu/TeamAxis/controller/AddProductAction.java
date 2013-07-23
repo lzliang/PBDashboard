@@ -19,7 +19,7 @@ public class AddProductAction extends Action {
 	private ProductDAO productDAO;
 	
 	public AddProductAction(Model model) {
-		productDAO = model.getProdutDAO();
+		productDAO = model.getProductDAO();
 	}
 	
 	@Override

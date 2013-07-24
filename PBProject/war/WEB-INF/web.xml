@@ -27,4 +27,15 @@
   <servlet-name>SystemServiceServlet</servlet-name>
   <url-pattern>/_ah/spi/*</url-pattern>
  </servlet-mapping>
+ 
+ <servlet>
+    <servlet-name>HelpRequestAction</servlet-name>
+    <servlet-class>cmu.TeamAxis.controller.HelpRequestAction</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelpRequestAction</servlet-name>
+    <url-pattern>/helpRequestAction.do</url-pattern>
+  </servlet-mapping>
+ 
 </web-app>

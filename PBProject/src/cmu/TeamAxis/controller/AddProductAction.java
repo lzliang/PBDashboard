@@ -59,7 +59,6 @@ public class AddProductAction extends Action {
 	    
 	    
 	    productDAO.addProduct(productBean);
-		
 	    
 		return "addProduct.jsp";
 		} catch (FormBeanException e) {

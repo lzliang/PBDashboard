@@ -44,9 +44,12 @@
     </div>
   </div>
 </div>
+
+<div>Getting Started with AJAX using JAVA: Hello World!</div>
+  <div id="hello"><button type="button" onclick="makeRequest()">Say Hello!</button></div>
 </body>
 
-
+<script type="text/javascript" language="javascript" src="js/ajax.js"></script>
 <script src="js/homepage-js.js" type="text/javascript"></script>
 
 </html>

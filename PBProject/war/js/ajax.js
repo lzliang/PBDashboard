@@ -28,6 +28,7 @@ function getXMLHttpRequest() {
  * AJAX call starts with this function
  */
 function makeRequest() {
+//	setTimeout('makeRequest()',2000);
   var xmlHttpRequest = getXMLHttpRequest();
   xmlHttpRequest.onreadystatechange = getReadyStateHandler(xmlHttpRequest);
   xmlHttpRequest.open("POST", "helpRequestAction.do", true);
@@ -46,10 +47,22 @@ function getReadyStateHandler(xmlHttpRequest) {
   return function() {
     if (xmlHttpRequest.readyState == 4) {
       if (xmlHttpRequest.status == 200) {
-        document.getElementById("hello").innerHTML = xmlHttpRequest.responseText;
+    	  
+    	  if(xmlHttpRequest.responseText != null){
+    		  var tag = xmlHttpRequest.responseText + document.getElementById("requestpanel").innerHTML;
+    		  document.getElementById("requestpanel").innerHTML = tag;
+    		  
+    	  }
+    	  
+        
       } else {
         alert("HTTP error " + xmlHttpRequest.status + ": " + xmlHttpRequest.statusText);
       }
     }
   };
 }
+
+
+	window.onload=function(){
+		setTimeout('makeRequest()',2000);
+	}

@@ -20,38 +20,47 @@ public class HelpRequestAction extends HttpServlet {
 
 	private Model model;
 
-	
-	
-	
-	
-//	private RequestDAO requestDAO;
+
+
+
+
+	//	private RequestDAO requestDAO;
 	private ProductDAO productDAO;
-//	private ProductLocationDAO productLocationDAO;
-//	
-//	public HelpRequestAction(Model model) {
-//		requestDAO = model.getRequestDAO();
-//		productDAO = model.getProductDAO();
-//		productLocationDAO = model.getProductLocationDAO();
-//	}
-	
-//	public String getName() {
-//		// TODO Auto-generated method stub
-//		return "helpRequestAction.do";
-//	}
+	//	private ProductLocationDAO productLocationDAO;
+	//	
+	//	public HelpRequestAction(Model model) {
+	//		requestDAO = model.getRequestDAO();
+	//		productDAO = model.getProductDAO();
+	//		productLocationDAO = model.getProductLocationDAO();
+	//	}
+
+	//	public String getName() {
+	//		// TODO Auto-generated method stub
+	//		return "helpRequestAction.do";
+	//	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
-		      throws java.io.IOException {
-		
+			throws java.io.IOException {
+
 		try {
 			model = new Model(getServletConfig());
 			productDAO = model.getProductDAO();
-			
+
 			ProductBean productBean = new ProductBean();
-			
+
 			productBean = productDAO.getProduct("test");
-			
+
 			System.out.println("BARCODE:     "+productBean.getBarCode());
 			
+			
+			res.setContentType("text/html");
+			int i=(int) (Math.random()*100);
+			if(i%2==0) {
+				res.getWriter().write("<div class=\"content\"> TEST "+i+"</div>");
+			}
+
+
+
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,15 +68,11 @@ public class HelpRequestAction extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		    res.setContentType("text/html");
-		    res.getWriter().write("Hello World!");
-		  }
-		 
-		  public void doGet(HttpServletRequest req, HttpServletResponse res)
-		      throws java.io.IOException {
-		    doPost(req, res);
-		  }
+	}
+
+	public void doGet(HttpServletRequest req, HttpServletResponse res)
+			throws java.io.IOException {
+		doPost(req, res);
+	}
 
 }

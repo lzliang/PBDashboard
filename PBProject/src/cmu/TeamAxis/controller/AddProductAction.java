@@ -37,6 +37,7 @@ public class AddProductAction extends Action {
 		request.setAttribute("errors", errors);
 		
 		
+		
 		AddProductForm form;
 		try {
 			form = formBeanFactory.create(request);
@@ -51,12 +52,19 @@ public class AddProductAction extends Action {
 	    	return "addProduct.jsp";
 	    }
 	    
+	    
+//	    String productName = request.getParameter("productName");
+//	    System.out.println("productName "+ productName);
+	    
 	    //Create a productBean
 	    double price = Double.valueOf(form.getPrice());
 	    ProductBean productBean = new ProductBean(form.getProductName(), form.getProductType(),
 	    										form.getProductDescription(), form.getBarCode(),
 	    										price);
-	    
+//	    ProductBean productBean = new ProductBean(form.getProductName(), "from url",
+//				"from url", "from url",
+//				0);
+//	    System.out.println(productDAO.getProducts().length);
 	    
 	    productDAO.addProduct(productBean);
 	    

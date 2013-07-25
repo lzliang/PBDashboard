@@ -53,9 +53,8 @@ body {
 	font-family:Arial, Helvetica, sans-serif;
 	background-color:#FEFEFA;
 	box-shadow: 0px 3px 7px #888888;
-	cursor:pointer;
 }
-.contentfull {
+.detail {
 	width: 100%;
 	margin-bottom: 10px;
 	height: 285px;
@@ -65,8 +64,163 @@ body {
 	background-color:#FEFEFA;
 	box-shadow: 0px 3px 7px #888888;
 }
+.requestpanel{
+	overflow:auto;
+	overflow-x:hidden;
+	height:85%;
 
-.productimg {
-	width: 100px;
-	height: 90px;
+}
+
+.request_1{
+	background-color:#FFF;
+	margin-top:5px;
+	height:100px;
+	
+}
+#request_1_text{
+	text-align:left;
+	font-weight:bold;
+	padding-top:5px;
+	padding-bottom:2px;
+	
+	
+}
+p{
+	line-height:10px;
+	
+}
+#request_1_button_helping{
+  position: relative;
+  left: 250px;
+  bottom: 85px;
+
+}
+#request_1_button_completed{
+  position: relative;
+  left: 327px;
+  bottom: 65px;
+  
+}
+#pic{
+	float:left;
+	
+}
+.overviewBox{
+	width:600px;
+	height:300px;
+	float:left;
+	text-align:left;
+}
+.detail_prodname{
+	position: relative;
+  left: 130px;
+  bottom: 130px;
+	font-size:25px;
+	padding-top:10px;
+	padding-right:5px;
+	font-weight:bolder;
+	
+	
+}
+h5{
+	font-weight:bold;
+	display:inline;
+}
+.detail_rating{
+position: relative;
+left: 130px;
+bottom: 130px;
+
+}
+#pricePart{
+  position: relative;
+  left: 50px;
+  bottom: 30px;
+	}
+.priceLarge{
+	color:#D21F15;
+	font-weight:bolder;
+	font-size:30px;
+	}
+.priceSmall{
+	color:#D21F15;
+	font-weight:bolder;
+	font-size:22px;
+	vertical-align:top;
+	}
+.productPrice{
+font-size:14px;
+width:250px;
+position: relative;
+left: 130px;
+bottom: 120px;
+}
+
+#tabs{
+     position: relative;
+left: 10px;
+bottom: 130px;
+	 width:72%;
+	
+	border:none;}
+#tabs ul{
+	background:none;
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	}
+#tabs ul li a{
+	font-size:14px;
+	font-weight:bold;
+	color:#771B61;}
+#tabs div{
+	border:thin #AAA solid;
+	border-top:none;
+	width:88%;
+	height:80px;
+	text-align:left;
+}
+.similarpanel{
+	overflow:scroll;
+	overflow-x:hidden;
+
+
+}
+.similar_1_pic{
+	
+}
+.similar_1{
+	background-color:#FFF;
+	margin-top:5px;
+	height:100px;
+	
+}
+#similar_1_text{
+	text-align:left;
+	font-weight:bold;
+	padding-top:5px;
+	padding-bottom:2px;
+	
+	
+}
+.competitorpanel{
+	overflow:scroll;
+	overflow-x:hidden;
+
+
+}
+
+.competitor_1{
+	background-color:#FFF;
+	margin-top:5px;
+	height:100px;
+	
+}
+#competitor_1_text{
+	text-align:left;
+	font-weight:bold;
+	padding-top:5px;
+	padding-bottom:2px;
+	
+	
 }

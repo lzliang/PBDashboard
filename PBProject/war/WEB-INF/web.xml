@@ -12,7 +12,7 @@
     </init-param>
 	<servlet>
 		<servlet-name>Controller</servlet-name>
-		<servlet-class>cmu.TeamAxis.controller.Controller</servlet-class>
+		<servlet-class>cmu.axis.controller.Controller</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Controller</servlet-name>

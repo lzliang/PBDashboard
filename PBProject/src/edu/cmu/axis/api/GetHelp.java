@@ -4,6 +4,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -41,5 +42,13 @@ public class GetHelp {
 	public String testPut(String pData) {
 	    //Use gson to convert input string into maps would do all our work
 	    return pData;
+	}
+	
+	@GET
+	@Path("{machineID}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getHelpInfo(@PathParam("machineID") int machineID) {
+	//public String getinfo() {
+		return machineID+"";
 	}
 }

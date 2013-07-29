@@ -11,10 +11,5 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jstl-1.2.jar"/>
 	<classpathentry kind="lib" path="/Users/Jingwei/Downloads/jersey-archive-1.17.1/lib/asm-3.1.jar"/>
 	<classpathentry kind="lib" path="/Users/Jingwei/Downloads/jersey-archive-1.17.1/lib/jsr311-api-1.1.1.jar"/>
-	<classpathentry kind="lib" path="commons-codec-1.8-javadoc.jar"/>
-	<classpathentry kind="lib" path="commons-codec-1.8-sources.jar"/>
-	<classpathentry kind="lib" path="commons-codec-1.8-test-sources.jar"/>
-	<classpathentry kind="lib" path="commons-codec-1.8-tests.jar"/>
-	<classpathentry kind="lib" path="commons-codec-1.8.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

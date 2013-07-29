@@ -34,17 +34,17 @@
   <url-pattern>/_ah/spi/*</url-pattern>
  </servlet-mapping>
   
- <!-- 
+<!-- For AJAX on the help feature page -->
  <servlet>
     <servlet-name>HelpRequestAction</servlet-name>
-    <servlet-class>cmu.TeamAxis.controller.HelpRequestAction</servlet-class>
+    <servlet-class>cmu.axis.controller.HelpRequestAction</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>HelpRequestAction</servlet-name>
     <url-pattern>/helpRequestAction.do</url-pattern>
   </servlet-mapping>
-  -->
+
   
   <servlet>
       <servlet-name>restful</servlet-name>

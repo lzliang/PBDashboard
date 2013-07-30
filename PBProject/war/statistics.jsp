@@ -32,7 +32,7 @@ $(function(){
 		</div>
 		<div id="nav">
 			<ul>
-				<li class="upp"><a href="#">In-store Help</a>
+				<li class="upp"><a href="helpRequest.jsp">In-store Help</a>
 					<ul>
 						<li>&#8250; <a href="">Visit site</a></li>
 						<li>&#8250; <a href="">Reports</a></li>
@@ -40,7 +40,7 @@ $(function(){
 						<li>&#8250; <a href="">Site config</a></li>
 					</ul>
 				</li>
-				<li class="upp"><a href="#">Statistic</a>
+				<li class="upp"><a href="statistics.jsp">Statistic</a>
 					<ul>
 						<li>&#8250; <a href="">Show all pages</a></li>
 						<li>&#8250; <a href="">Add new page</a></li>
@@ -63,10 +63,10 @@ $(function(){
       
       <div id="fast_nav" class="fast_nav">
       	<ul class="fast">
-					<li><a class="windows" href="#">Fast button navigation</a></li>
-					<li><a class="pgr" href="#">Go to any location</a></li>
-					<li><a class="safari" href="#">Calendar and schedule</a></li>
-					<li><a class="chart" href="#">Chart and graphics</a></li>
+					<li><a class="windows" href="#">Staff Evaluation</a></li>
+					<li><a class="pgr" href="#">Help Feature Analysis</a></li>
+					<li><a class="safari" href="#">Customer Analysis</a></li>
+					<li><a class="chart" href="#">Other Graphics</a></li>
 				</ul>
       
       </div>

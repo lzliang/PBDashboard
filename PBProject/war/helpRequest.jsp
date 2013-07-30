@@ -33,7 +33,7 @@ $(function(){
 		</div>
 		<div id="nav">
 			<ul>
-				<li class="upp"><a href="#">In-store Help</a>
+				<li class="upp"><a href="helpRequest.jsp">In-store Help</a>
 					<ul>
 						<li>&#8250; <a href="">Visit site</a></li>
 						<li>&#8250; <a href="">Reports</a></li>
@@ -41,7 +41,7 @@ $(function(){
 						<li>&#8250; <a href="">Site config</a></li>
 					</ul>
 				</li>
-				<li class="upp"><a href="#">Statistics</a>
+				<li class="upp"><a href="statistics.jsp">Statistics</a>
 					<ul>
 						<li>&#8250; <a href="">Show all pages</a></li>
 						<li>&#8250; <a href="">Add new page</a></li>

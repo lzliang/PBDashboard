@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <!-- init  -->
+    <init-param>
+      <!-- speed up initial Jersey loading by deactivating WADL -->
+      <param-name>com.sun.jersey.config.feature.DisableWADL</param-name>
+      <param-value>true</param-value>
+    </init-param>
+	<servlet>
+		<servlet-name>Controller</servlet-name>
+		<servlet-class>cmu.axis.controller.Controller</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Controller</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>helpRequest.jsp</welcome-file>
+	</welcome-file-list>
+    <servlet>
+  		<servlet-name>SystemServiceServlet</servlet-name>
+  		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+    <init-param>
+   		<param-name>services</param-name>
+   		<param-value/>
+  	</init-param>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>SystemServiceServlet</servlet-name>
+  <url-pattern>/_ah/spi/*</url-pattern>
+ </servlet-mapping>
+  
+<!-- For AJAX on the help feature page -->
+ <servlet>
+    <servlet-name>HelpRequestAction</servlet-name>
+    <servlet-class>cmu.axis.controller.HelpRequestAction</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelpRequestAction</servlet-name>
+    <url-pattern>/helpRequestAction.do</url-pattern>
+  </servlet-mapping>
+
+  
+  <servlet>
+      <servlet-name>restful</servlet-name>
+      <servlet-class>
+        com.sun.jersey.spi.container.servlet.ServletContainer
+      </servlet-class>
+      <init-param>
+          <param-name>com.sun.jersey.config.property.packages</param-name>
+          <!-- Enter the Jersey resources to speed up initial Jersey loading -->
+          <!-- can separate the java packages using  -->
+          <param-value>edu.cmu.axis.api</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+  </servlet>
+     <servlet-mapping>
+      <servlet-name>restful</servlet-name>
+      <url-pattern>/_api/*</url-pattern>
+    </servlet-mapping>
+  
+</web-app>

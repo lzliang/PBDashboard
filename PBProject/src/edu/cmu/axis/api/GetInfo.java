@@ -16,4 +16,12 @@ public class GetInfo {
 	//public String info() {
 		return machineID+"";
 	}
+	
+	@GET
+	@Path("/lon/{lon}/lat/{lat}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getStoreID(@PathParam("lon") String lon,@PathParam("lat")String lat){
+		return lon + "_"+lat;
+	}
 }
+

@@ -5,12 +5,12 @@ public class RequestBean {
     private long customerID;
     private long employeeID;
     private int storeID;
-    private int aisleNum;
-    private String queryType;
+    private String location; // Remove it
     private String query;
     private long productID;
     private String timeStamp;
     private String status;
+    private String customerFeedback;
 
     public long getRequestID() {
 	return requestID;
@@ -44,20 +44,12 @@ public class RequestBean {
 	this.storeID = storeID;
     }
 
-    public int getAisleNum() {
-	return aisleNum;
-    }
-
-    public void setAisleNum(int aisleNum) {
-	this.aisleNum = aisleNum;
-    }
-
     public String getQueryType() {
-	return queryType;
+	return location;
     }
 
     public void setQueryType(String queryType) {
-	this.queryType = queryType;
+	this.location = queryType;
     }
 
     public long getProductID() {
@@ -90,6 +82,14 @@ public class RequestBean {
 
     public void setQuery(String query) {
 	this.query = query;
+    }
+
+    public String getCustomerFeedback() {
+	return customerFeedback;
+    }
+
+    public void setCustomerFeedback(String customerFeedback) {
+	this.customerFeedback = customerFeedback;
     }
 
 }

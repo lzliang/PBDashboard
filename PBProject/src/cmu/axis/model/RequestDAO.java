@@ -32,12 +32,13 @@ public class RequestDAO {
 	    e.setProperty("customerID", request.getCustomerID());
 	    e.setProperty("employeeID", request.getEmployeeID());
 	    e.setProperty("storeID", request.getStoreID());
-	    e.setProperty("aisleNum", request.getAisleNum());
+	    // e.setProperty("aisleNum", request.getAisleNum());
 	    e.setProperty("queryType", request.getQueryType());
 	    e.setProperty("query", request.getQuery());
 	    e.setProperty("productID", request.getProductID());
 	    e.setProperty("timeStamp", request.getTimeStamp());
 	    e.setProperty("status", request.getStatus());
+	    e.setProperty("customerFeedback", request.getCustomerFeedback());
 
 	    // Create a new entity in the datastore. Id will be automatically
 	    // set.
@@ -98,13 +99,11 @@ public class RequestDAO {
 	rbean.setCustomerID((Long) e.getProperty("customerID"));
 	rbean.setEmployeeID((Long) e.getProperty("employeeID"));
 	rbean.setStoreID(Integer.parseInt(e.getProperty("storeID").toString()));
-	rbean.setAisleNum(Integer
-		.parseInt(e.getProperty("aisleNum").toString()));
-	rbean.setQueryType((String) (e.getProperty("queryType")));
 	rbean.setQuery((String) (e.getProperty("query")));
 	rbean.setProductID((Long) (e.getProperty("productID")));
 	rbean.setTimeStamp((String) (e.getProperty("timeStamp")));
 	rbean.setStatus((String) (e.getProperty("status")));
+	rbean.setCustomerFeedback((String) (e.getProperty("customerFeedback")));
 	return rbean;
     }
 

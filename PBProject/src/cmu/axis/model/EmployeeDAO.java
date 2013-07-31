@@ -32,6 +32,7 @@ public class EmployeeDAO {
 	    e.setProperty("userName", employee.getUserName());
 	    e.setProperty("password", employee.getPassword());
 	    e.setProperty("designation", employee.getDesignation());
+	    e.setProperty("picURL", employee.getPicURL());
 
 	    // Create a new entity in the datastore. Id will be automatically
 	    // set.
@@ -98,6 +99,7 @@ public class EmployeeDAO {
 	ebean.setUserName((String) e.getProperty("userName"));
 	ebean.setPassword((String) e.getProperty("password"));
 	ebean.setDesignation((String) e.getProperty("designation"));
+	ebean.setPicURL((String) e.getProperty("picURL"));
 	return ebean;
     }
 

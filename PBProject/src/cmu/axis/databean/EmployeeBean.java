@@ -5,6 +5,7 @@ public class EmployeeBean {
     private String userName;
     private String password;
     private String designation;
+    private String picURL;
 
     public long getEmployeeID() {
 	return employeeID;
@@ -36,6 +37,14 @@ public class EmployeeBean {
 
     public void setDesignation(String designation) {
 	this.designation = designation;
+    }
+
+    public String getPicURL() {
+	return picURL;
+    }
+
+    public void setPicURL(String picURL) {
+	this.picURL = picURL;
     }
 
 }

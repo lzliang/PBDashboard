@@ -83,6 +83,15 @@ public class RequestDAO {
 	return rBean;
     }
 
+    public void updateRequest(long rID, String cFeedback) throws DAOException,
+	    EntityNotFoundException {
+	Key rKey = KeyFactory.createKey(rootKey, "Request", rID);
+	Entity request = datastore.get(rKey);
+	request.setProperty("customerFeedback", cFeedback);
+	datastore.put(request);
+
+    }
+
     private List<RequestBean> runAscendingQuery() {
 	List<Entity> entities = datastore.prepare(ascendingQuery).asList(
 		FetchOptions.Builder.withLimit(100));

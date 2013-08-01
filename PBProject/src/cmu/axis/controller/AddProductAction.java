@@ -36,7 +36,15 @@ public class AddProductAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
-		
+		String[] string = {"hello","hello2"};
+		try {
+			ProductBean[] productBeans = productDAO.getProducts();
+			request.setAttribute("test2", string);
+		} catch (DAOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    System.out.println("XXXX "+string.length);
 		
 		AddProductForm form;
 		try {
@@ -67,6 +75,8 @@ public class AddProductAction extends Action {
 //	    System.out.println(productDAO.getProducts().length);
 	    
 	    productDAO.addProduct(productBean);
+	    
+	    
 	    
 		return "addProduct.jsp";
 		} catch (FormBeanException e) {

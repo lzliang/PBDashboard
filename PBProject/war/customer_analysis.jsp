@@ -68,12 +68,18 @@ $(function(){
       
       
 		  <div class="full_w">
-				<div class="h_title">Help Feature Analysis</div>
-					<script src="js/highcharts_init.js"></script>
-					<div id="container" style="min-width: 300px; height: 380px; margin: 0 auto"></div>
-					<script src="js/highcharts.js"></script>
+				<div class="h_title">Customer Analysis</div>
+				
+                <div style="text-align:center">	
+                    <img src="//chart.googleapis.com/chart?chs=500x400&cht=p&chco=3366CC|AA0033|FFCC33|FF0000|008000&chd=s:HbMHI&chdl=11-20|21-30|31-40|41-50|60%2B&chtt=Customer+Analysis&chts=676767,14" width="500" height="400" alt="Customer Analysis" />
+
+                   
+                    
+                    </div>
+                    
+                    
 			</div>
-		  <div class="clear"></div>
+		  
 	  </div>
 		<div class="clear"></div>
 	</div>

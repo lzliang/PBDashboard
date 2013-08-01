@@ -16,6 +16,8 @@ $(function(){
 	$(".box").children(".h_title").click( function() { $(this).next("ul").slideToggle(); });
 });
 </script>
+<script language="javascript" src="http://www.google.com/jsapi"></script>
+<script language="javascript" src="js/bar-chart.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -68,12 +70,21 @@ $(function(){
       
       
 		  <div class="full_w">
-				<div class="h_title">Help Feature Analysis</div>
-					<script src="js/highcharts_init.js"></script>
-					<div id="container" style="min-width: 300px; height: 380px; margin: 0 auto"></div>
-					<script src="js/highcharts.js"></script>
+				<div class="h_title">Staff Evaluation</div>
+				
+                <div style="text-align:center">	
+                    <div id="chart"></div>
+
+                    <div id="page_button">
+       						 <button>Previous</button>
+                             <button>Next</button>
+       					 </div>
+                    
+                    </div>
+                    
+                    
 			</div>
-		  <div class="clear"></div>
+		  
 	  </div>
 		<div class="clear"></div>
 	</div>

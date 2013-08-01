@@ -53,7 +53,7 @@ $(document).pngFix( );
 		</tr>
 		<tr>
 			<th></th>
-			<td><input type="button" class="submit-login"  /></td>
+			<td><a href="helpRequest.jsp"><input type="button" class="submit-login"  /></a></td>
 		</tr>
 		</table>
 	</div>

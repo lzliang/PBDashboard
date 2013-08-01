@@ -45,6 +45,9 @@
 							onClick="clearForm(this.form)">Reset</button>
 					</td>
 				</tr>
+				<tr><td>${test2[0]} </td>
+				
+				</tr>
 			</table>
 
 		</form>

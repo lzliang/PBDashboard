@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/navi.css" media="screen" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/tab.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	$(".box .h_title").not(this).next("ul").hide("normal");
@@ -17,6 +18,7 @@ $(function(){
 	$(".box").children(".h_title").click( function() { $(this).next("ul").slideToggle(); });
 });
 </script>
+
 <script type="text/javascript">
 function change(i) {
 	if (i==1) {
@@ -30,16 +32,33 @@ function change(i) {
 	document.getElementById('similar1').style.display = "block";	
 	document.getElementById('info1').style.display = "block";
 	} else if(i==3) {
+		
 		document.getElementById('btn2').style.display = "block";	
 	document.getElementById('btn1').style.display = "none";
 	}
 	
 }
 
-function btnchange() {
-	this.style.background="80C65A";
+function btnchange(childnode) {
+	var child=childnode;
+    var parentdiv=child.parentNode.parentNode;
+	var requestPanel=parentdiv.parentNode;
+	
+	 var myElement = document.createElement("div");//输入想要创建的类型  
+            myElement.className="card_style";    
+            myElement.id="id1";  
+			myElement.innerHTML = parentdiv.innerHTML;
+	requestPanel.parentNode.insertBefore(myElement, requestPanel);
+	<!-- can just reload the request list here-->
+	parentdiv.parentNode.removeChild(parentdiv);
+	requestPanel.style.height="62%";
+	document.getElementById('btn2').style.display = "block";	
+	document.getElementById('btn1').style.display = "none";
+	
 }
 </script>
+
+
 </head>
 <body>
 <div class="wrap">
@@ -79,11 +98,14 @@ function btnchange() {
 	<div id="content">
 		
 	  <div id="main">
-			<div class="half_w half_left">
+			<div class="half_w half_left scrollable">
 				<div class="h_title">Help Request List</div>
                 
-                <div class="scroll_panel" id="scroll_panel">
-					<div class="card_style" onclick="change(2)"> 
+                <div id="helping_request">
+                 
+                </div>
+                <div class="scroll_panel" id="request_list_panel">
+					<div class="card_style" onclick="update()"> 
                     
       					<div id="request_pic" class="request_pic">
        						 <img height="55" width="42" src="img/coke.jpg">        
@@ -94,7 +116,7 @@ function btnchange() {
        						<p id="request_text_location">Location: 01-E45</p>
                          </div>
          				 <div id="request_button" class="request_button">
-       						 <button id="btn1" style="display: block;" onclick="change(3)">Go Help</button>
+       						 <button id="btn1" style="display: block;" onclick="btnchange(this)">Go Help</button>
                              <button id="btn2" style="background: #80C65A; display: none;">Helping...</button>
        					 </div>
            			<div class="clear"></div>
@@ -119,7 +141,7 @@ function btnchange() {
                     </div>
 			</div>
             
-            <div class="half_w half_right">
+            <div class="half_w half_right scrollable">
 				<div class="h_title">Similar Products</div>
 				
                 <div class="scroll_panel">
@@ -322,17 +344,24 @@ Shipping Advisory: This item must be shipped separately from other items in your
 
 
 <!-- test code for AJAX, need to be deleted 
+  -->
 <div class="clear"></div>
 
 <div>Getting Started with AJAX using JAVA: Hello World!</div>
   <div><button type="button" onclick="makeRequest()">Say Hello!</button></div>
-  <div id="ReloadThis">Default text</div>
+  <div id="ReloadThis">Defualt Text</div>
+  <div>${testString}</div>
   
-  -->
+  
 </body>
 
 <!--  
-<script type="text/javascript" language="javascript" src="js/ajax.js"></script>
 -->
-
+<script type="text/javascript" language="javascript" src="js/ajax.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+initTab();
+setTimeout('makeRequest()',2000);
+}
+</script>
 </html>

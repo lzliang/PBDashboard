@@ -445,10 +445,14 @@ cursor: pointer;
 	margin:10px 10px;
 }
 
+.scrollable {
+	overflow: hidden;
+}
+
 .scroll_panel {
-overflow: auto;
-overflow-x: hidden;
-height: 85%;
+	overflow-y: scroll;
+	height: 85%;
+	width: 104%;
 }
 
 .similar_item {

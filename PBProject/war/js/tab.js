@@ -1,9 +1,7 @@
-window.onload = function(){
-init()
-}
+
 var containercolor="#ffffff";
 
-function init() {
+function initTab() {
 
 var border="#ffffff 1px solid";
 var conbkcolor="#ffffff";

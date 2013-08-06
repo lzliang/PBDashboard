@@ -1,9 +1,5 @@
 package cmu.axis.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,12 +9,8 @@ import cmu.axis.databean.ProductBean;
 import cmu.axis.model.DAOException;
 import cmu.axis.model.Model;
 import cmu.axis.model.ProductDAO;
-import cmu.axis.model.ProductLocationDAO;
-import cmu.axis.model.RequestDAO;
 
-@SuppressWarnings("serial")
-public class HelpRequestAction extends HttpServlet {
-
+public class ProductDetailsAJAX extends HttpServlet {
 	private Model model;
 
 
@@ -27,18 +19,7 @@ public class HelpRequestAction extends HttpServlet {
 
 	//	private RequestDAO requestDAO;
 	private ProductDAO productDAO;
-	//	private ProductLocationDAO productLocationDAO;
-	//	
-	//	public HelpRequestAction(Model model) {
-	//		requestDAO = model.getRequestDAO();
-	//		productDAO = model.getProductDAO();
-	//		productLocationDAO = model.getProductLocationDAO();
-	//	}
 
-	//	public String getName() {
-	//		// TODO Auto-generated method stub
-	//		return "helpRequestAction.do";
-	//	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws java.io.IOException {
@@ -51,18 +32,13 @@ public class HelpRequestAction extends HttpServlet {
 
 			productBean = productDAO.getProduct("test");
 
-			int i=(int) (Math.random()*100);
-			String testString = "test " + i;
-		
-			req.setAttribute("testString", testString);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/helpRequest.jsp");
-			System.out.println("testString:     "+testString);
+			
 			
 			
 			res.setContentType("text/html");
-			if(i%2==0) {
-				res.getWriter().write("<div class=\"card_style\"> TEST "+i+"</div>");
-			}
+			
+				res.getWriter().write("<div class=\"card_style\"> TESTSTRING details </div>");
+			
 
 
 

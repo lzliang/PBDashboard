@@ -39,7 +39,27 @@
     <servlet-name>HelpRequestAction</servlet-name>
     <url-pattern>/helpRequestAction.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SimilarProductAJAX</servlet-name>
+    <servlet-class>cmu.axis.controller.SimilarProductAJAX</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SimilarProductAJAX</servlet-name>
+    <url-pattern>/similarProductAJAX.do</url-pattern>
+  </servlet-mapping>
 
+  <servlet>
+    <servlet-name>ProductDetailsAJAX</servlet-name>
+    <servlet-class>cmu.axis.controller.ProductDetailsAJAX</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductDetailsAJAX</servlet-name>
+    <url-pattern>/productDetailsAJAX.do</url-pattern>
+  </servlet-mapping>
+  
   
   <servlet>
       <servlet-name>restful</servlet-name>

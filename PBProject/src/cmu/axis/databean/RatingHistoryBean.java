@@ -6,6 +6,7 @@ public class RatingHistoryBean {
     private long rhid;
     private long customerId;
     private long employeeId;
+    private String employeeName;
     private double rating;
     private Date timeStamp;
 
@@ -47,6 +48,14 @@ public class RatingHistoryBean {
 
     public void setRhid(long rhid) {
 	this.rhid = rhid;
+    }
+
+    public String getEmployeeName() {
+	return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+	this.employeeName = employeeName;
     }
 
 }

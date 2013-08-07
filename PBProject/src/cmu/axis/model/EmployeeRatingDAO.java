@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cmu.axis.databean.EmployeeRatingBean;
+import cmu.axis.databean.RatingHistoryBean;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
@@ -76,8 +78,21 @@ public class EmployeeRatingDAO {
 	}
     }
 
-    // public void updateEmployeeRating (RatingHistoryBean aRating) throws
-    // DAOException, EntityNotFoundException
+    public void updateEmployeeRating(RatingHistoryBean aRating)
+	    throws DAOException, EntityNotFoundException {
+	EmployeeRatingBean anEmployeeRating = getEmployeeRating(aRating
+		.getEmployeeName());
+	Key erKey = KeyFactory.createKey(rootKey, "EmployeeRating",
+		aRating.getRhid());
+	Entity employeeRating = datastore.get(erKey);
+	int numOfRatings = anEmployeeRating.getNumOfRatings() + 1;
+	double avgRating = ((anEmployeeRating.getAverageRating() * anEmployeeRating
+		.getNumOfRatings()) + aRating.getRating()) / numOfRatings;
+	employeeRating.setProperty("numOfRatings", numOfRatings);
+	employeeRating.setProperty("averageRating", avgRating);
+	datastore.put(employeeRating);
+
+    }
 
     /*
      * public CustomerBean getCustomer(long customerId) throws DAOException,

@@ -21,9 +21,9 @@ public class ProductInfo {
 	private static final String ENDPOINT = "ecs.amazonaws.com";
 	// private static final String ITEM_ID = "813810010424";
 	
-
+	static Map<String, String> params = new HashMap<String, String>();
 	public Map<String, String> getProductInfoByBarcode(String barcode) {
-		Map<String, String> params = new HashMap<String, String>();
+//		Map<String, String> params = new HashMap<String, String>();
 		Map<String, String> product = new HashMap<String, String>();
 
 		SignedRequestsHelper helper;
@@ -80,8 +80,8 @@ public class ProductInfo {
 		return product;
 	}
 	public Map<String, String> getProductInfoByASIN(String ASIN) {
-		Map<String, String> product = new HashMap<String, String>();
-		Map<String, String> params = new HashMap<String, String>();
+//		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> product = new HashMap<String, String>();	
 		SignedRequestsHelper helper;
 		try {
 			helper = SignedRequestsHelper.getInstance(ENDPOINT,
@@ -92,13 +92,10 @@ public class ProductInfo {
 		}
 
 		String requestUrl = null;
-		params.put("Service", "AWSECommerceService");
-		params.put("Version", "2009-03-31");
-		params.put("Operation", "ItemLookup");
-		params.put("IdType", "ASIN");
 
+		params.put("IdType", "ASIN");
+		params.remove("SearchIndex");
 		params.put("ItemId", ASIN);
-		params.put("AssociateTag", "th0426-20");
 		params.put("ResponseGroup", "Medium");
 
 		requestUrl = helper.sign(params);
@@ -134,7 +131,7 @@ public class ProductInfo {
 		return product;
 	}
 	public Map<String, Map<String, String>> getSimilarities(String barcode){
-		Map<String, String> params = new HashMap<String, String>();
+		
 		Map<String, Map<String, String>> similarities = new HashMap<String, Map<String, String>>();
 		SignedRequestsHelper helper;
 		try {

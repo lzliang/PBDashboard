@@ -2,6 +2,7 @@ package cmu.axis.databean;
 
 public class EmployeeRatingBean {
     private long employeeId;
+    private String employeeName;
     private int numOfRatings;
     private double averageRating;
 
@@ -27,6 +28,14 @@ public class EmployeeRatingBean {
 
     public void setAverageRating(double averageRating) {
 	this.averageRating = averageRating;
+    }
+
+    public String getEmployeeName() {
+	return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+	this.employeeName = employeeName;
     }
 
 }

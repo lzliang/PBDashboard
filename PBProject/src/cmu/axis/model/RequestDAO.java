@@ -79,6 +79,18 @@ public class RequestDAO {
 	return rBeans.toArray(new RequestBean[rBeans.size()]);
     }
 
+    public RequestBean[] getRequests(String status, String day)
+	    throws DAOException, EntityNotFoundException {
+	List<RequestBean> rBeans = new ArrayList<RequestBean>();
+	List<RequestBean> reqBeans = runAscendingQuery();
+	for (RequestBean reqBean : reqBeans) {
+	    if (reqBean.getStatus().equals(status)
+		    && reqBean.getTimeStamp().equals(day))
+		rBeans.add(reqBean);
+	}
+	return rBeans.toArray(new RequestBean[rBeans.size()]);
+    }
+
     /*
      * public RequestBean getRequest(String request) throws DAOException { try {
      * RequestBean aProduct = new RequestBean(); List<RequestBean> products =
@@ -122,6 +134,19 @@ public class RequestDAO {
 	if (rBean.getStatus().equals("Serving"))
 	    return true;
 	return false;
+    }
+
+    public int numOfServedRequest() throws DAOException,
+	    EntityNotFoundException {
+	RequestBean[] allRequests = getRequests();
+	return allRequests.length;
+
+    }
+
+    public int numOfServedRequest(String day) throws DAOException,
+	    EntityNotFoundException {
+	RequestBean[] allRequests = getRequests("Done", day);
+	return allRequests.length;
     }
 
     public void updateRequest(long rID, String cFeedback) throws DAOException,

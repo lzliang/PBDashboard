@@ -3,6 +3,7 @@ package cmu.axis.databean;
 import java.util.Date;
 
 public class RatingHistoryBean {
+    private long rhid;
     private long customerId;
     private long employeeId;
     private double rating;
@@ -38,6 +39,14 @@ public class RatingHistoryBean {
 
     public void setTimeStamp(Date timeStamp) {
 	this.timeStamp = timeStamp;
+    }
+
+    public long getRhid() {
+	return rhid;
+    }
+
+    public void setRhid(long rhid) {
+	this.rhid = rhid;
     }
 
 }

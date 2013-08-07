@@ -26,7 +26,7 @@ public class Reviews {
 		ProductInfo pi = new ProductInfo();
 		List<review> tempList = new ArrayList<review>();
 		
-		String reviewUrl = pi.getProductInfo(barcode).get("Reviews");
+		String reviewUrl = pi.getProductInfoByBarcode(barcode).get("Reviews");
 		String rawData = URLConnection.getData(reviewUrl);
 		Document document = Jsoup.parse(rawData);
 		// System.out.print(document);

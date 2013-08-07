@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.datanucleus.sco.backed.Map;
 
@@ -39,29 +40,24 @@ public class GetHelp {
 	@POST
 	//@Path("/")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String helpRequest(String pData) {
+	public Response helpRequest(String pData) {
 	    Gson gson = new Gson();
-	    HashMap<String, String> request = gson.fromJson(pData, HashMap.class);
-	   // if(saveHelpRequest(request)){ //TODO
-	    	
-	   // }else{
-	    	
-	  //  }
-	    return pData;
+	    HashMap<String, String> request = gson.fromJson(pData, HashMap.class);    
+	    return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pData).build();
 	}
 	
 	@PUT
 	@Produces(MediaType.TEXT_PLAIN)
-	public String testPut(String pData) {
+	public Response testPut(String pData) {
 	    //Use gson to convert input string into maps would do all our work
-	    return pData;
+	    return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pData).build();
 	}
 	
 	@GET
 	@Path("{machineID}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String getHelpingEmployee(@PathParam("machineID") String machineID) {
+	public Response getHelpingEmployee(@PathParam("machineID") String machineID) {
 	//	Map<String, String> rt = getHelpingEmployee(machineID);
-		return machineID+"";
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(machineID).build();
 	}
 }

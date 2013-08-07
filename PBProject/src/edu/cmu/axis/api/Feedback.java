@@ -8,6 +8,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.mortbay.util.ajax.JSON;
 
@@ -19,7 +20,7 @@ public class Feedback {
 
 	@POST
 	@Produces(MediaType.TEXT_PLAIN)
-	public String updateFeedback(String inputRequest) {
+	public Response updateFeedback(String inputRequest) {
 		//do something with gson TODO
 		Gson gson = new Gson();
 		Feedback fb = gson.fromJson(inputRequest, Feedback.class);
@@ -30,6 +31,6 @@ public class Feedback {
 			returnmap.put("status","error");
 		//}
 		
-		return JSON.toString(returnmap);
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(inputRequest).build();
 	}
 }

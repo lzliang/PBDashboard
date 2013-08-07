@@ -8,6 +8,7 @@ public class RequestBean {
     private String location; // Remove it
     private String query;
     private long productID;
+    private String barcode;
     private String timeStamp;
     private String status;
     private String customerFeedback;
@@ -90,6 +91,14 @@ public class RequestBean {
 
     public void setCustomerFeedback(String customerFeedback) {
 	this.customerFeedback = customerFeedback;
+    }
+
+    public String getBarcode() {
+	return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+	this.barcode = barcode;
     }
 
 }

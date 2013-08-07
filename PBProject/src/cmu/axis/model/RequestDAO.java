@@ -36,6 +36,7 @@ public class RequestDAO {
 	    e.setProperty("queryType", request.getQueryType());
 	    e.setProperty("query", request.getQuery());
 	    e.setProperty("productID", request.getProductID());
+	    e.setProperty("barcode", request.getBarcode());
 	    e.setProperty("timeStamp", request.getTimeStamp());
 	    e.setProperty("status", request.getStatus());
 	    e.setProperty("customerFeedback", request.getCustomerFeedback());
@@ -64,6 +65,17 @@ public class RequestDAO {
 	    e.printStackTrace();
 	    throw new DAOException(e);
 	}
+    }
+
+    public RequestBean[] getRequests(String status) throws DAOException,
+	    EntityNotFoundException {
+	List<RequestBean> rBeans = new ArrayList<RequestBean>();
+	List<RequestBean> reqBeans = runAscendingQuery();
+	for (RequestBean reqBean : reqBeans) {
+	    if (reqBean.getStatus().equals(status))
+		rBeans.add(reqBean);
+	}
+	return rBeans.toArray(new RequestBean[rBeans.size()]);
     }
 
     /*
@@ -110,6 +122,7 @@ public class RequestDAO {
 	rbean.setStoreID(Integer.parseInt(e.getProperty("storeID").toString()));
 	rbean.setQuery((String) (e.getProperty("query")));
 	rbean.setProductID((Long) (e.getProperty("productID")));
+	rbean.setBarcode((String) e.getProperty("barcode"));
 	rbean.setTimeStamp((String) (e.getProperty("timeStamp")));
 	rbean.setStatus((String) (e.getProperty("status")));
 	rbean.setCustomerFeedback((String) (e.getProperty("customerFeedback")));

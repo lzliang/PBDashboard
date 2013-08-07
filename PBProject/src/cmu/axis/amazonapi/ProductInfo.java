@@ -80,7 +80,6 @@ public class ProductInfo {
 		return product;
 	}
 	public Map<String, String> getProductInfoByASIN(String ASIN) {
-//		Map<String, String> params = new HashMap<String, String>();
 		Map<String, String> product = new HashMap<String, String>();	
 		SignedRequestsHelper helper;
 		try {

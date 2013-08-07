@@ -1,6 +1,8 @@
 package cmu.axis.amazonapi;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,7 +13,7 @@ import org.jsoup.select.Elements;
 public class Reviews {
 	String overallRating;
 	List<review> reviewList;
-
+	
 	public class review {
 		String rating;
 		String customerName;
@@ -21,10 +23,9 @@ public class Reviews {
 
 	}
 
-	public Reviews getReviews(String barcode) {
-		Reviews reviews = new Reviews();
+	public List<Map<String,String>> getReviews(String barcode) {
 		ProductInfo pi = new ProductInfo();
-		List<review> tempList = new ArrayList<review>();
+		List<Map<String,String>> tempList = new ArrayList<Map<String,String>>();
 		
 		String reviewUrl = pi.getProductInfoByBarcode(barcode).get("Reviews");
 		String rawData = URLConnection.getData(reviewUrl);
@@ -114,19 +115,18 @@ public class Reviews {
 //		System.out.print(contents);
 		
 		for(int i=0; i<dates.size();i++){
-			review tempReview = new review();
-			tempReview.date = dates.get(i);
-			tempReview.customerName = cust_names.get(i);
-			tempReview.rating = indi_ratings.get(i);
-			tempReview.title = titles.get(i);
-			tempReview.content = contents.get(i);
-			tempList.add(tempReview);
-			
+			Map<String,String> currReview = new HashMap<String,String>();
+			currReview.put("Date", dates.get(i));
+			currReview.put("CustomerName", cust_names.get(i));
+			currReview.put("Rating",indi_ratings.get(i));
+			currReview.put("Title", titles.get(i));
+			currReview.put("Content", contents.get(i));
+			tempList.add(currReview);
 		}
 		
-		this.reviewList = tempList;
+		//this.reviewList = tempList;
 		
-		return reviews;
+		return tempList;
 
 	}
 

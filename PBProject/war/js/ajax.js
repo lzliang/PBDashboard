@@ -41,25 +41,25 @@ function makeRequest() {
 }
 
 
-function update() {
+function update(id) {
 //	setTimeout('makeRequest()',2000);
   var xmlHttp_two = getXMLHttpRequest();
   xmlHttp_two.onreadystatechange=function(){
 	  if(xmlHttp_two.readyState==4){
-	  document.getElementById("similar1").innerHTML=xmlHttp_two.responseText;
+	  document.getElementById("similar_products").innerHTML=xmlHttp_two.responseText;
 	  }
 	  }
-	  xmlHttp_two.open("GET","similarProductAJAX.do",true);
+	  xmlHttp_two.open("GET","similarProductAJAX.do?id="+id,true);
 	  xmlHttp_two.send(null);
 	  
 	  
 	  var xmlHttp_details = getXMLHttpRequest();
 	  xmlHttp_details.onreadystatechange=function(){
 		  if(xmlHttp_details.readyState==4){
-		  document.getElementById("info1").innerHTML=xmlHttp_details.responseText;
+		  document.getElementById("productDetails").innerHTML=xmlHttp_details.responseText;
 		  }
 		  }
-	  xmlHttp_details.open("GET","productDetailsAJAX.do",true);
+	  xmlHttp_details.open("GET","productDetailsAJAX.do?id="+id,true);
 	  xmlHttp_details.send(null);
 }
 

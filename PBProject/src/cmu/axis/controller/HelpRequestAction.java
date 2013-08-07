@@ -52,11 +52,10 @@ public class HelpRequestAction extends HttpServlet {
 			productBean = productDAO.getProduct("test");
 
 			int i=(int) (Math.random()*100);
-			String testString = "test " + i;
+
 		
-			req.setAttribute("testString", testString);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/helpRequest.jsp");
-			System.out.println("testString:     "+testString);
+			String testString = req.getParameter("id");
+			System.out.println("id:     "+testString);
 			
 			
 			res.setContentType("text/html");

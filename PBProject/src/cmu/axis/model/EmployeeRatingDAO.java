@@ -76,6 +76,9 @@ public class EmployeeRatingDAO {
 	}
     }
 
+    // public void updateEmployeeRating (RatingHistoryBean aRating) throws
+    // DAOException, EntityNotFoundException
+
     /*
      * public CustomerBean getCustomer(long customerId) throws DAOException,
      * EntityNotFoundException { Key cKey = KeyFactory.createKey(rootKey,

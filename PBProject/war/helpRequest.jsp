@@ -105,7 +105,7 @@ function btnchange(childnode) {
                  
                 </div>
                 <div class="scroll_panel" id="request_list_panel">
-					<div class="card_style" onclick="update()"> 
+					<div class="card_style" onclick="update(813810010424)"> 
                     
       					<div id="request_pic" class="request_pic">
        						 <img height="55" width="42" src="img/coke.jpg">        
@@ -145,94 +145,8 @@ function btnchange(childnode) {
 				<div class="h_title">Similar Products</div>
 				
                 <div class="scroll_panel">
-                <div id="similar1" style="display:block">
-                  <div id="similar_item" class="similar_item">
-                      <div id="similar_pic">
-                               <img height="100" width="77" src="img/pesi.jpg">        
-                           </div>
-                          <div id="similar_text" >
-                               <p id="similar_text_name">Pesi Cola</p>	 
-                               <p id="similar_text_price">$1.99</p>	 
-                           </div>
-                   </div>
-                   <div id="similar_item" class="similar_item">
-                      <div id="similar_pic">
-                               <img height="100" width="77" src="img/pesi2.jpg">        
-                           </div>
-                          <div id="similar_text" >
-                               <p id="similar_text_name">Pepsi Cola - 36/12 oz. cans</p>	 
-                               <p id="similar_text_price">$14.99</p>	 
-                           </div>
-                   </div>
-                   <div id="similar_item" class="similar_item">
-                      <div id="similar_pic">
-                               <img height="100" width="77" src="img/7up.jpg">        
-                           </div>
-                          <div id="similar_text" >
-                               <p id="similar_text_name">7-UP Soda Soft Drink</p>	 
-                               <p id="similar_text_price">$1.99</p>	 
-                           </div>
-                   </div>
-                   <div id="similar_item" class="similar_item">
-                      <div id="similar_pic">
-                               <img height="100" width="77" src="img/fanta.jpg">        
-                           </div>
-                          <div id="similar_text" >
-                               <p id="similar_text_name">Coca Cola Fanta Strawberry</p>	 
-                               <p id="similar_text_price">$1.99</p>	 
-                           </div>
-                   </div>
-                   <div id="similar_item" class="similar_item">
-                      <div id="similar_pic">
-                               <img height="100" width="77" src="img/coke2.jpg">        
-                           </div>
-                          <div id="similar_text" >
-                               <p id="similar_text_name">Coca Cola Coke Zero</p>	 
-                               <p id="similar_text_price">$1.79</p>	 
-                           </div>
-                   </div>
-                   <div id="similar_item" class="similar_item">
-                      <div id="similar_pic">
-                               <img height="100" width="77" src="img/coke3.jpg">        
-                           </div>
-                          <div id="similar_text" >
-                               <p id="similar_text_name">Coca-Cola Vanilla Coke, 12-12 fl. oz Cans</p>	 
-                               <p id="similar_text_price">$8.50</p>	 
-                           </div>
-                   </div>
-                   
-                   
-                   
-                   
+                <div id="similar_products">
                  </div>
-                 
-                 <div id="similar2" style="display:none">
-                  <div id="similar_item" class="similar_item">
-                      <div id="similar_pic">
-                               <img height="100" width="77" src="img/iphone2.jpg">        
-                           </div>
-                          <div id="similar_text" >
-                               <p id="similar_text_name">Apple iPhone 4 16GB (Black) </p>	 
-                               <p id="similar_text_price">$285.99</p>	 
-                           </div>
-                   </div>
-                   <div id="similar_item" class="similar_item">
-                      <div id="similar_pic">
-                               <img height="100" width="77" src="img/galaxys4.jpg">        
-                           </div>
-                          <div id="similar_text" >
-                               <p id="similar_text_name">Samsung Galaxy S IV/S4 GT-I9500</p>	 
-                               <p id="similar_text_price">$630.00</p>	 
-                           </div>
-                   </div>
-                   
-                  
-                   
-                   
-                   
-                   
-                 </div>
-                 
                  </div>
 					
 			</div>
@@ -244,51 +158,9 @@ function btnchange(childnode) {
 				<div class="h_title">Product Detail Information</div>
 				<div id="tabco4">
     <div>
-    <div id="info1" style="display:block">
-    <div  style="padding-top:20px"><div id="request_pic" class="request_pic">
-       						 <img height="85" width="65" src="img/coke.jpg">        
-       					 </div>
-      					<div id="request_text" class="request_text">
-       						 <p id="request_text_prodname">Product Name: Coca Cola Classic</p>
-                             <p id="request_text_name">Price: $1.99</p>
-       						<p id="request_text_location">Location: 01-E45</p>
-                         </div>
-                         </div>
-                         <div class="clear"></div>
-                         <div style="margin:15px 15px;"><h4>Price Compare:</h4> 
-                         	<div style="margin-right:40px; float:left;">Amazon: $1.45</div>      
-                         	<div style="margin-right:40px; float:left;">Target: $1.49</div>   
-                        	<div style="margin-right:40px; float:left;">Walmart: $1.45</div>
-                         
-                         </div>
-                         <div style="margin:35px 15px; clear:left;"><h4>Product Description:</h4> 18 x 12 x 5 inches ; 21.7 pounds
-Shipping Weight: 21.7 pounds (View shipping rates and policies)
-Shipping: This item can only be shipped to the 48 contiguous states. We regret it cannot be shipped to APO/FPO, Hawaii, Alaska, or Puerto Rico.
-Shipping Advisory: This item must be shipped separately from other items in your order. Additional shipping charges will not apply.</div>
-                         </div>
-                  
-                  <div id="info2" style="display:none">
-    <div  style="padding-top:20px"><div id="request_pic" class="request_pic">
-       						 <img height="85" width="65" src="img/iphone.jpg">        
-       					 </div>
-      					<div id="request_text" class="request_text">
-       						 <p id="request_text_prodname">Product Name: Apple iPhone 5 16GB (White)</p>
-                             <p id="request_text_name">Price: $710.99</p>
-       						<p id="request_text_location">Location: 03-C15</p>
-                         </div>
-                         </div>
-                         <div class="clear"></div>
-                         <div style="margin:15px 15px;"><h4>Price Compare:</h4> 
-                         	<div style="margin-right:40px; float:left;">Amazon: $708.45</div>      
-                         	<div style="margin-right:40px; float:left;">BestBuy: $708.45</div>   
-                        	
-                         </div>
-                         <div style="margin:35px 15px; clear:left;"><h4>Product Description:</h4> This iPhone 5 16GB White comes in the original box from Apple with all original accessories in the box. This iPhone 5 16GB comes Factory Unlocked for any GSM and will work with any GSM SIM card in the world.</div>
-                         </div>
-                  
-                  
-                         
-                         </div>
+    <div id="productDetails">
+    </div>
+    </div>
     <div>
     <h3>Most Useful Customer Reviews:</h3>
     <div style="margin:15px 0px">

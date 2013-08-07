@@ -1,11 +1,16 @@
 package cmu.axis.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cmu.axis.amazonapi.ProductInfo;
 import cmu.axis.databean.ProductBean;
 import cmu.axis.model.DAOException;
 import cmu.axis.model.Model;
@@ -33,17 +38,34 @@ public class SimilarProductAJAX extends HttpServlet {
 
 			productBean = productDAO.getProduct("test");
 
-			int i=(int) (Math.random()*100);
-			String testString = "test " + i;
+			String productID = req.getParameter("id");
+			ProductInfo p = new ProductInfo();
+			Map<String, Map<String, String>> productMap = p.getSimilarities(productID);
+			Set<String> similarProducts = productMap.keySet();
 			
-			String[] string = {"hello","hello2"};
 			
-				req.setAttribute("test2", string);
 			
+			String result = "";
+			
+			for(int i=0; i<similarProducts.size(); i++) {
+				result += "<div id=\"similar_item\" class=\"similar_item\">"
+						+ "<div id=\"similar_pic\">"
+						+ "<img height=\"100\" width=\"77\" src=\""+ productMap.get(similarProducts.toArray()[i]).get("Picture") +"\">"
+						+ "</div>"
+						+ "<div id=\"similar_text\" >"
+						+ "<p>"+ productMap.get(similarProducts.toArray()[i]).get("Name") +"</p>"
+						+ "<p>"+ productMap.get(similarProducts.toArray()[i]).get("Price") +"</p>"
+						+ "</div>"
+						+ "</div>";
+				if((i+1)%3==0) {
+					result += "<div class=\"clear\"></div>";
+				}
+			}
+			
+			System.out.println(result);
 			
 			res.setContentType("text/html");
-			
-				res.getWriter().write("<div class=\"card_style\"> TESTSTRING '${test2[0]}'"+"</div>");
+			res.getWriter().write(result);
 			
 
 

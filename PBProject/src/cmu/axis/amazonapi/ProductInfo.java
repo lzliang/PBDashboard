@@ -21,9 +21,9 @@ public class ProductInfo {
 	private static final String ENDPOINT = "ecs.amazonaws.com";
 	// private static final String ITEM_ID = "813810010424";
 	
-	static Map<String, String> params = new HashMap<String, String>();
+//	static Map<String, String> params = new HashMap<String, String>();
 	public Map<String, String> getProductInfoByBarcode(String barcode) {
-//		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<String, String>();
 		Map<String, String> product = new HashMap<String, String>();
 
 		SignedRequestsHelper helper;
@@ -80,7 +80,7 @@ public class ProductInfo {
 		return product;
 	}
 	public Map<String, String> getProductInfoByASIN(String ASIN) {
-//		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<String, String>();
 		Map<String, String> product = new HashMap<String, String>();	
 		SignedRequestsHelper helper;
 		try {
@@ -92,10 +92,14 @@ public class ProductInfo {
 		}
 
 		String requestUrl = null;
-
+		
+		
+		params.put("Service", "AWSECommerceService");
+		params.put("Version", "2009-03-31");
+		params.put("Operation", "ItemLookup");
 		params.put("IdType", "ASIN");
-		params.remove("SearchIndex");
 		params.put("ItemId", ASIN);
+		params.put("AssociateTag", "th0426-20");
 		params.put("ResponseGroup", "Medium");
 
 		requestUrl = helper.sign(params);
@@ -131,7 +135,7 @@ public class ProductInfo {
 		return product;
 	}
 	public Map<String, Map<String, String>> getSimilarities(String barcode){
-		
+		Map<String, String> params = new HashMap<String, String>();
 		Map<String, Map<String, String>> similarities = new HashMap<String, Map<String, String>>();
 		SignedRequestsHelper helper;
 		try {
@@ -164,7 +168,7 @@ public class ProductInfo {
 			for(int i=0; i<ASINNodeList.getLength();i++){
 				Node ASINNode = ASINNodeList.item(i);
 				String ASIN = ASINNode.getFirstChild().getTextContent();
-//				System.out.println(ASIN);
+				System.out.println(ASIN);
 				
 				similarities.put(ASIN,getProductInfoByASIN(ASIN));
 			}
@@ -195,11 +199,11 @@ public class ProductInfo {
 		Map<String, Map<String, String>> test1 = p.getSimilarities("813810010424");
 		Set<String> test2 = test1.keySet();
 		System.out.println(test2);
-		System.out.println(test1.get(test2.toArray()[1]).get("Name"));
-		System.out.println(test1.get(test2.toArray()[1]).get("Description"));
-		System.out.println(test1.get(test2.toArray()[1]).get("Price"));
-		System.out.println(test1.get(test2.toArray()[1]).get("Picture"));
-		System.out.println(test1.get(test2.toArray()[1]).get("Reviews"));
+		System.out.println(test1.get(test2.toArray()[0]).get("Name"));
+		System.out.println(test1.get(test2.toArray()[0]).get("Description"));
+		System.out.println(test1.get(test2.toArray()[0]).get("Price"));
+		System.out.println(test1.get(test2.toArray()[0]).get("Picture"));
+		System.out.println(test1.get(test2.toArray()[0]).get("Reviews"));
 		
 		
 	}

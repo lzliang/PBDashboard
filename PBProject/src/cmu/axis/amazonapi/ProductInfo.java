@@ -80,10 +80,8 @@ public class ProductInfo {
 		return product;
 	}
 	public Map<String, String> getProductInfoByASIN(String ASIN) {
-<<<<<<< HEAD
 		Map<String, String> params = new HashMap<String, String>();
-=======
->>>>>>> refs/remotes/origin/master
+
 		Map<String, String> product = new HashMap<String, String>();	
 		SignedRequestsHelper helper;
 		try {

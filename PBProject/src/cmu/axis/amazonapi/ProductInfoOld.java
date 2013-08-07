@@ -11,7 +11,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
-public class ProductInfo {
+public class ProductInfoOld {
 	private static final String AWS_ACCESS_KEY_ID = "AKIAI3NCEPGAPX2DE7SQ";
 	private static final String AWS_SECRET_KEY = "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";
 	private static final String ENDPOINT = "ecs.amazonaws.com";
@@ -75,7 +75,7 @@ public class ProductInfo {
 	}
 
 	public static void main(String args[]) {
-		ProductInfo p = new ProductInfo();
+		ProductInfoOld p = new ProductInfoOld();
 		Map<String, String> test = new HashMap<String, String>();
 		test = p.getProductInfo("813810010424");
 

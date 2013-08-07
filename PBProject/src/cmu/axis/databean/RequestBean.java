@@ -4,6 +4,7 @@ public class RequestBean {
     private long requestID;
     private long customerID;
     private long employeeID;
+    private String employeeName;
     private int storeID;
     private String location; // Remove it
     private String query;
@@ -99,6 +100,14 @@ public class RequestBean {
 
     public void setBarcode(String barcode) {
 	this.barcode = barcode;
+    }
+
+    public String getEmployeeName() {
+	return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+	this.employeeName = employeeName;
     }
 
 }

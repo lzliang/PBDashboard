@@ -31,6 +31,7 @@ public class RequestDAO {
 	    // e.setProperty("customerId", customer.getCustomerId());
 	    e.setProperty("customerID", request.getCustomerID());
 	    e.setProperty("employeeID", request.getEmployeeID());
+	    e.setProperty("employeeName", request.getEmployeeName());
 	    e.setProperty("storeID", request.getStoreID());
 	    // e.setProperty("aisleNum", request.getAisleNum());
 	    e.setProperty("queryType", request.getQueryType());
@@ -95,6 +96,26 @@ public class RequestDAO {
 	return rBean;
     }
 
+    public RequestBean getRequest(String empName) throws DAOException,
+	    EntityNotFoundException {
+	RequestBean[] servingRequests = getRequests("Serving");
+	for (int i = 0; i < servingRequests.length; i++) {
+	    if (servingRequests[i].getEmployeeName().equals(empName))
+		return servingRequests[i];
+	}
+	return null;
+    }
+
+    public RequestBean getRequestbyEmpID(long empID) throws DAOException,
+	    EntityNotFoundException {
+	RequestBean[] servingRequests = getRequests("Serving");
+	for (int i = 0; i < servingRequests.length; i++) {
+	    if (servingRequests[i].getEmployeeID() == empID)
+		return servingRequests[i];
+	}
+	return null;
+    }
+
     public void updateRequest(long rID, String cFeedback) throws DAOException,
 	    EntityNotFoundException {
 	Key rKey = KeyFactory.createKey(rootKey, "Request", rID);
@@ -119,6 +140,7 @@ public class RequestDAO {
 	rbean.setRequestID(e.getKey().getId());
 	rbean.setCustomerID((Long) e.getProperty("customerID"));
 	rbean.setEmployeeID((Long) e.getProperty("employeeID"));
+	rbean.setEmployeeName((String) e.getProperty("employeeName"));
 	rbean.setStoreID(Integer.parseInt(e.getProperty("storeID").toString()));
 	rbean.setQuery((String) (e.getProperty("query")));
 	rbean.setProductID((Long) (e.getProperty("productID")));

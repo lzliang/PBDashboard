@@ -24,19 +24,21 @@ public class GetInfo {
 	public String getInfo(@PathParam("barcode")  String barcode) {
 		ProductInfo pi = new ProductInfo();
 		Gson gson = new Gson();
+		Map<String, Object> rt = new HashMap<String, Object>();
 		Map<String, String> productInfo = pi.getProductInfoByBarcode(barcode);
 		if(productInfo.size() == 0){
 			productInfo.put("Status","error");
-			productInfo.put("Reason", "Can not get the product from Amazon");
+			productInfo.put("Reason", "Can not get the product from Amazon");		
 		}else{
-			productInfo.remove("Reviews");
-			productInfo.put("Status","success");
 			Reviews r= new Reviews();
 			List<Map<String,String>> reviews = r.getReviews(barcode);
-			String strReview = gson.toJson(reviews);
-			productInfo.put("Reviews", strReview);
+			productInfo.remove("Reviews");
+			rt.put("Reviews", reviews);
+			
+			productInfo.put("Status","success");
 		}
-		return gson.toJson(productInfo);
+		rt.putAll(productInfo);
+		return gson.toJson(rt);
 	}
 	
 	@GET

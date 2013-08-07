@@ -116,6 +116,14 @@ public class RequestDAO {
 	return null;
     }
 
+    public boolean isRequestBeingServed(long reqId) throws DAOException,
+	    EntityNotFoundException {
+	RequestBean rBean = getRequest(reqId);
+	if (rBean.getStatus().equals("Serving"))
+	    return true;
+	return false;
+    }
+
     public void updateRequest(long rID, String cFeedback) throws DAOException,
 	    EntityNotFoundException {
 	Key rKey = KeyFactory.createKey(rootKey, "Request", rID);

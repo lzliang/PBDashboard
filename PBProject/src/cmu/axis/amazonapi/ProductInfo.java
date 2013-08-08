@@ -16,8 +16,10 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class ProductInfo {
-	private static final String AWS_ACCESS_KEY_ID = "AKIAI3NCEPGAPX2DE7SQ";
-	private static final String AWS_SECRET_KEY = "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";
+	private static final String AWS_ACCESS_KEY_ID_1 = "AKIAI3NCEPGAPX2DE7SQ";
+	private static final String AWS_SECRET_KEY_1 = "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";
+	private static final String AWS_ACCESS_KEY_ID_2 = "AKIAIXJ55O4DOO7NQG2A";
+	private static final String AWS_SECRET_KEY_2 = "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";
 	private static final String ENDPOINT = "ecs.amazonaws.com";
 	// private static final String ITEM_ID = "813810010424";
 	
@@ -29,7 +31,7 @@ public class ProductInfo {
 		SignedRequestsHelper helper;
 		try {
 			helper = SignedRequestsHelper.getInstance(ENDPOINT,
-					AWS_ACCESS_KEY_ID, AWS_SECRET_KEY);
+					AWS_ACCESS_KEY_ID_1, AWS_SECRET_KEY_1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -86,7 +88,7 @@ public class ProductInfo {
 		SignedRequestsHelper helper;
 		try {
 			helper = SignedRequestsHelper.getInstance(ENDPOINT,
-					AWS_ACCESS_KEY_ID, AWS_SECRET_KEY);
+					AWS_ACCESS_KEY_ID_2, AWS_SECRET_KEY_2);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -141,7 +143,7 @@ public class ProductInfo {
 		SignedRequestsHelper helper;
 		try {
 			helper = SignedRequestsHelper.getInstance(ENDPOINT,
-					AWS_ACCESS_KEY_ID, AWS_SECRET_KEY);
+					AWS_ACCESS_KEY_ID_1, AWS_SECRET_KEY_1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

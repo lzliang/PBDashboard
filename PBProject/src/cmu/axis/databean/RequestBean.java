@@ -6,12 +6,11 @@ public class RequestBean {
     private long employeeID;
     private String employeeName;
     private int storeID;
-    private String location; // Remove it
+    private String deviceId;
     private String query;
-    private long productID; //not necessary
     private String barcode;
-    private String timeStamp;//time received help request, and time the help request is taken care of
-    //add another time stamp
+    private String helpRequestTime;
+    private String helpReceivedTime;
     private String status;
     private String customerFeedback;
 
@@ -47,28 +46,20 @@ public class RequestBean {
 	this.storeID = storeID;
     }
 
-    public String getQueryType() {
-	return location;
+    public String getDeviceId() {
+	return deviceId;
     }
 
-    public void setQueryType(String queryType) {
-	this.location = queryType;
-    }
-
-    public long getProductID() {
-	return productID;
-    }
-
-    public void setProductID(long productID) {
-	this.productID = productID;
+    public void setDeviceId(String deviceId) {
+	this.deviceId = deviceId;
     }
 
     public String getTimeStamp() {
-	return timeStamp;
+	return helpRequestTime;
     }
 
     public void setTimeStamp(String timeStamp) {
-	this.timeStamp = timeStamp;
+	this.helpRequestTime = timeStamp;
     }
 
     public String getStatus() {
@@ -109,6 +100,14 @@ public class RequestBean {
 
     public void setEmployeeName(String employeeName) {
 	this.employeeName = employeeName;
+    }
+
+    public String getHelpReceivedTime() {
+	return helpReceivedTime;
+    }
+
+    public void setHelpReceivedTime(String helpReceivedTime) {
+	this.helpReceivedTime = helpReceivedTime;
     }
 
 }

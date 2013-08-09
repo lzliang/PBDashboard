@@ -28,17 +28,15 @@ public class RequestDAO {
 	    t = datastore.beginTransaction();
 
 	    Entity e = new Entity("Request", rootKey);
-	    // e.setProperty("customerId", customer.getCustomerId());
 	    e.setProperty("customerID", request.getCustomerID());
 	    e.setProperty("employeeID", request.getEmployeeID());
 	    e.setProperty("employeeName", request.getEmployeeName());
 	    e.setProperty("storeID", request.getStoreID());
-	    // e.setProperty("aisleNum", request.getAisleNum());
-	    e.setProperty("queryType", request.getQueryType());
+	    e.setProperty("deviceId", request.getDeviceId());
 	    e.setProperty("query", request.getQuery());
-	    e.setProperty("productID", request.getProductID());
 	    e.setProperty("barcode", request.getBarcode());
-	    e.setProperty("timeStamp", request.getTimeStamp());
+	    e.setProperty("helpRequestTime", request.getTimeStamp());
+	    e.setProperty("helpReceivedTime", request.getHelpReceivedTime());
 	    e.setProperty("status", request.getStatus());
 	    e.setProperty("customerFeedback", request.getCustomerFeedback());
 
@@ -128,6 +126,16 @@ public class RequestDAO {
 	return null;
     }
 
+    public RequestBean getRequestbyMachineId(String machineId)
+	    throws DAOException, EntityNotFoundException {
+	RequestBean[] servingRequests = getRequests("Serving");
+	for (int i = 0; i < servingRequests.length; i++) {
+	    if (servingRequests[i].getDeviceId() == machineId)
+		return servingRequests[i];
+	}
+	return null;
+    }
+
     public boolean isRequestBeingServed(long reqId) throws DAOException,
 	    EntityNotFoundException {
 	RequestBean rBean = getRequest(reqId);
@@ -175,10 +183,11 @@ public class RequestDAO {
 	rbean.setEmployeeID((Long) e.getProperty("employeeID"));
 	rbean.setEmployeeName((String) e.getProperty("employeeName"));
 	rbean.setStoreID(Integer.parseInt(e.getProperty("storeID").toString()));
+	rbean.setDeviceId((String) (e.getProperty("deviceId")));
 	rbean.setQuery((String) (e.getProperty("query")));
-	rbean.setProductID((Long) (e.getProperty("productID")));
 	rbean.setBarcode((String) e.getProperty("barcode"));
-	rbean.setTimeStamp((String) (e.getProperty("timeStamp")));
+	rbean.setTimeStamp((String) (e.getProperty("helpRequestTime")));
+	rbean.setTimeStamp((String) (e.getProperty("helpReceivedTime")));
 	rbean.setStatus((String) (e.getProperty("status")));
 	rbean.setCustomerFeedback((String) (e.getProperty("customerFeedback")));
 	return rbean;

@@ -108,7 +108,7 @@ public class GetHelp {
 		Gson gson = new Gson();
 		try {
 			rb = rd.getRequest(requestID);
-		} catch (DAOException | EntityNotFoundException e) {
+		} catch (Exception e) {
 			rt.put("status", "error");
 			return Response.status(200)
 					.header("Access-Control-Allow-Origin", "*")

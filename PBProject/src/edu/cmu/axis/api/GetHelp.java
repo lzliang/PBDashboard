@@ -13,6 +13,9 @@ import javax.ws.rs.core.Response;
 
 import org.datanucleus.sco.backed.Map;
 
+import cmu.axis.databean.RequestBean;
+import cmu.axis.model.RequestDAO;
+
 import com.google.gson.Gson;
 
 @Path("/help")
@@ -40,10 +43,18 @@ public class GetHelp {
 	@POST
 	//@Path("/")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response helpRequest(String pData) {
+	public Response helpRequest(String helpData) {
+		//{"machineID":"", "barcode":"", "location":"","customerName":"","storeID":""}
+		
 	    Gson gson = new Gson();
-	    HashMap<String, String> request = gson.fromJson(pData, HashMap.class);    
-	    return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pData).build();
+	    HashMap<String,String> helpMap = gson.fromJson(helpData, HashMap.class);
+	    RequestDAO rd = new RequestDAO();
+	    RequestBean rb = new RequestBean();
+	    rb.setBarcode(helpMap.get("barCode"));
+//	    rb.setStoreID(storeID)(helpMap.get("machineID"));
+//	    boolean saveRequest = saveHelpRequest(helpMap);
+	   // return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( ).build();
+	    return null;
 	}
 	
 	@PUT

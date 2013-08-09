@@ -8,9 +8,10 @@ public class RequestBean {
     private int storeID;
     private String location; // Remove it
     private String query;
-    private long productID;
+    private long productID; //not necessary
     private String barcode;
-    private String timeStamp;
+    private String timeStamp;//time received help request, and time the help request is taken care of
+    //add another time stamp
     private String status;
     private String customerFeedback;
 

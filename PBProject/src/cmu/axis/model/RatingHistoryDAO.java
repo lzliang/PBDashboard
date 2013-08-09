@@ -22,7 +22,7 @@ public class RatingHistoryDAO {
     private final Query ascendingQuery = new Query("RatingHistory", rootKey)
 	    .addSort("timeStamp", Query.SortDirection.ASCENDING);
 
-    public void addRatingHistory(RatingHistoryBean ratingHistory)
+    public boolean saveRatingHistory(RatingHistoryBean ratingHistory)
 	    throws DAOException {
 	Transaction t = null;
 	try {
@@ -42,6 +42,7 @@ public class RatingHistoryDAO {
 	    // item.setId(e.getKey().getId()); id stuff, add later
 
 	    t.commit();
+	    return true;
 	} catch (Exception e) {
 	    e.printStackTrace();
 	    throw new DAOException(e);

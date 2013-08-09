@@ -5,12 +5,15 @@ public class RequestBean {
     private long customerID;
     private long employeeID;
     private String employeeName;
+    private String customerName;
     private int storeID;
+    private String inStoreLocation;
     private String deviceId;
     private String query;
     private String barcode;
     private String helpRequestTime;
     private String helpReceivedTime;
+    private String day;
     private String status;
     private String customerFeedback;
 
@@ -108,6 +111,30 @@ public class RequestBean {
 
     public void setHelpReceivedTime(String helpReceivedTime) {
 	this.helpReceivedTime = helpReceivedTime;
+    }
+
+    public String getInStoreLocation() {
+	return inStoreLocation;
+    }
+
+    public void setInStoreLocation(String inStoreLocation) {
+	this.inStoreLocation = inStoreLocation;
+    }
+
+    public String getCustomerName() {
+	return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+	this.customerName = customerName;
+    }
+
+    public String getDay() {
+	return day;
+    }
+
+    public void setDay(String day) {
+	this.day = day;
     }
 
 }

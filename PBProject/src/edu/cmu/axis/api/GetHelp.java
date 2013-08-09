@@ -71,4 +71,22 @@ public class GetHelp {
 	//	Map<String, String> rt = getHelpingEmployee(machineID);
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(machineID).build();
 	}
+	
+	@GET
+	@Path("/serving/{requestID}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response serving(@PathParam("requestID") String requestID) {
+		//	Map<String, String> rt = getHelpingEmployee(machineID);
+		String s = "{\"status\":\"sucess\"}";
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(s).build();
+	}
+	
+	@GET
+	@Path("/done/{requestID}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response done(@PathParam("requestID") String requestID) {
+		//	Map<String, String> rt = getHelpingEmployee(machineID);
+		String s = "{\"status\":\"sucess\"}";
+			return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(s).build();
+	}
 }

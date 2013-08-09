@@ -29,7 +29,6 @@ public class RatingHistoryDAO {
 	    t = datastore.beginTransaction();
 
 	    Entity e = new Entity("RatingHistory", rootKey);
-	    // e.setProperty("customerId", customer.getCustomerId());
 	    e.setProperty("customerId", ratingHistory.getCustomerId());
 	    e.setProperty("employeeId", ratingHistory.getEmployeeId());
 	    e.setProperty("rating", ratingHistory.getRating());

@@ -115,7 +115,7 @@ public class GetHelp {
 			rb = rd.getRequest(requestID);
 		} catch (Exception e) {
 			rt.put("status", "error");
-			rt.put("status", e.getMessage());
+			rt.put("reason", e.getMessage());
 			return Response.status(200)
 					.header("Access-Control-Allow-Origin", "*")
 					.entity(gson.toJson(rt)).build();

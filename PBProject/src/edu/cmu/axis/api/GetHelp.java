@@ -104,11 +104,10 @@ public class GetHelp {
 		return Response.status(200).header("Access-Control-Allow-Origin", "*")
 				.entity(s).build();
 	}
-	//TODO
 	@GET
 	@Path("/status/{requestID}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response requestStatus(@PathParam("requestID") String requestID) {
+	public Response requestStatus(@PathParam("requestID") long requestID) {
 		RequestBean rb = null;
 		Map<String, String> rt = new HashMap<String, String>();
 		Gson gson = new Gson();
@@ -116,12 +115,14 @@ public class GetHelp {
 			rb = rd.getRequest(requestID);
 		} catch (Exception e) {
 			rt.put("status", "error");
+			rt.put("status", e.getMessage());
 			return Response.status(200)
 					.header("Access-Control-Allow-Origin", "*")
 					.entity(gson.toJson(rt)).build();
 		}
 		if(rb == null){
 			rt.put("status", "error");
+			rt.put("reason", "Can not get the request with given ID");
 			return Response.status(200)
 					.header("Access-Control-Allow-Origin", "*")
 					.entity(gson.toJson(rt)).build();

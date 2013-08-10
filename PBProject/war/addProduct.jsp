@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
 <title>Add New Product</title>
 </head>
 <body>
@@ -45,9 +46,7 @@
 							onClick="clearForm(this.form)">Reset</button>
 					</td>
 				</tr>
-				<tr><td>${test2[0]} </td>
 				
-				</tr>
 			</table>
 
 		</form>

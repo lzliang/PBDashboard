@@ -1,7 +1,9 @@
 package cmu.axis.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.datastore.EntityNotFoundException;
+
+import cmu.axis.amazonapi.ProductInfo;
 import cmu.axis.databean.ProductBean;
+import cmu.axis.databean.RequestBean;
 import cmu.axis.model.DAOException;
 import cmu.axis.model.Model;
 import cmu.axis.model.ProductDAO;
@@ -26,7 +32,7 @@ public class HelpRequestAction extends HttpServlet {
 
 
 	//	private RequestDAO requestDAO;
-	private ProductDAO productDAO;
+	private RequestDAO requestDAO;
 	//	private ProductLocationDAO productLocationDAO;
 	//	
 	//	public HelpRequestAction(Model model) {
@@ -45,23 +51,53 @@ public class HelpRequestAction extends HttpServlet {
 
 		try {
 			model = new Model(getServletConfig());
-			productDAO = model.getProductDAO();
-
-			ProductBean productBean = new ProductBean();
-
-			productBean = productDAO.getProduct("test");
-
-			int i=(int) (Math.random()*100);
-
-		
-			String testString = req.getParameter("id");
-			System.out.println("id:     "+testString);
+			requestDAO = model.getRequestDAO();
 			
+			
+			
+//			RequestBean requestBean = new RequestBean();
+//			requestBean.setBarcode("885909510269");
+//			requestBean.setEmployeeName("Alex");
+//			requestBean.setStatus("Need Help");
+//			requestBean.setQuery("x");
+//			
+//			requestDAO.addRequest(requestBean);
+			
+
+			RequestBean[] requestList = requestDAO.getRequests("Need Help");
+			System.out.println("REQUEST NUM:   " + requestList.length);
+
+			ProductInfo p = new ProductInfo();
+			Map<String, String> productMap = new HashMap<String, String>();
+			String barcode = new String();
+			
+			String result = new String();
+			
+			for(int i=0; i<requestList.length; i++) {
+				barcode = requestList[i].getBarcode();
+				productMap = p.getProductInfoByBarcode(barcode);
+				
+				result += "<div class=\"card_style\" onclick=\"update("+ barcode +")\">"
+						+ "<div id=\"request_pic\" class=\"request_pic\">"
+						+ "<img height=\"55\" width=\"42\" src=\""+ productMap.get("Picture") +"\">"
+   						+ "</div>"  
+						+ "<div id=\"request_text\" class=\"request_text\">"
+						+ "<p>Name: Joe Doe </p>"
+						+ "<p>Product Name:"+ productMap.get("Name") +"</p>"
+   						+ "<p>Location: 01-E45</p>" 
+   						+ "</div>"
+   						+ "<div class=\"request_button\">"
+   						+ "<button onclick=\"goHelp(this, "+requestList[i].getRequestID()+")\">Go Help</button>"
+     				    + "</div>"
+   						+ "<div class=\"clear\"></div>"
+   						+ "</div>";
+       			
+                 
+			}
 			
 			res.setContentType("text/html");
-			if(i%2==0) {
-				res.getWriter().write("<div class=\"card_style\"> TEST "+i+"</div>");
-			}
+			res.getWriter().write(result);
+			
 
 
 
@@ -70,6 +106,9 @@ public class HelpRequestAction extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EntityNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

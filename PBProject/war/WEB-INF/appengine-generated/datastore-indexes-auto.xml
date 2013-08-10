@@ -1,10 +1,10 @@
-<!-- Indices written at Wed, 7 Aug 2013 15:56:57 EDT -->
+<!-- Indices written at Fri, 9 Aug 2013 22:31:14 EDT -->
 
 <datastore-indexes>
 
     <!-- Used 1 time in query history -->
-    <datastore-index kind="Product" ancestor="true" source="auto">
-        <property name="productName" direction="asc"/>
+    <datastore-index kind="Request" ancestor="true" source="auto">
+        <property name="query" direction="asc"/>
     </datastore-index>
 
 </datastore-indexes>

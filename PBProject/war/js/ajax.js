@@ -63,7 +63,85 @@ function update(id) {
 	  xmlHttp_details.send(null);
 }
 
- 
+
+function goHelp(childnode, requestID) {
+	
+	if(checkStatus(requestID)=="Serving") {
+		
+		alert('Someone else is helping with this request.');
+		
+	} else {
+		var child=childnode;
+	    var parentdiv=child.parentNode.parentNode;
+	    var requestPanel=parentdiv.parentNode;
+	    parentdiv.parentNode.removeChild(parentdiv);
+		requestPanel.style.height="62%";
+		
+		var xmlHttp_help = getXMLHttpRequest();
+		xmlHttp_help.onreadystatechange=function(){
+			if(xmlHttp_help.readyState==4){
+				document.getElementById("helping_request").innerHTML=xmlHttp_help.responseText;
+			}
+		}
+		xmlHttp_help.open("GET","goHelpAJAX.do?id="+requestID,true);
+		xmlHttp_help.send(null);
+		
+	}
+}
+
+function checkStatus(requestID) {
+
+	jQuery.ajax(
+			"http://axispbcusen.appspot.com/_api/help/status/"+requestID,
+			{
+				dataType: "json",
+				type: "GET", //GET is the default but just wanted to show this option
+				error: function(jqXHR, textStatus, errorThrown) {
+					alert(errorThrown);
+				},
+				success: function(data, textStatus, jqXHR) {
+					/*
+					 * jQuery will automatically parse the returned JSON so 
+					 * data should be our deserialized object.
+					 */
+					var status = data.requestStatus;
+						
+					
+					//$("div").html(htmlString);
+					
+//					alert(status);
+					return status;
+				}
+			}
+		);
+}
+
+
+function complete(childnode, childrequestID) {
+
+	jQuery.ajax(
+			"http://axispbcusen.appspot.com/_api/help/done/"+requestID,
+			{
+				dataType: "json",
+				type: "GET", //GET is the default but just wanted to show this option
+				error: function(jqXHR, textStatus, errorThrown) {
+					alert(errorThrown);
+				},
+				success: function(data, textStatus, jqXHR) {
+
+					var child=childnode;
+				    var parentdiv=child.parentNode.parentNode;
+				    var requestPanel=parentdiv.parentNode;
+				    parentdiv.parentNode.removeChild(parentdiv);
+					requestPanel.style.height="85%";
+					
+					alert('OK');
+//					return status;
+				}
+			}
+		);
+}
+
 
 
 

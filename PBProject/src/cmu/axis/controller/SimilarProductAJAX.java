@@ -62,7 +62,6 @@ public class SimilarProductAJAX extends HttpServlet {
 				}
 			}
 			
-			System.out.println(result);
 			
 			res.setContentType("text/html");
 			res.getWriter().write(result);

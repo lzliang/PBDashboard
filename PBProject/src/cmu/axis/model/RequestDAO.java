@@ -90,6 +90,14 @@ public class RequestDAO {
     }
 
     /*
+     * public RequestStats[] getRequestStats() throws DAOException,
+     * EntityNotFoundException { RequestBean[] allRequests = getRequests();
+     * 
+     * 
+     * }
+     */
+
+    /*
      * public RequestBean getRequest(String request) throws DAOException { try {
      * RequestBean aProduct = new RequestBean(); List<RequestBean> products =
      * runAscendingQuery(); for (RequestBean product : products) { if

@@ -12,8 +12,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import cmu.axis.databean.EmployeeBean;
 import cmu.axis.databean.RequestBean;
 import cmu.axis.model.DAOException;
+import cmu.axis.model.EmployeeDAO;
 import cmu.axis.model.RequestDAO;
 
 import com.google.appengine.api.datastore.EntityNotFoundException;
@@ -22,20 +24,7 @@ import com.google.gson.Gson;
 @Path("/help")
 public class GetHelp {
 	RequestDAO rd = new RequestDAO();
-
-	// /**
-	// * This is an example of GET
-	// * The url of this method is:
-	// * http://localhost:8888/_api/help, method get
-	// * @return a json string
-	// */
-	// @GET
-	// @Path("{machineID}")
-	// @Produces(MediaType.TEXT_PLAIN)
-	// public String getHelpingEmployee() {
-	// return "Hello Jersey on Google App Engine";
-	// }
-
+	EmployeeDAO ed = new EmployeeDAO();
 	/**
 	 * The url of this method is: http://localhost:8888/_api/help, method post
 	 * 
@@ -48,20 +37,20 @@ public class GetHelp {
 	public Response helpRequest(String helpData) {
 		// {"machineID":"", "barcode":"",
 		// "location":"","customerName":"","storeID":""}
-
 		Gson gson = new Gson();
 		HashMap<String, String> helpMap = gson
 				.fromJson(helpData, HashMap.class);
-		RequestDAO rd = new RequestDAO();
 		RequestBean rb = new RequestBean();
 		rb.setBarcode(helpMap.get("barCode"));
-		// rb.setStoreID(storeID)(helpMap.get("machineID"));
+		rb.setDeviceId(helpMap.get("machineID"));
+		//rb.set
 		// boolean saveRequest = saveHelpRequest(helpMap);
 		// return Response.status(200).header("Access-Control-Allow-Origin",
 		// "*").entity( ).build();
 		return null;
 	}
 
+	//currently not taken
 	@PUT
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response testPut(String pData) {
@@ -74,11 +63,28 @@ public class GetHelp {
 	@Path("{machineID}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response getHelpingEmployee(@PathParam("machineID") String machineID) {
-		// Map<String, String> rt = getHelpingEmployee(machineID);
+		RequestBean rb;
+		Map<String,String> rt = new HashMap<String, String>();
+		Gson gson = new Gson();
+		
+		try {
+			rb = rd.getRequestbyMachineId(machineID);
+			String name = rb.getEmployeeName();
+			EmployeeBean e = ed.getEmployee(rb.getCustomerID());
+			rt.put("status", "success");
+			rt.put("employeeName", name);
+			rt.put("employeePic", e.getPicURL());
+		} catch (Exception e) {
+			rt.put("status", "error");
+			return Response.status(200)
+					.header("Access-Control-Allow-Origin", "*")
+					.entity(gson.toJson(rt)).build();
+		} 
 		return Response.status(200).header("Access-Control-Allow-Origin", "*")
-				.entity(machineID).build();
+				.entity(rt).build();
 	}
 
+	//TODO
 	@GET
 	@Path("/serving/{requestID}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -88,7 +94,7 @@ public class GetHelp {
 		return Response.status(200).header("Access-Control-Allow-Origin", "*")
 				.entity(s).build();
 	}
-
+	//TODO
 	@GET
 	@Path("/done/{requestID}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -98,7 +104,7 @@ public class GetHelp {
 		return Response.status(200).header("Access-Control-Allow-Origin", "*")
 				.entity(s).build();
 	}
-
+	//TODO
 	@GET
 	@Path("/status/{requestID}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -114,7 +120,12 @@ public class GetHelp {
 					.header("Access-Control-Allow-Origin", "*")
 					.entity(gson.toJson(rt)).build();
 		}
-
+		if(rb == null){
+			rt.put("status", "error");
+			return Response.status(200)
+					.header("Access-Control-Allow-Origin", "*")
+					.entity(gson.toJson(rt)).build();
+		}
 		rt.put("status", "sucess");
 		rt.put("requestStatus", rb.getStatus());
 		return Response.status(200).header("Access-Control-Allow-Origin", "*")

@@ -17,13 +17,13 @@ import cmu.axis.amazonapi.Reviews;
 import com.google.gson.Gson;
 @Path("/info")
 public class GetInfo {
+	Gson gson = new Gson();
 	//finished
 	@GET
 	@Path("/{barcode}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response getInfo(@PathParam("barcode")  String barcode) {
 		ProductInfo pi = new ProductInfo();
-		Gson gson = new Gson();
 		Map<String, Object> rt = new HashMap<String, Object>();
 		Map<String, String> productInfo = pi.getProductInfoByBarcode(barcode);
 		if(productInfo.size() == 0){
@@ -39,7 +39,6 @@ public class GetInfo {
 		}
 		rt.putAll(productInfo);
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(gson.toJson(rt)).build();
-		//return gson.toJson(rt);
 	}
 	
 	@Deprecated

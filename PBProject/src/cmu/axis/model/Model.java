@@ -12,6 +12,9 @@ public class Model {
     private final ProductDAO productDAO = new ProductDAO();
     private final ProductLocationDAO productLocationDAO = new ProductLocationDAO();
     private final RequestDAO requestDAO = new RequestDAO();
+    private final RatingHistoryDAO ratingHistoryDAO = new RatingHistoryDAO();
+    private final EmployeeRatingDAO employeeRatingDAO = new EmployeeRatingDAO();
+    private final StoreDAO storeDAO = new StoreDAO();
 
     public Model(ServletConfig config) throws ServletException {
     }
@@ -47,4 +50,16 @@ public class Model {
     public RequestDAO getRequestDAO() {
 	return requestDAO;
     }
-	}
+
+    public RatingHistoryDAO getRatingHistoryDAO() {
+	return ratingHistoryDAO;
+    }
+
+    public EmployeeRatingDAO getEmployeeRatingDAO() {
+	return employeeRatingDAO;
+    }
+
+    public StoreDAO getStoreDAO() {
+	return storeDAO;
+    }
+}

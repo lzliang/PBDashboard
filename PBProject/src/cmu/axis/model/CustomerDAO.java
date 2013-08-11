@@ -81,6 +81,16 @@ public class CustomerDAO {
 	return cBean;
     }
 
+    public void updateCustomer(long cID, CustomerBean aCustomer)
+	    throws DAOException, EntityNotFoundException {
+	Key cKey = KeyFactory.createKey(rootKey, "Request", cID);
+	Entity customer = datastore.get(cKey);
+	customer.setProperty("customerName", aCustomer.getCustomerName());
+	customer.setProperty("IMEI", aCustomer.getIMEI());
+	datastore.put(customer);
+
+    }
+
     private List<CustomerBean> runAscendingQuery() {
 	List<Entity> entities = datastore.prepare(ascendingQuery).asList(
 		FetchOptions.Builder.withLimit(100));

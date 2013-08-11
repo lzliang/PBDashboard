@@ -12,25 +12,37 @@ import javax.ws.rs.core.Response;
 
 import org.mortbay.util.ajax.JSON;
 
-import com.google.gson.Gson;
+import cmu.axis.databean.RequestBean;
+import cmu.axis.model.RequestDAO;
 
+import com.google.gson.Gson;
 
 @Path("/feedback")
 public class Feedback {
+	Gson gson = new Gson();
+	RequestDAO rd = new RequestDAO();
 
+	//finished
 	@POST
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response updateFeedback(String inputRequest) {
-		//do something with gson TODO
-		Gson gson = new Gson();
-		Feedback fb = gson.fromJson(inputRequest, Feedback.class);
-		Map<String,String> returnmap = new HashMap<String,String>();
-		//if(saveFeedback(fb)){
-			returnmap.put("status","success");
-		//}else{
-			returnmap.put("status","error");
-		//}
+		//{"machineID":"", "feedback":"","rating":"","bought":"true/false"}
 		
-		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(inputRequest).build();
+		Map<String,String> fb = gson.fromJson(inputRequest, Map.class);
+		Map<String,String> rt = new HashMap<String,String>();
+		fb.remove("machineID");
+		try{
+		RequestBean rb = rd.getRequestbyMachineId(fb.get("machineID"));
+		
+		rd.updateRequest(rb.getRequestID(), gson.toJson(fb));
+		}
+		catch(Exception e){
+			return Util.returnError(null, e);
+		}
+		rt.put("status", "sucess");
+		return Response.status(200).header("Access-Control-Allow-Origin", "*")
+				.entity(gson.toJson(rt)).build();
+		
+		
 	}
 }

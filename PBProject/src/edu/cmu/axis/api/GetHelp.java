@@ -51,6 +51,7 @@ public class GetHelp {
 		}
 		Map<String,String> rt = new HashMap<String, String>();
 		rt.put("status", "sucess");
+		rt.put("time","3");
 		return Response.status(200).header("Access-Control-Allow-Origin", "*")
 				.entity(gson.toJson(rt)).build();
 	}

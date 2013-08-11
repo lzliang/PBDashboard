@@ -84,6 +84,18 @@ public class EmployeeDAO {
 	return eBean;
     }
 
+    public void updateEmployee(long eID, EmployeeBean anEmployee)
+	    throws DAOException, EntityNotFoundException {
+	Key eKey = KeyFactory.createKey(rootKey, "Employee", eID);
+	Entity employee = datastore.get(eKey);
+	employee.setProperty("userName", anEmployee.getUserName());
+	employee.setProperty("password", anEmployee.getPassword());
+	employee.setProperty("designation", anEmployee.getDesignation());
+	employee.setProperty("picURL", anEmployee.getPicURL());
+	employee.setProperty("storeID", anEmployee.getStoreID());
+	datastore.put(employee);
+    }
+
     private List<EmployeeBean> runAscendingQuery() {
 	List<Entity> entities = datastore.prepare(ascendingQuery).asList(
 		FetchOptions.Builder.withLimit(100));

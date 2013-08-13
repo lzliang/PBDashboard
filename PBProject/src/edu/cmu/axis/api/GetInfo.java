@@ -27,9 +27,8 @@ public class GetInfo {
 		ProductInfo pi = new ProductInfo();
 		Map<String, Object> rt = new HashMap<String, Object>();
 		Map<String, String> productInfo = pi.getProductInfoByBarcode(barcode);
-		if(productInfo.size() == 0){
-			productInfo.put("Status","error");
-			productInfo.put("Reason", "Can not get the product from Amazon");		
+		if(productInfo==null || productInfo.size() == 0){
+			return Util.returnError("Can not get the product from Amazon", null);	
 		}else{
 			Reviews r= new Reviews();
 			List<Map<String,String>> reviews = new ArrayList<Map<String, String>>();

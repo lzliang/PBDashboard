@@ -78,6 +78,9 @@ public class ProductInfo {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		catch (NullPointerException e) {
+			return null;
+		}
 
 		return product;
 	}

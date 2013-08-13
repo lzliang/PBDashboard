@@ -18,6 +18,7 @@ $(function(){
 </script>
 <script language="javascript" src="http://www.google.com/jsapi"></script>
 <script language="javascript" src="js/bar-chart.js"></script>
+
 </head>
 <body>
 <div class="wrap">
@@ -77,7 +78,7 @@ $(function(){
 
                     <div id="page_button">
        						 <button>Previous</button>
-                             <button>Next</button>
+                             <button onclick="onLoadCallback();">Next</button>
        					 </div>
                     
                     </div>

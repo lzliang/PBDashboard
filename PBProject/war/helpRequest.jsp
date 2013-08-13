@@ -10,7 +10,6 @@
 <link rel="stylesheet" type="text/css" href="css/navi.css" media="screen" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/tab.js"></script>
-
 <script type="text/javascript">
 $(function(){
 	$(".box .h_title").not(this).next("ul").hide("normal");
@@ -18,7 +17,6 @@ $(function(){
 	$(".box").children(".h_title").click( function() { $(this).next("ul").slideToggle(); });
 });
 </script>
-
 <script type="text/javascript">
 function change(i) {
 	if (i==1) {
@@ -57,174 +55,124 @@ function btnchange(childnode) {
 	
 }
 </script>
-
-
 </head>
 <body>
 <div class="wrap">
-	<div id="header">
-		<div id="top">
-			<div class="left">
-				<p>Welcome, <strong>Paweł B.</strong> [ <a href="">logout</a> ]</p>
-			</div>
-			<div class="right">
-				<div class="align-right">
-					<p>Last login: <strong>08-01-2013 13:12</strong></p>
-				</div>
-			</div>
-		</div>
-		<div id="nav">
-			<ul>
-				<li class="upp"><a href="helpRequest.jsp">In-store Help</a>					
-				</li>
-				<li class="upp"><a href="statistics.jsp">Statistics</a>
-					<ul>
-						<li>&#8250; <a href="statistics.jsp">Help Feature Analysis</a></li>
-						<li>&#8250; <a href="staff_evaluation.jsp">Staff Evaluation</a></li>
-						<li>&#8250; <a href="customer_analysis.jsp">Customer Analysis</a></li>
-						<li>&#8250; <a href="">Other Graphics</a></li>
-					</ul>
-				</li>
-				<li class="upp"><a href="#">Settings</a>
-					<ul>
-						<li>&#8250; <a href="">Site Configuration</a></li>
-						<li>&#8250; <a href="">Contact Form</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div>
-	
-	<div id="content">
-		
-	  <div id="main">
-			<div class="half_w half_left scrollable">
-				<div class="h_title">Help Request List</div>
-                
-                <div id="helping_request">
-                 
-                </div>
-                <div class="scroll_panel" id="request_list_panel">
-					<div class="card_style" onclick="update(813810010424)"> 
-                    
-      					<div id="request_pic" class="request_pic">
-       						 <img height="55" width="42" src="img/coke.jpg">        
-       					 </div>
-      					<div id="request_text" class="request_text">
-       						 <p id="request_text_name">Name: Joe Doe</p>
-       						 <p id="request_text_prodname">Product Name: Coca Cola Classic</p>
-       						<p id="request_text_location">Location: 01-E45</p>
-                         </div>
-         				 <div id="request_button" class="request_button">
-       						 <button id="btn1" style="display: block;" onclick="btnchange(this)">Go Help</button>
-                             <button id="btn2" style="background: #80C65A; display: none;">Helping...</button>
-       					 </div>
-           			<div class="clear"></div>
-                     </div>
-                     
-                     <div class="card_style" onclick="change(1)">               
-      					<div id="request_pic" class="request_pic">
-       						 <img height="55" width="42" src="img/iphone.jpg">        
-       					 </div>
-      					<div id="request_text" class="request_text">
-       						 <p id="request_text_name">Name: Amy</p>
-       						 <p id="request_text_prodname">Product Name: Apple iPhone 5 16GB</p>
-       						<p id="request_text_location">Location: 03-C15</p>
-                         </div>
-         				 <div id="request_button" class="request_button">
-       						 <button>Go Help</button>
-       					 </div>
-           			<div class="clear"></div>
-                     </div>
-                    
-					
+  <div id="header">
+    <div id="top">
+      <div class="left">
+        <p>Welcome, <strong>Paweł B.</strong> [ <a href="">logout</a> ]</p>
+      </div>
+      <div class="right">
+        <div class="align-right">
+          <p>Last login: <strong>08-01-2013 13:12</strong></p>
+        </div>
+      </div>
+    </div>
+    <div id="nav">
+      <ul>
+        <li class="upp"><a href="helpRequest.jsp">In-store Help</a> </li>
+        <li class="upp"><a href="statistics.jsp">Statistics</a>
+          <ul>
+            <li>&#8250; <a href="statistics.jsp">Help Feature Analysis</a></li>
+            <li>&#8250; <a href="staff_evaluation.jsp">Staff Evaluation</a></li>
+            <li>&#8250; <a href="customer_analysis.jsp">Customer Analysis</a></li>
+            <li>&#8250; <a href="">Other Graphics</a></li>
+          </ul>
+        </li>
+        <li class="upp"><a href="#">Settings</a>
+          <ul>
+            <li>&#8250; <a href="">Site Configuration</a></li>
+            <li>&#8250; <a href="">Contact Form</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="content">
+    <div id="main">
+      <div class="half_w half_left scrollable">
+        <div class="h_title">Help Request List</div>
+        <div id="helping_request"> </div>
+        <div class="scroll_panel" id="request_list_panel">
+          <div class="card_style" onclick="update(813810010424)">
+            <div id="request_pic" class="request_pic"> <img height="55" width="42" src="img/coke.jpg"> </div>
+            <div id="request_text" class="request_text">
+              <p id="request_text_name">Name: Joe Doe</p>
+              <p id="request_text_prodname">Product Name: Coca Cola Classic</p>
+              <p id="request_text_location">Location: 01-E45</p>
+            </div>
+            <div id="request_button" class="request_button">
+              <button id="btn1" style="display: block;" onclick="btnchange(this)">Go Help</button>
+              <button id="btn2" style="background: #80C65A; display: none;">Helping...</button>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="card_style" onclick="change(1)">
+            <div id="request_pic" class="request_pic"> <img height="55" width="42" src="img/iphone.jpg"> </div>
+            <div id="request_text" class="request_text">
+              <p id="request_text_name">Name: Amy</p>
+              <p id="request_text_prodname">Product Name: Apple iPhone 5 16GB</p>
+              <p id="request_text_location">Location: 03-C15</p>
+            </div>
+            <div id="request_button" class="request_button">
+              <button>Go Help</button>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="half_w half_right scrollable">
+        <div class="h_title">Similar Products</div>
+        <div class="scroll_panel">
+          <div id="similar_products"> </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="full_w scrollable">
+        <div class="h_title">Product Detail Information</div>
+        <div id="tabco4">
+          <div id="productDetails"> </div>
+          <div>
+            <h3>Most Useful Customer Reviews:</h3>
+            <div id="comment_list" class="comment_list scroll_panel">
+              <ol>
+                <li>
+                  <div class="comment">
+                    <div class="left"> <img style="margin-left:15px" height="50" width="50" src="img/user.png" />
+                      <div class="comment-meta">
+                        <p class="comment-author"><span>admin</span></p>
+                        <p class="comment-date">Apr 8, 2013</p>
+                      </div>
                     </div>
-			</div>
-            
-            <div class="half_w half_right scrollable">
-				<div class="h_title">Similar Products</div>
-				
-                <div class="scroll_panel">
-                <div id="similar_products">
-                 </div>
-                 </div>
-					
-			</div>
-           
-			
-			<div class="clear"></div>
-            
-            <div class="full_w">
-				<div class="h_title">Product Detail Information</div>
-				<div id="tabco4">
-    <div>
-    <div id="productDetails">
+                    <div class="comment_right">
+                      <p>Hi,This is really amazing.</p>
+                      <p><img src="img/1_Star.gif" width="92" height="20" /> </p>
+                    </div>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+          <ul>
+            <li><a href="javascript:vd()">Details</a></li>
+            <li><a href="javascript:vd()">Reviews</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clear"></div>
     </div>
+    <div class="clear"></div>
+  </div>
+  <div id="footer">
+    <div class="left">
+      <p>Admin Panel: <a href="">http://axispbcusen.appspot.com/</a></p>
     </div>
-    <div>
-    <h3>Most Useful Customer Reviews:</h3>
-    <div style="margin:15px 0px">
-    <p >Name: James</p>
-    <p> These make me feel like a giant., May 28, 2013</p>
-    <p> ------------------------</p>
+    <div class="right">
+      <p><a href="">Example link 1</a> | <a href="">Example link 2</a></p>
     </div>
-    <div style="margin:15px 0px">
-    <p >Name: Chris</p>
-    <p> Classic!!., February 25, 2013</p>
-    <p> ------------------------</p>
-    </div>
-    <div style="margin:15px 0px">
-    <p>Name: Amber</p>
-    <p> Delivery is so fast!!., February 08, 2013</p>
-
-    </div>
-    
-    
-    </div>
-    
-    
-    
-    <ul>
-        
-        <li><a href="javascript:vd()">Details</a></li>
-        <li><a href="javascript:vd()">Reviews</a></li>
-          
-    </ul>
-    
+  </div>
 </div>
-			</div>
-            
-			
-			
-			<div class="clear"></div>
-            
-	  </div>
-		<div class="clear"></div>
-	</div>
-
-	<div id="footer">
-		<div class="left">
-			<p>Admin Panel: <a href="">http://axispbcusen.appspot.com/</a></p>
-		</div>
-		<div class="right">
-			<p><a href="">Example link 1</a> | <a href="">Example link 2</a></p>
-		</div>
-	</div>
-</div>
-
-
-
-
-<!-- test code for AJAX, need to be deleted 
-  -->
-<div class="clear"></div>
-
-<div>Getting Started with AJAX using JAVA: Hello World!</div>
-  <div><button type="button" onclick="makeRequest()">Say Hello!</button></div>
-  <div id="ReloadThis">Defualt Text</div>
-  <div>${testString}</div>
-  
-  
 </body>
 
 <!--  
@@ -233,7 +181,7 @@ function btnchange(childnode) {
 <script type="text/javascript">
 window.onload = function(){
 initTab();
-setTimeout('makeRequest()',2000);
+setTimeout('makeRequest()',0);
 }
 </script>
 </html>

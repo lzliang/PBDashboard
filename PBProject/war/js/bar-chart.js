@@ -2,6 +2,7 @@ var queryString = '';
       var dataUrl = '';
 
       function onLoadCallback() {
+		  alert('callback');
         if (dataUrl.length > 0) {
           var query = new google.visualization.Query(dataUrl);
           query.setQuery(queryString);
@@ -27,8 +28,10 @@ var queryString = '';
       }
 
       function draw(dataTable) {
+		  alert('draw');
         var vis = new google.visualization.ImageChart(document.getElementById('chart'));
         var options = {
+			
           chxl: '1:|Voroinca|Tom|Sam|Mary|Kevin|Jame|Jack|Carol|Andy|Alice',
           chxp: '',
           chxr: '0,0,5|1,0,0',
@@ -44,7 +47,11 @@ var queryString = '';
           chdl: 'Average Score',
           chm: 'N,0D0C0B,0,-1,11',
           chtt: 'Staff Performance Evaluation',
-          chts: '676767,14'
+          chts: '676767,14',
+		  animation:{
+    duration: 2000,
+    easing: 'linear',
+  }
         };
         vis.draw(dataTable, options);
       }

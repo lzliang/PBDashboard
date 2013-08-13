@@ -16,6 +16,46 @@ $(function(){
 	$(".box").children(".h_title").click( function() { $(this).next("ul").slideToggle(); });
 });
 </script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  0,      400],
+          ['2005',  0,      460],
+          ['2006',  0,       1120],
+          ['2007',  0,      540]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          hAxis: {title: 'Year', titleTextStyle: {color: 'red'}},
+		  animation: {duration:1000, easing:'out'}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+		
+		
+		
+		setTimeout(function() {
+
+		  data.setValue(0,1,300);
+		   data.setValue(1,1,300);
+		    data.setValue(2,1,300);
+			 data.setValue(3,1,300);
+			  chart.draw(data, options);
+	  },1000);
+		
+      }
+	  
+
+
+    </script>
+
+
 </head>
 <body>
 <div class="wrap">
@@ -69,9 +109,9 @@ $(function(){
       
 		  <div class="full_w">
 				<div class="h_title">Help Feature Analysis</div>
-					<script src="js/highcharts_init.js"></script>
-					<div id="container" style="min-width: 300px; height: 380px; margin: 0 auto"></div>
-					<script src="js/highcharts.js"></script>
+					
+					<div id="chart_div"></div>
+					
 			</div>
 		  <div class="clear"></div>
 	  </div>

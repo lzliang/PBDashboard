@@ -1,6 +1,7 @@
 package cmu.axis.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,12 +58,18 @@ public class HelpRequestAction extends HttpServlet {
 			
 //			RequestBean requestBean = new RequestBean();
 //			requestBean.setBarcode("885909510269");
-//			requestBean.setEmployeeName("Alex");
+//			requestBean.setEmployeeName("Lynn");
 //			requestBean.setStatus("Need Help");
 //			requestBean.setQuery("x");
-//			
+//			requestBean.setDay("Sat Aug 11 23:56:10 EDT 2013");
+//			requestBean.setCustomerID(0);
+//			requestBean.setStoreID(0);
+//			requestBean.setEmployeeID(0);
+////			
 //			requestDAO.addRequest(requestBean);
-			
+//			Date date = new Date();
+//			RequestBean[] test = requestDAO.getRequests();
+//			System.out.println("test  " + test.length);
 
 			RequestBean[] requestList = requestDAO.getRequests("Need Help");
 			System.out.println("REQUEST NUM:   " + requestList.length);

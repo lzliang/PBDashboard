@@ -61,6 +61,17 @@ function update(id) {
 		  }
 	  xmlHttp_details.open("GET","productDetailsAJAX.do?id="+id,true);
 	  xmlHttp_details.send(null);
+	  
+	  
+	  var xmlHttp_reviews = getXMLHttpRequest();
+	  xmlHttp_reviews.onreadystatechange=function(){
+		  if(xmlHttp_reviews.readyState==4){
+		  document.getElementById("comment_list").innerHTML=xmlHttp_reviews.responseText;
+		  }
+		  }
+	  xmlHttp_reviews.open("GET","reviewsAJAX.do?id="+id,true);
+	  xmlHttp_reviews.send(null);
+	  
 }
 
 
@@ -117,7 +128,7 @@ function checkStatus(requestID) {
 }
 
 
-function complete(childnode, childrequestID) {
+function complete(requestID) {
 
 	jQuery.ajax(
 			"http://axispbcusen.appspot.com/_api/help/done/"+requestID,
@@ -129,11 +140,8 @@ function complete(childnode, childrequestID) {
 				},
 				success: function(data, textStatus, jqXHR) {
 
-					var child=childnode;
-				    var parentdiv=child.parentNode.parentNode;
-				    var requestPanel=parentdiv.parentNode;
-				    parentdiv.parentNode.removeChild(parentdiv);
-					requestPanel.style.height="85%";
+					document.getElementById('helping_request').innerHTML = "";
+					document.getElementById('request_list_panel').style.height="85%";
 					
 					alert('OK');
 //					return status;

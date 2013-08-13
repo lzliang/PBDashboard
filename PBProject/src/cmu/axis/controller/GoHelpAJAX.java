@@ -30,6 +30,8 @@ public class GoHelpAJAX extends HttpServlet {
 			long requestID = Long.valueOf(req.getParameter("id"));
 			RequestBean requestBean = requestDAO.getRequest(requestID);
 			String barcode = requestBean.getBarcode();
+			requestBean.setStatus("Serving");
+			requestDAO.updateRequest(requestID, requestBean);
 		
 			ProductInfo p = new ProductInfo();
 			Map<String, String> productMap = new HashMap<String, String>();
@@ -46,7 +48,7 @@ public class GoHelpAJAX extends HttpServlet {
 						+ "<p>Location: 01-E45</p>" 
 						+ "</div>"
 						+ "<div class=\"request_button\">"
-						+ "<button style=\"background: #80C65A\" onclick=\"complete(this, "+ requestID +")\">Helping...</button>"
+						+ "<button style=\"background: #80C65A\" onclick=\"complete("+ requestID +")\">Helping...</button>"
  				    + "</div>"
 						+ "<div class=\"clear\"></div>"
 						+ "</div>");

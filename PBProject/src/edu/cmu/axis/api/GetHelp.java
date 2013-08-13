@@ -39,7 +39,7 @@ public class GetHelp {
 		HashMap<String, String> helpMap = gson
 				.fromJson(helpData, HashMap.class);
 		RequestBean rb = new RequestBean();
-		rb.setBarcode(helpMap.get("barCode"));
+		rb.setBarcode(helpMap.get("barcode"));
 		rb.setDeviceId(helpMap.get("machineID"));
 		rb.setStatus("Need Help");
 		long currentMillis = System.currentTimeMillis();

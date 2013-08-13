@@ -85,7 +85,7 @@ function update(id) {
 					  + "</div>"
 					  + "</div>"
 					  + "<div class=\"comment_right\">"
-					  + "<p>"+val.Title+"</p>"
+					  + "<p><b>"+val.Title+"</b></p>"
 					  + "<p>"+val.Content+"</p>"
 					  + "<p><img src=\"img/"+val.Rating.charAt(0)+"_Star.gif\" width=\"92\" height=\"20\" /> </p>"
 					  + "</div>"

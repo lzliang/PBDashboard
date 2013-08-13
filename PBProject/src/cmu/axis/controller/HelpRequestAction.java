@@ -49,6 +49,7 @@ public class HelpRequestAction extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws java.io.IOException {
+		String result = new String();
 
 		try {
 			model = new Model(getServletConfig());
@@ -78,11 +79,14 @@ public class HelpRequestAction extends HttpServlet {
 			Map<String, String> productMap = new HashMap<String, String>();
 			String barcode = new String();
 			
-			String result = new String();
 			
 			for(int i=0; i<requestList.length; i++) {
 				barcode = requestList[i].getBarcode();
+
 				productMap = p.getProductInfoByBarcode(barcode);
+				if(productMap == null) {
+					continue;
+				}
 				
 				result += "<div class=\"card_style\" onclick=\"update("+ barcode +")\">"
 						+ "<div id=\"request_pic\" class=\"request_pic\">"
@@ -118,6 +122,9 @@ public class HelpRequestAction extends HttpServlet {
 		} catch (EntityNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (Exception e) {
+			res.setContentType("text/html");
+			res.getWriter().write(result);
 		}
 	}
 

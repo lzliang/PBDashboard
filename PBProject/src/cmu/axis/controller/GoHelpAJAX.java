@@ -48,7 +48,8 @@ public class GoHelpAJAX extends HttpServlet {
 						+ "<p>Location: 01-E45</p>" 
 						+ "</div>"
 						+ "<div class=\"request_button\">"
-						+ "<button style=\"background: #80C65A\" onclick=\"complete("+ requestID +")\">Helping...</button>"
+						+ "<button style=\"background: #80C65A\" onclick=\"complete("+ requestID +")\">Complete</button>"
+						+ "<p class=\"helping_text\">In progress...</p>"
  				    + "</div>"
 						+ "<div class=\"clear\"></div>"
 						+ "</div>");

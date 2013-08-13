@@ -108,54 +108,29 @@ function btnchange(childnode) {
             </div>
             <div class="clear"></div>
           </div>
-          <div class="card_style" onclick="change(1)">
-            <div id="request_pic" class="request_pic"> <img height="55" width="42" src="img/iphone.jpg"> </div>
-            <div id="request_text" class="request_text">
-              <p id="request_text_name">Name: Amy</p>
-              <p id="request_text_prodname">Product Name: Apple iPhone 5 16GB</p>
-              <p id="request_text_location">Location: 03-C15</p>
-            </div>
-            <div id="request_button" class="request_button">
-              <button>Go Help</button>
-            </div>
-            <div class="clear"></div>
-          </div>
         </div>
       </div>
       <div class="half_w half_right scrollable">
-        <div class="h_title">Similar Products</div>
+        <div class="h_title">Products Details</div>
         <div class="scroll_panel">
-          <div id="similar_products"> </div>
+          <div id="productDetails"> </div>
         </div>
       </div>
       <div class="clear"></div>
       <div class="full_w scrollable">
-        <div class="h_title">Product Detail Information</div>
+        <div class="h_title">Other Information</div>
         <div id="tabco4">
-          <div id="productDetails"> </div>
+          <div> 
+          <div id="similar_products" class="scroll_panel"> </div>
+          </div>
           <div>
             <h3>Most Useful Customer Reviews:</h3>
-            <div id="comment_list" class="comment_list scroll_panel">
-              <ol>
-                <li>
-                  <div class="comment">
-                    <div class="left"> <img style="margin-left:15px" height="50" width="50" src="img/user.png" />
-                      <div class="comment-meta">
-                        <p class="comment-author"><span>admin</span></p>
-                        <p class="comment-date">Apr 8, 2013</p>
-                      </div>
-                    </div>
-                    <div class="comment_right">
-                      <p>Hi,This is really amazing.</p>
-                      <p><img src="img/1_Star.gif" width="92" height="20" /> </p>
-                    </div>
-                  </div>
-                </li>
-              </ol>
+            <div class="comment_list scroll_panel">
+            <ol id="comment_list" ></ol>
             </div>
           </div>
           <ul>
-            <li><a href="javascript:vd()">Details</a></li>
+            <li><a href="javascript:vd()">Similar Products</a></li>
             <li><a href="javascript:vd()">Reviews</a></li>
           </ul>
         </div>

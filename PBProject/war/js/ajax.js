@@ -43,6 +43,7 @@ function makeRequest() {
 
 function update(id) {
 //	setTimeout('makeRequest()',2000);
+	
   var xmlHttp_two = getXMLHttpRequest();
   xmlHttp_two.onreadystatechange=function(){
 	  if(xmlHttp_two.readyState==4){
@@ -63,14 +64,45 @@ function update(id) {
 	  xmlHttp_details.send(null);
 	  
 	  
-	  var xmlHttp_reviews = getXMLHttpRequest();
-	  xmlHttp_reviews.onreadystatechange=function(){
-		  if(xmlHttp_reviews.readyState==4){
-		  document.getElementById("comment_list").innerHTML=xmlHttp_reviews.responseText;
+	  
+	  jQuery.ajax("http://axispbcusen.appspot.com/_api/info/"+id, {
+		  dataType : "json",
+		  type : "GET", //GET is the default but just wanted to show this option
+		  error : function(jqXHR, textStatus, errorThrown) {
+			  alert(errorThrown);
+		  },
+		  success : function(data, textStatus, jqXHR) {
+			  var selectString = "";
+			  
+			  data.Reviews.forEach(function(val, index, array) {
+				  selectString += "<li>"
+					  + "<div class=\"comment\">"
+					  + "<div class=\"comment_left\">"
+					  + "<img style=\"margin-left:15px\" height=\"50\" width=\"50\" src=\"img/user.png\" />"
+					  + "<div class=\"comment-meta\">"
+					  + "<p class=\"comment-author\"><span>"+val.CustomerName+"</span></p>"
+					  + "<p class=\"comment-date\">"+val.Date+"</p> "
+					  + "</div>"
+					  + "</div>"
+					  + "<div class=\"comment_right\">"
+					  + "<p>"+val.Title+"</p>"
+					  + "<p>"+val.Content+"</p>"
+					  + "<p><img src=\"img/"+val.Rating.charAt(0)+"_Star.gif\" width=\"92\" height=\"20\" /> </p>"
+					  + "</div>"
+					  + "</div>"
+					  + "</li>";
+			  });
+			  
+			  document.getElementById("comment_list").innerHTML=selectString;
 		  }
-		  }
-	  xmlHttp_reviews.open("GET","reviewsAJAX.do?id="+id,true);
-	  xmlHttp_reviews.send(null);
+	  });
+	  
+	  
+	  
+			 
+			  
+			
+	  
 	  
 }
 

@@ -57,11 +57,11 @@ public class HelpRequestAction extends HttpServlet {
 			
 			
 //			RequestBean requestBean = new RequestBean();
-//			requestBean.setBarcode("885909510269");
+//			requestBean.setBarcode("813810010424");
 //			requestBean.setEmployeeName("Lynn");
 //			requestBean.setStatus("Need Help");
 //			requestBean.setQuery("x");
-//			requestBean.setDay("Sat Aug 11 23:56:10 EDT 2013");
+//			requestBean.setDay("Sat Aug 12 23:56:10 EDT 2013");
 //			requestBean.setCustomerID(0);
 //			requestBean.setStoreID(0);
 //			requestBean.setEmployeeID(0);

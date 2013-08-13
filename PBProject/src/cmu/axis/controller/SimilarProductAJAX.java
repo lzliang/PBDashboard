@@ -57,11 +57,12 @@ public class SimilarProductAJAX extends HttpServlet {
 						+ "<p>"+ productMap.get(similarProducts.toArray()[i]).get("Price") +"</p>"
 						+ "</div>"
 						+ "</div>";
-				if((i+1)%3==0) {
-					result += "<div class=\"clear\"></div>";
-				}
+//				if((i+1)%3==0) {
+//					result += "<div class=\"clear\"></div>";
+//				}
 			}
 			
+//			result += "<div class=\"clear\"></div>";
 			
 			res.setContentType("text/html");
 			res.getWriter().write(result);

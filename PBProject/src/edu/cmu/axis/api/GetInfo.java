@@ -1,5 +1,6 @@
 package edu.cmu.axis.api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +32,14 @@ public class GetInfo {
 			productInfo.put("Reason", "Can not get the product from Amazon");		
 		}else{
 			Reviews r= new Reviews();
-			List<Map<String,String>> reviews = r.getReviews(barcode);
-			productInfo.remove("Reviews");
+			List<Map<String,String>> reviews = new ArrayList<Map<String, String>>();
+			try{
+				reviews = r.getReviews(barcode);
+			}catch (Exception e){
+				
+			}
+			productInfo.remove("Reviews");			
 			rt.put("Reviews", reviews);
-			
 			productInfo.put("Status","success");
 		}
 		rt.putAll(productInfo);

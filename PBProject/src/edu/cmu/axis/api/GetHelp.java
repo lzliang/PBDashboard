@@ -24,6 +24,7 @@ public class GetHelp {
 	RequestDAO rd = new RequestDAO();
 	EmployeeDAO ed = new EmployeeDAO();
 	Gson gson = new Gson();
+	java.util.Date date= new java.util.Date();
 	/**
 	 * The url of this method is: http://localhost:8888/_api/help, method post
 	 * 
@@ -41,6 +42,9 @@ public class GetHelp {
 		rb.setBarcode(helpMap.get("barCode"));
 		rb.setDeviceId(helpMap.get("machineID"));
 		rb.setStatus("Need Help");
+		long currentMillis = System.currentTimeMillis();
+		rb.setHelpRequestTime(Long.toString(currentMillis));
+		rb.setDay(Long.toString(Util.trimTimeStampToDay(currentMillis)));
 		if(helpMap.containsKey("customerName")){
 			rb.setCustomerName(helpMap.get("customerName"));
 		}
@@ -57,6 +61,7 @@ public class GetHelp {
 	}
 
 	//currently not taken
+	@Deprecated
 	@PUT
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response testPut(String pData) {
@@ -89,7 +94,7 @@ public class GetHelp {
 				.entity(rt).build();
 	}
 
-	//need test
+	//finished
 	@GET
 	@Path("/serving/{requestID}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -100,6 +105,8 @@ public class GetHelp {
 			if(rb.getStatus().equals("Need Help")){
 				rb.setStatus("Serving");
 				rd.updateRequest(requestID, rb);
+				
+				rb.setHelpReceivedTime(Long.toString(System.currentTimeMillis()));
 			}else{
 				throw new RuntimeException();
 			}

@@ -1,8 +1,6 @@
 package edu.cmu.axis.api;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.GET;
@@ -12,12 +10,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
 import cmu.axis.databean.RequestStats;
 import cmu.axis.model.RequestDAO;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 @Path("/stats")
 public class Stats {
@@ -37,16 +33,8 @@ public class Stats {
 			e.printStackTrace();
 			return Util.returnError(null, e);
 		}
-		if(intvl.trim().toLowerCase().equals("week")){
-			if(stats.length <= 7){
-				rt.put("data",stats);
-			}else{
-				RequestStats[] week = new RequestStats[7];
-				for(int i = 0; i < 7;i++){
-					week[i] = stats[stats.length-6+i];
-				}
-				rt.put("data",week);
-			}
+		if(intvl.trim().toLowerCase().equals("all")){
+			rt.put("data",stats);
 		}
 		rt.put("status", "success");
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(gson.toJson(rt)).build();

@@ -37,7 +37,7 @@ public class RequestDAO {
 	    e.setProperty("deviceId", request.getDeviceId());
 	    e.setProperty("query", request.getQuery());
 	    e.setProperty("barcode", request.getBarcode());
-	    e.setProperty("helpRequestTime", request.getTimeStamp());
+	    e.setProperty("helpRequestTime", request.getHelpRequestTime());
 	    e.setProperty("helpReceivedTime", request.getHelpReceivedTime());
 	    e.setProperty("day", request.getDay());
 	    e.setProperty("status", request.getStatus());
@@ -200,7 +200,7 @@ public class RequestDAO {
 	request.setProperty("deviceId", rBean.getDeviceId());
 	request.setProperty("query", rBean.getQuery());
 	request.setProperty("barcode", rBean.getBarcode());
-	request.setProperty("helpRequestTime", rBean.getTimeStamp());
+	request.setProperty("helpRequestTime", rBean.getHelpRequestTime());
 	request.setProperty("helpReceivedTime", rBean.getHelpReceivedTime());
 	request.setProperty("day", rBean.getDay());
 	request.setProperty("status", rBean.getStatus());
@@ -230,7 +230,7 @@ public class RequestDAO {
 	rbean.setDeviceId((String) (e.getProperty("deviceId")));
 	rbean.setQuery((String) (e.getProperty("query")));
 	rbean.setBarcode((String) e.getProperty("barcode"));
-	rbean.setTimeStamp((String) (e.getProperty("helpRequestTime")));
+	rbean.setHelpRequestTime((String) (e.getProperty("helpRequestTime")));
 	rbean.setHelpReceivedTime((String) (e.getProperty("helpReceivedTime")));
 	rbean.setDay((String) (e.getProperty("day")));
 	rbean.setStatus((String) (e.getProperty("status")));

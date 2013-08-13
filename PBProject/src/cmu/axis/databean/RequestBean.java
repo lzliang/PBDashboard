@@ -57,11 +57,11 @@ public class RequestBean {
 	this.deviceId = deviceId;
     }
 
-    public String getTimeStamp() {
+    public String getHelpRequestTime() {
 	return helpRequestTime;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    public void setHelpRequestTime(String timeStamp) {
 	this.helpRequestTime = timeStamp;
     }
 

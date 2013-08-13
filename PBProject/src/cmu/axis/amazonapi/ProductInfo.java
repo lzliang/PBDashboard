@@ -137,7 +137,9 @@ public class ProductInfo {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		catch (NullPointerException e) {
+			return null;
+		}
 		return product;
 	}
 	public Map<String, Map<String, String>> getSimilarities(String barcode){

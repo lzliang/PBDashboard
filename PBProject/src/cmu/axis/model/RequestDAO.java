@@ -1,10 +1,14 @@
 package cmu.axis.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import cmu.axis.databean.RequestBean;
 import cmu.axis.databean.RequestStats;
+import cmu.axis.databean.RequestStatsHourly;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -111,19 +115,38 @@ public class RequestDAO {
 	    EntityNotFoundException {
 	List<RequestStats> rqStats = new ArrayList<RequestStats>();
 	RequestBean[] allRequests = getRequests();
-	RequestStats aReqStat = new RequestStats();
-	aReqStat.setDay(allRequests[0].getDay());
-	aReqStat.setNumberOfServedRequests(numOfServedRequest(aReqStat.getDay()));
-	rqStats.add(aReqStat);
-	for (int i = 1; i < allRequests.length; i++) {
-	    if (!allRequests[i].getDay().equals(aReqStat.getDay())) {
-		aReqStat.setDay(allRequests[i].getDay());
-		aReqStat.setNumberOfServedRequests(numOfServedRequest(aReqStat
-			.getDay()));
-		rqStats.add(aReqStat);
+	if (allRequests.length > 0) {
+	    RequestStats aReqStat = new RequestStats();
+	    aReqStat.setDay(allRequests[0].getDay());
+	    aReqStat.setNumberOfServedRequests(numOfServedRequest(aReqStat
+		    .getDay()));
+	    rqStats.add(aReqStat);
+	    for (int i = 1; i < allRequests.length; i++) {
+		if (!allRequests[i].getDay().equals(aReqStat.getDay())) {
+		    aReqStat.setDay(allRequests[i].getDay());
+		    aReqStat.setNumberOfServedRequests(numOfServedRequest(aReqStat
+			    .getDay()));
+		    rqStats.add(aReqStat);
+		}
 	    }
+	    return rqStats.toArray(new RequestStats[rqStats.size()]);
 	}
-	return rqStats.toArray(new RequestStats[rqStats.size()]);
+	return null;
+    }
+
+    public RequestStatsHourly[] getRequestStats(String day, int staringHour,
+	    int interval) throws DAOException, EntityNotFoundException {
+	List<RequestStatsHourly> rqStats = new ArrayList<RequestStatsHourly>();
+	RequestStatsHourly aRequestStatsHourly = new RequestStatsHourly();
+	while (staringHour + interval < 24) {
+	    aRequestStatsHourly.setStaringHour(staringHour);
+	    aRequestStatsHourly.setEndingHour(staringHour + interval);
+	    aRequestStatsHourly.setNumberOfServedRequests(numOfServedRequest(
+		    day, staringHour, interval));
+	    rqStats.add(aRequestStatsHourly);
+	    staringHour = staringHour + interval;
+	}
+	return rqStats.toArray(new RequestStatsHourly[rqStats.size()]);
     }
 
     public boolean doesExist(RequestBean request) throws DAOException,
@@ -203,6 +226,23 @@ public class RequestDAO {
 	    EntityNotFoundException {
 	RequestBean[] allRequests = getRequests("Done", day);
 	return allRequests.length;
+    }
+
+    public int numOfServedRequest(String day, int startingHour, int interval)
+	    throws DAOException, EntityNotFoundException {
+	RequestBean[] allRequests = getRequests("Done", day);
+	int count = 0;
+	Calendar cDate = new GregorianCalendar();
+	for (int i = 0; i < allRequests.length; i++) {
+	    Date date = new Date(Long.parseLong(allRequests[0]
+		    .getHelpReceivedTime()));
+	    cDate.setTime(date);
+	    if (cDate.get(Calendar.HOUR_OF_DAY) > startingHour
+		    && cDate.get(Calendar.HOUR_OF_DAY) < startingHour
+			    + interval)
+		count++;
+	}
+	return count;
     }
 
     public void updateRequest(long rID, String cFeedback) throws DAOException,

@@ -26,14 +26,16 @@ public class Util {
 		return Response.status(200).header("Access-Control-Allow-Origin", "*")
 				.entity(gson.toJson(rt)).build();
 	}
+
 	public static long trimTimeStampToDay(long currentMilisec) {
-        Calendar calendar = Calendar.getInstance();
-        Date date = new Date(currentMilisec);
-        calendar.setTime(date);
-        calendar.set(Calendar.MILLISECOND, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.HOUR, 0);
-        return calendar.getTimeInMillis();
-    }
+		Calendar calendar = Calendar.getInstance();
+		Date date = new Date(currentMilisec);
+		calendar.setTime(date);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.HOUR, 0);
+		return calendar.getTimeInMillis();
+	}
+
 }

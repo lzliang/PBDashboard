@@ -1,6 +1,8 @@
 package edu.cmu.axis.api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.GET;
@@ -33,6 +35,8 @@ public class Stats {
 			e.printStackTrace();
 			return Util.returnError(null, e);
 		}
+		List<Map<String,String>> formatedStats = new ArrayList<Map<String,String>>();
+		
 		if(intvl.trim().toLowerCase().equals("all")){
 			rt.put("data",stats);
 		}

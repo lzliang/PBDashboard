@@ -35,7 +35,7 @@ public class ProductDetailsAJAX extends HttpServlet {
 			productDAO = model.getProductDAO();
 
 			ProductBean productBean = new ProductBean();
-
+		
 			productBean = productDAO.getProduct("test");
 
 			String barcode = req.getParameter("id");

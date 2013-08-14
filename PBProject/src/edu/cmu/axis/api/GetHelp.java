@@ -41,6 +41,7 @@ public class GetHelp {
 		rb.setBarcode(helpMap.get("barcode"));
 		rb.setDeviceId(helpMap.get("machineID"));
 		rb.setStatus("Need Help");
+		rb.setQuery(Util.randomLocation());
 		long currentMillis = System.currentTimeMillis();
 		rb.setHelpRequestTime(Long.toString(currentMillis));
 		rb.setDay(Long.toString(Util.trimTimeStampToDay(currentMillis)));

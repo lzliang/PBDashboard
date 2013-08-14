@@ -37,5 +37,17 @@ public class Util {
 		calendar.set(Calendar.HOUR, 0);
 		return calendar.getTimeInMillis();
 	}
+	
+	public static String randomLocation() {
+		StringBuilder sb = new StringBuilder();
+		sb.append((int) (Math.random() * 5.0));
+		sb.append((int) (Math.random() * 10.0));
+		sb.append("-");
+		int random = (int) (Math.random() * 12.0);
+		sb.append((char) ('A' + random));
+		sb.append((int) (Math.random() * 10.0));
+		sb.append((int) (Math.random() * 10.0));
+		return sb.toString();
+	}
 
 }

@@ -45,10 +45,11 @@ public class Stats {
 				sb.append(stats[i].getNumberOfServedRequests());
 				sb.append(",");
 			}
+			String formatted = sb.toString();
 			if(sb.charAt(sb.length()-1) == ','){
-				sb.substring(0, sb.length()-1);
+				formatted = sb.substring(0, sb.length()-1);
 			}
-			rt.put("data",sb.toString());
+			rt.put("data",formatted);
 		}
 		rt.put("status", "success");
 		//String s = "[1147651200000,67.79],[1147737600000,64.98],[1147824000000,65.26]";

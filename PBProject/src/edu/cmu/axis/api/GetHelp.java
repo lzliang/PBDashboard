@@ -104,7 +104,6 @@ public class GetHelp {
 			if(rb.getStatus().equals("Need Help")){
 				rb.setStatus("Serving");
 				rd.updateRequest(requestID, rb);
-				
 				rb.setHelpReceivedTime(Long.toString(System.currentTimeMillis()));
 			}else{
 				throw new RuntimeException();

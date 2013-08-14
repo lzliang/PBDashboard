@@ -98,9 +98,9 @@ public class HelpRequestAction extends HttpServlet {
 				rt.append("<img height=\"55\" width=\"42\" src=\""+ productMap.get("Picture") +"\" />");
 				rt.append("</div>");
 				rt.append("<div id=\"request_text\" class=\"request_text\">");
-				rt.append("<p>Name: "+bean.getCustomerName()+ "</p>");
-				rt.append("<p>Product Name:"+ productMap.get("Name") +"</p>");
-			    rt.append("<p>"+ bean.getQuery() +"</p>"); 
+				rt.append("<p><b>Name: </b>"+bean.getCustomerName()+ "</p>");
+				rt.append("<p><b>Product Name: </b>"+ productMap.get("Name") +"</p>");
+			    rt.append("<p><b>Location: </b>"+ bean.getQuery() +"</p>"); 
 				rt.append("</div>");
 				rt.append("<div class=\"request_button\">");
 				rt.append("<button onclick=\"goHelp(this, \'"+bean.getRequestID()+"\')\">Go Help</button>");

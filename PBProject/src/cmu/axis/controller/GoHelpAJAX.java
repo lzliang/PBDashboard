@@ -37,6 +37,12 @@ public class GoHelpAJAX extends HttpServlet {
 			Map<String, String> productMap = new HashMap<String, String>();
 			productMap = p.getProductInfoByBarcode(barcode);
 			
+			if(productMap == null) {
+				res.setContentType("text/html");
+				res.getWriter().write("");
+				return;
+			}
+			
 			res.setContentType("text/html");
 			res.getWriter().write("<div class=\"card_style\" onclick=\"update(\'"+ barcode +"\')\">"
 					+ "<div id=\"request_pic\" class=\"request_pic\">"

@@ -17,44 +17,7 @@ $(function(){
 	$(".box").children(".h_title").click( function() { $(this).next("ul").slideToggle(); });
 });
 </script>
-<script type="text/javascript">
-function change(i) {
-	if (i==1) {
-	document.getElementById('similar1').style.display = "none";	
-	document.getElementById('info1').style.display = "none";
-	document.getElementById('similar2').style.display = "block";	
-	document.getElementById('info2').style.display = "block";	
-	} else if(i==2){
-		document.getElementById('similar2').style.display = "none";	
-	document.getElementById('info2').style.display = "none";
-	document.getElementById('similar1').style.display = "block";	
-	document.getElementById('info1').style.display = "block";
-	} else if(i==3) {
-		
-		document.getElementById('btn2').style.display = "block";	
-	document.getElementById('btn1').style.display = "none";
-	}
-	
-}
 
-function btnchange(childnode) {
-	var child=childnode;
-    var parentdiv=child.parentNode.parentNode;
-	var requestPanel=parentdiv.parentNode;
-	
-	 var myElement = document.createElement("div");//输入想要创建的类型  
-            myElement.className="card_style";    
-            myElement.id="id1";  
-			myElement.innerHTML = parentdiv.innerHTML;
-	requestPanel.parentNode.insertBefore(myElement, requestPanel);
-	<!-- can just reload the request list here-->
-	parentdiv.parentNode.removeChild(parentdiv);
-	requestPanel.style.height="62%";
-	document.getElementById('btn2').style.display = "block";	
-	document.getElementById('btn1').style.display = "none";
-	
-}
-</script>
 </head>
 <body>
 <div class="wrap">
@@ -95,19 +58,6 @@ function btnchange(childnode) {
         <div class="h_title">Help Request List</div>
         <div id="helping_request"> </div>
         <div class="scroll_panel" id="request_list_panel">
-          <div class="card_style" onclick="update(813810010424)">
-            <div id="request_pic" class="request_pic"> <img height="55" width="42" src="img/coke.jpg"> </div>
-            <div id="request_text" class="request_text">
-              <p id="request_text_name">Name: Joe Doe</p>
-              <p id="request_text_prodname">Product Name: Coca Cola Classic</p>
-              <p id="request_text_location">Location: 01-E45</p>
-            </div>
-            <div id="request_button" class="request_button">
-              <button id="btn1" style="display: block;" onclick="btnchange(this)">Go Help</button>
-              <button id="btn2" style="background: #80C65A; display: none;">Helping...</button>
-            </div>
-            <div class="clear"></div>
-          </div>
         </div>
       </div>
       <div class="half_w half_right scrollable">

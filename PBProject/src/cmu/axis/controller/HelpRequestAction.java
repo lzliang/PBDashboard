@@ -49,8 +49,9 @@ public class HelpRequestAction extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws java.io.IOException {
-		String result = new String();
+//		String result = new String();
 
+		StringBuilder rt = new StringBuilder();
 		try {
 			model = new Model(getServletConfig());
 			requestDAO = model.getRequestDAO();
@@ -74,61 +75,77 @@ public class HelpRequestAction extends HttpServlet {
 
 			RequestBean[] requestList = requestDAO.getRequests("Need Help");
 			
-			for(RequestBean bean:requestList) {
-				System.out.println("REQUEST ID:   " + bean.getRequestID());
-				
-			}
+//			for(RequestBean bean:requestList) {
+//				System.out.println("REQUEST ID:   " + bean.getRequestID());
+//				
+//			}
 
 			ProductInfo p = new ProductInfo();
 			Map<String, String> productMap = new HashMap<String, String>();
 			String barcode = new String();
 			
-			
-			for(int i=0; i<requestList.length; i++) {
-				barcode = requestList[i].getBarcode();
 
+			for(RequestBean bean:requestList) {
+				barcode = bean.getBarcode();
+				
 				productMap = p.getProductInfoByBarcode(barcode);
 				if(productMap == null) {
 					continue;
 				}
 				
-				result += "<div class=\"card_style\" onclick=\"update(\'"+ barcode +"\')\">"
-						+ "<div id=\"request_pic\" class=\"request_pic\">"
-						+ "<img height=\"55\" width=\"42\" src=\""+ productMap.get("Picture") +"\">"
-   						+ "</div>"  
-						+ "<div id=\"request_text\" class=\"request_text\">"
-						+ "<p>Name: Joe Doe </p>"
-						+ "<p>Product Name:"+ productMap.get("Name") +"</p>"
-   						+ "<p>Location: 01-E45</p>" 
-   						+ "</div>"
-   						+ "<div class=\"request_button\">"
-   						+ "<button onclick=\"goHelp(this, \'"+requestList[i].getRequestID()+"\')\">Go Help</button>"
-     				    + "</div>"
-   						+ "<div class=\"clear\"></div>"
-   						+ "</div>";
-       			
-                 
+				rt.append("<div class=\"card_style\" onclick=\"update(\'"+ barcode +"\')\">");
+				rt.append("<div id=\"request_pic\" class=\"request_pic\">");
+				rt.append("<img height=\"55\" width=\"42\" src=\""+ productMap.get("Picture") +"\" />");
+				rt.append("</div>");
+				rt.append("<div id=\"request_text\" class=\"request_text\">");
+				rt.append("<p>Name: "+bean.getCustomerName()+ "</p>");
+				rt.append("<p>Product Name:"+ productMap.get("Name") +"</p>");
+			    rt.append("<p>Location: 01-E45</p>"); 
+				rt.append("</div>");
+				rt.append("<div class=\"request_button\">");
+				rt.append("<button onclick=\"goHelp(this, \'"+bean.getRequestID()+"\')\">Go Help</button>");
+				rt.append("</div>");
+				rt.append("<div class=\"clear\"></div>");
+				rt.append("</div>");
 			}
 			
+//			for(int i=0; i<requestList.length; i++) {
+//				barcode = requestList[i].getBarcode();
+//
+//				productMap = p.getProductInfoByBarcode(barcode);
+//				if(productMap == null) {
+//					continue;
+//				}
+//				
+//				result += "<div class=\"card_style\" onclick=\"update(\'"+ barcode +"\')\">"
+//						+ "<div id=\"request_pic\" class=\"request_pic\">"
+//						+ "<img height=\"55\" width=\"42\" src=\""+ productMap.get("Picture") +"\">"
+//   						+ "</div>"  
+//						+ "<div id=\"request_text\" class=\"request_text\">"
+//						+ "<p>Name: Joe Doe </p>"
+//						+ "<p>Product Name:"+ productMap.get("Name") +"</p>"
+//   						+ "<p>Location: 01-E45</p>" 
+//   						+ "</div>"
+//   						+ "<div class=\"request_button\">"
+//   						+ "<button onclick=\"goHelp(this, \'"+requestList[i].getRequestID()+"\')\">Go Help</button>"
+//     				    + "</div>"
+//   						+ "<div class=\"clear\"></div>"
+//   						+ "</div>";
+//       			
+//                 
+//			}
+			
 			res.setContentType("text/html");
-			res.getWriter().write(result);
+			res.getWriter().write(rt.toString());
 			
 
 
 
 
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (EntityNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (Exception e) {
 			res.setContentType("text/html");
-			res.getWriter().write(result);
+			res.getWriter().write(rt.toString());
 		}
 	}
 

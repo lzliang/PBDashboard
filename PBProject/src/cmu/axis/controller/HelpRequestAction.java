@@ -100,7 +100,7 @@ public class HelpRequestAction extends HttpServlet {
 				rt.append("<div id=\"request_text\" class=\"request_text\">");
 				rt.append("<p>Name: "+bean.getCustomerName()+ "</p>");
 				rt.append("<p>Product Name:"+ productMap.get("Name") +"</p>");
-			    rt.append("<p>Location: 01-E45</p>"); 
+			    rt.append("<p>"+ bean.getQuery() +"</p>"); 
 				rt.append("</div>");
 				rt.append("<div class=\"request_button\">");
 				rt.append("<button onclick=\"goHelp(this, \'"+bean.getRequestID()+"\')\">Go Help</button>");

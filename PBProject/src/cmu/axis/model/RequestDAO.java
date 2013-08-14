@@ -24,32 +24,36 @@ public class RequestDAO {
 	    "helpRequestTime", Query.SortDirection.ASCENDING);
 
     public void addRequest(RequestBean request) throws DAOException {
+
 	Transaction t = null;
 	try {
-	    t = datastore.beginTransaction();
+	    if (!doesExist(request)) {
+		t = datastore.beginTransaction();
 
-	    Entity e = new Entity("Request", rootKey);
-	    e.setProperty("customerID", request.getCustomerID());
-	    e.setProperty("employeeID", request.getEmployeeID());
-	    e.setProperty("employeeName", request.getEmployeeName());
-	    e.setProperty("customerName", request.getCustomerName());
-	    e.setProperty("storeID", request.getStoreID());
-	    e.setProperty("deviceId", request.getDeviceId());
-	    e.setProperty("query", request.getQuery());
-	    e.setProperty("barcode", request.getBarcode());
-	    e.setProperty("helpRequestTime", request.getHelpRequestTime());
-	    e.setProperty("helpReceivedTime", request.getHelpReceivedTime());
-	    e.setProperty("day", request.getDay());
-	    e.setProperty("status", request.getStatus());
-	    e.setProperty("customerFeedback", request.getCustomerFeedback());
+		Entity e = new Entity("Request", rootKey);
+		e.setProperty("customerID", request.getCustomerID());
+		e.setProperty("employeeID", request.getEmployeeID());
+		e.setProperty("employeeName", request.getEmployeeName());
+		e.setProperty("customerName", request.getCustomerName());
+		e.setProperty("storeID", request.getStoreID());
+		e.setProperty("deviceId", request.getDeviceId());
+		e.setProperty("query", request.getQuery());
+		e.setProperty("barcode", request.getBarcode());
+		e.setProperty("helpRequestTime", request.getHelpRequestTime());
+		e.setProperty("helpReceivedTime", request.getHelpReceivedTime());
+		e.setProperty("day", request.getDay());
+		e.setProperty("status", request.getStatus());
+		e.setProperty("customerFeedback", request.getCustomerFeedback());
 
-	    // Create a new entity in the datastore. Id will be automatically
-	    // set.
-	    datastore.put(e);
-	    request.setRequestID(e.getKey().getId());
-	    // item.setId(e.getKey().getId()); id stuff, add later
+		// Create a new entity in the datastore. Id will be
+		// automatically
+		// set.
+		datastore.put(e);
+		request.setRequestID(e.getKey().getId());
+		// item.setId(e.getKey().getId()); id stuff, add later
 
-	    t.commit();
+		t.commit();
+	    }
 	} catch (Exception e) {
 	    e.printStackTrace();
 	    throw new DAOException(e);
@@ -75,6 +79,17 @@ public class RequestDAO {
 	List<RequestBean> reqBeans = runAscendingQuery();
 	for (RequestBean reqBean : reqBeans) {
 	    if (reqBean.getStatus().equals(status))
+		rBeans.add(reqBean);
+	}
+	return rBeans.toArray(new RequestBean[rBeans.size()]);
+    }
+
+    public RequestBean[] getRequestsOfADevice(String deviceId)
+	    throws DAOException, EntityNotFoundException {
+	List<RequestBean> rBeans = new ArrayList<RequestBean>();
+	List<RequestBean> reqBeans = runAscendingQuery();
+	for (RequestBean reqBean : reqBeans) {
+	    if (reqBean.getDeviceId().equals(deviceId))
 		rBeans.add(reqBean);
 	}
 	return rBeans.toArray(new RequestBean[rBeans.size()]);
@@ -109,6 +124,17 @@ public class RequestDAO {
 	    }
 	}
 	return rqStats.toArray(new RequestStats[rqStats.size()]);
+    }
+
+    public boolean doesExist(RequestBean request) throws DAOException,
+	    EntityNotFoundException {
+	RequestBean[] allExistingRequests = getRequestsOfADevice(request
+		.getDeviceId());
+	for (int i = 0; i < allExistingRequests.length; i++) {
+	    if (allExistingRequests[i].getStatus().equalsIgnoreCase("Serving"))
+		return true;
+	}
+	return false;
     }
 
     /*

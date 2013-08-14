@@ -24,7 +24,6 @@ public class GetHelp {
 	RequestDAO rd = new RequestDAO();
 	EmployeeDAO ed = new EmployeeDAO();
 	Gson gson = new Gson();
-	java.util.Date date= new java.util.Date();
 	/**
 	 * The url of this method is: http://localhost:8888/_api/help, method post
 	 * 

@@ -16,6 +16,7 @@ import cmu.axis.amazonapi.ProductInfo;
 import cmu.axis.amazonapi.Reviews;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 @Path("/info")
 public class GetInfo {
 	Gson gson = new Gson();

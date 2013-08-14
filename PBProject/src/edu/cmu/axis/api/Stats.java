@@ -35,15 +35,25 @@ public class Stats {
 			e.printStackTrace();
 			return Util.returnError(null, e);
 		}
-		List<Map<String,String>> formatedStats = new ArrayList<Map<String,String>>();
 		
 		if(intvl.trim().toLowerCase().equals("all")){
-			rt.put("data",stats);
+			StringBuilder sb = new StringBuilder();
+			for(int i = 0; i < stats.length; i++){
+				
+				sb.append(stats[i].getDay());
+				sb.append(",");
+				sb.append(stats[i].getNumberOfServedRequests());
+				sb.append(",");
+			}
+			if(sb.charAt(sb.length()-1) == ','){
+				sb.substring(0, sb.length()-1);
+			}
+			rt.put("data",sb.toString());
 		}
 		rt.put("status", "success");
-		String s = "[1147651200000,67.79],[1147737600000,64.98],[1147824000000,65.26]";
-
-		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(s).build();
+		//String s = "[1147651200000,67.79],[1147737600000,64.98],[1147824000000,65.26]";
+		
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(gson.toJson(rt)).build();
 	}
 	
 

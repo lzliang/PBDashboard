@@ -1,6 +1,7 @@
 package cmu.axis.controller;
 
 import java.awt.List;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,8 +43,16 @@ public class ProductDetailsAJAX extends HttpServlet {
 			ProductInfo p = new ProductInfo();
 			Map<String, String> productMap = new HashMap<String, String>();
 			productMap = p.getProductInfoByBarcode(barcode);
-			
+//			if(productMap.containsKey("Price"))
+			System.out.println("PRICE    PRICE " +barcode);
 			double productPrice = Double.valueOf(productMap.get("Price").substring(1));
+			
+			DecimalFormat df = new DecimalFormat("#,###,###.##");
+            
+            String amazonPrice = df.format(productPrice-3);
+            String targetPrice = df.format(productPrice+3.5);
+            String walmartPrice = df.format(productPrice-2);
+			
 			
 			//for the tab of product details
 			String result = ""
@@ -57,9 +66,9 @@ public class ProductDetailsAJAX extends HttpServlet {
 					+ " </div>"
 					+ "<div class=\"clear\"></div>"
 					+ "<div style=\"margin:15px 15px\"><h4>Price Compare:</h4>"
-					+ "<div class=\"price_compare\">Amazon: $"+(productPrice-3)+"</div>"
-					+ "<div class=\"price_compare\">Target: $"+(productPrice+3.5)+"</div>"
-					+ "<div class=\"price_compare\">Walmart: $"+(productPrice-2)+"</div>"
+					+ "<div class=\"price_compare\">Amazon: $"+amazonPrice+"</div>"
+					+ "<div class=\"price_compare\">Target: $"+targetPrice+"</div>"
+					+ "<div class=\"price_compare\">Walmart: $"+walmartPrice+"</div>"
 					+ "</div>"
 					+ "<div class=\"clear\"></div>"
 					+ "<div style=\"margin:35px 15px\"><h4>Product Description:</h4> "

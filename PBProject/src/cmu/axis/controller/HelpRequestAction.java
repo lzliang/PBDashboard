@@ -58,7 +58,7 @@ public class HelpRequestAction extends HttpServlet {
 			
 			
 //			RequestBean requestBean = new RequestBean();
-//			requestBean.setBarcode("813810010424");
+//			requestBean.setBarcode("018208254965");
 //			requestBean.setEmployeeName("Lynn");
 //			requestBean.setStatus("Need Help");
 //			requestBean.setQuery("x");
@@ -73,7 +73,11 @@ public class HelpRequestAction extends HttpServlet {
 //			System.out.println("test  " + test.length);
 
 			RequestBean[] requestList = requestDAO.getRequests("Need Help");
-			System.out.println("REQUEST NUM:   " + requestList.length);
+			
+			for(RequestBean bean:requestList) {
+				System.out.println("REQUEST ID:   " + bean.getRequestID());
+				
+			}
 
 			ProductInfo p = new ProductInfo();
 			Map<String, String> productMap = new HashMap<String, String>();
@@ -88,7 +92,7 @@ public class HelpRequestAction extends HttpServlet {
 					continue;
 				}
 				
-				result += "<div class=\"card_style\" onclick=\"update("+ barcode +")\">"
+				result += "<div class=\"card_style\" onclick=\"update(\'"+ barcode +"\')\">"
 						+ "<div id=\"request_pic\" class=\"request_pic\">"
 						+ "<img height=\"55\" width=\"42\" src=\""+ productMap.get("Picture") +"\">"
    						+ "</div>"  
@@ -98,7 +102,7 @@ public class HelpRequestAction extends HttpServlet {
    						+ "<p>Location: 01-E45</p>" 
    						+ "</div>"
    						+ "<div class=\"request_button\">"
-   						+ "<button onclick=\"goHelp(this, "+requestList[i].getRequestID()+")\">Go Help</button>"
+   						+ "<button onclick=\"goHelp(this, \'"+requestList[i].getRequestID()+"\')\">Go Help</button>"
      				    + "</div>"
    						+ "<div class=\"clear\"></div>"
    						+ "</div>";

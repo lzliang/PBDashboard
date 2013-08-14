@@ -201,10 +201,10 @@ public class ProductInfo {
 	public static void main(String args[]) {
 		ProductInfo p = new ProductInfo();
 		Map<String, String> test3 = new HashMap<String, String>();
-		test3 = p.getProductInfoByBarcode("813810010424");
+		test3 = p.getProductInfoByBarcode("018208254965");
 		System.out.println(test3.get("Name"));
 
-		Map<String, Map<String, String>> test1 = p.getSimilarities("813810010424");
+		Map<String, Map<String, String>> test1 = p.getSimilarities("018208254965");
 		Set<String> test2 = test1.keySet();
 		System.out.println(test2);
 		System.out.println(test1.get(test2.toArray()[0]).get("Name"));

@@ -38,7 +38,7 @@ public class GoHelpAJAX extends HttpServlet {
 			productMap = p.getProductInfoByBarcode(barcode);
 			
 			res.setContentType("text/html");
-			res.getWriter().write("<div class=\"card_style\" onclick=\"update("+ barcode +")\">"
+			res.getWriter().write("<div class=\"card_style\" onclick=\"update(\'"+ barcode +"\')\">"
 					+ "<div id=\"request_pic\" class=\"request_pic\">"
 					+ "<img height=\"55\" width=\"42\" src=\""+ productMap.get("Picture") +"\">"
 						+ "</div>"  
@@ -48,7 +48,7 @@ public class GoHelpAJAX extends HttpServlet {
 						+ "<p>Location: 01-E45</p>" 
 						+ "</div>"
 						+ "<div class=\"request_button\">"
-						+ "<button style=\"background: #80C65A\" onclick=\"complete("+ requestID +")\">Complete</button>"
+						+ "<button style=\"background: #80C65A\" onclick=\"complete(\'"+ requestID +"\')\">Complete</button>"
 						+ "<p class=\"helping_text\">In progress...</p>"
  				    + "</div>"
 						+ "<div class=\"clear\"></div>"

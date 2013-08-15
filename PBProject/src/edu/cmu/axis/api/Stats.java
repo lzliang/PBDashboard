@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 public class Stats {
 	static Gson gson = new Gson();
 	RequestDAO rd = new RequestDAO();
+	private final static Logger LOGGER = Logger.getLogger(Feedback.class.getName());
 	@GET
 	@Path("/servno/{intvl}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -35,10 +37,20 @@ public class Stats {
 			e.printStackTrace();
 			return Util.returnError(null, e);
 		}
-		List<Map<String,String>> formatedStats = new ArrayList<Map<String,String>>();
-		
+		LOGGER.severe("RequestStats got from DAO: " + gson.toJson(stats));
+		List<Long[]> statsList = new ArrayList<Long[]>();
+//		Long[] s = {1153440000000L,60L};  
+//		Long[] s1 = {1153699200000L,61L};
+//		statsList.add(s);
+//		statsList.add(s1);
 		if(intvl.trim().toLowerCase().equals("all")){
-			rt.put("data",stats);
+			for(int i = 0; i < stats.length; i++){
+				Long[] curr = new Long[2];
+				curr[0] = Long.parseLong(stats[i].getDay());
+				curr[1] = (long)(stats[i].getNumberOfServedRequests());
+				statsList.add(curr);
+			}
+			rt.put("data",statsList);
 		}
 		rt.put("status", "success");
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(gson.toJson(rt)).build();

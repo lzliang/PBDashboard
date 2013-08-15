@@ -34,9 +34,9 @@ public class ProductDetailsAJAX extends HttpServlet {
 			model = new Model(getServletConfig());
 			productDAO = model.getProductDAO();
 
-			ProductBean productBean = new ProductBean();
-
-			productBean = productDAO.getProduct("test");
+//			ProductBean productBean = new ProductBean();
+//		
+//			productBean = productDAO.getProduct("test");
 
 			String barcode = req.getParameter("id");
 			ProductInfo p = new ProductInfo();
@@ -54,7 +54,7 @@ public class ProductDetailsAJAX extends HttpServlet {
 			String amazonPrice = df.format(productPrice);
 			String targetPrice = df.format(productPrice + priceDiff());
 			String walmartPrice = df.format(productPrice + priceDiff());
-			String randomLocation = randomLocation();
+//			String randomLocation = randomLocation();
 			StringBuilder rt = new StringBuilder();
 			rt.append("<div class=\"details_pic left\">");
 			rt.append("<p><img height=\"85\" width=\"85\" src=\""
@@ -62,8 +62,7 @@ public class ProductDetailsAJAX extends HttpServlet {
 			rt.append("<div style=\"margin:15px 15px; float:left;\">");
 			rt.append(" <p>Product Name: " + productMap.get("Name") + "</p>");
 			rt.append(" <p>Price: $" + productPrice + "</p>");
-			rt.append(" <p>Location: ");
-			rt.append(randomLocation + "</p></div>");
+			rt.append("</div>");
 			rt.append("<div class=\"clear\"></div>");
 			rt.append("<div style=\"margin:15px 15px\"><h4>Price Compare:</h4>");
 			rt.append("<div class=\"price_compare\">Amazon: $" + amazonPrice
@@ -106,10 +105,7 @@ public class ProductDetailsAJAX extends HttpServlet {
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
+		}  catch (Exception e) {
 			res.setContentType("text/html");
 			StringBuilder sb = new StringBuilder();
 			sb.append("<p style=\"color:red\">");
@@ -130,15 +126,15 @@ public class ProductDetailsAJAX extends HttpServlet {
 		return random;
 	}
 
-	private String randomLocation() {
-		StringBuilder sb = new StringBuilder();
-		sb.append((int) (Math.random() * 5.0));
-		sb.append((int) (Math.random() * 10.0));
-		sb.append("-");
-		int random = (int) (Math.random() * 12.0);
-		sb.append((char) ('A' + random));
-		sb.append((int) (Math.random() * 10.0));
-		sb.append((int) (Math.random() * 10.0));
-		return sb.toString();
-	}
+//	private String randomLocation() {
+//		StringBuilder sb = new StringBuilder();
+//		sb.append((int) (Math.random() * 5.0));
+//		sb.append((int) (Math.random() * 10.0));
+//		sb.append("-");
+//		int random = (int) (Math.random() * 12.0);
+//		sb.append((char) ('A' + random));
+//		sb.append((int) (Math.random() * 10.0));
+//		sb.append((int) (Math.random() * 10.0));
+//		return sb.toString();
+//	}
 }

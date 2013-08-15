@@ -35,21 +35,15 @@ public class Stats {
 			e.printStackTrace();
 			return Util.returnError(null, e);
 		}
-		
+		List<String[]> statsList = new ArrayList<String[]>();
 		if(intvl.trim().toLowerCase().equals("all")){
-			StringBuilder sb = new StringBuilder();
 			for(int i = 0; i < stats.length; i++){
-				
-				sb.append(stats[i].getDay());
-				sb.append(",");
-				sb.append(stats[i].getNumberOfServedRequests());
-				sb.append(",");
+				String[] str = new String[2];
+				str[0] = stats[i].getDay();
+				str[1] = Integer.toString(stats[i].getNumberOfServedRequests());
+				statsList.add(str);
 			}
-			String formatted = sb.toString();
-			if(sb.charAt(sb.length()-1) == ','){
-				formatted = sb.substring(0, sb.length()-1);
-			}
-			rt.put("data",formatted);
+			rt.put("data",statsList);
 		}
 		rt.put("status", "success");
 		//String s = "[1147651200000,67.79],[1147737600000,64.98],[1147824000000,65.26]";

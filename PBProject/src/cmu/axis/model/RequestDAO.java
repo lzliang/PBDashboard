@@ -114,7 +114,7 @@ public class RequestDAO {
     public RequestStats[] getRequestStats() throws DAOException,
 	    EntityNotFoundException {
 	List<RequestStats> rqStats = new ArrayList<RequestStats>();
-	RequestBean[] allRequests = getRequests();
+	RequestBean[] allRequests = getRequests("Done");
 	if (allRequests.length > 0) {
 	    RequestStats aReqStat = new RequestStats();
 	    aReqStat.setDay(allRequests[0].getDay());

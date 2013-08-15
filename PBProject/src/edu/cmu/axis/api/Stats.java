@@ -41,9 +41,9 @@ public class Stats {
 			rt.put("data",stats);
 		}
 		rt.put("status", "success");
-		String s = "[1147651200000,67.79],[1147737600000,64.98],[1147824000000,65.26]";
+		//String s = "1147651200000,67.79,1147737600000,64.98,1147824000000,65.26";
 
-		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(s).build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(gson.toJson(rt)).build();
 	}
 	
 

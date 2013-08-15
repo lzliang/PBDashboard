@@ -83,7 +83,7 @@ $(function(){
 			</div>
 		  <div class="clear"></div>
 	  </div>
-		<div class="clear"></div>
+		<div id="json" class="clear"></div>
 	</div>
 
 	<div id="footer">

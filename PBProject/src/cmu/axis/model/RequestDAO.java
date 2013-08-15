@@ -117,13 +117,13 @@ public class RequestDAO {
 	RequestBean[] allRequests = getRequests("Done");
 	if (allRequests.length > 0) {
 	    RequestStats aReqStat = new RequestStats();
-	    aReqStat.setDay(allRequests[0].getDay());
+	    aReqStat.setDay(millisToDate(allRequests[0].getDay()));
 	    aReqStat.setNumberOfServedRequests(numOfServedRequest(aReqStat
 		    .getDay()));
 	    rqStats.add(aReqStat);
 	    for (int i = 1; i < allRequests.length; i++) {
 		if (!allRequests[i].getDay().equals(aReqStat.getDay())) {
-		    aReqStat.setDay(allRequests[i].getDay());
+		    aReqStat.setDay(millisToDate(allRequests[i].getDay()));
 		    aReqStat.setNumberOfServedRequests(numOfServedRequest(aReqStat
 			    .getDay()));
 		    rqStats.add(aReqStat);
@@ -272,6 +272,18 @@ public class RequestDAO {
 	request.setProperty("status", rBean.getStatus());
 	request.setProperty("customerFeedback", rBean.getCustomerFeedback());
 	datastore.put(request);
+
+    }
+
+    public static String millisToDate(String millis) {
+	Date date = new Date(Long.parseLong(millis));
+	Calendar cDate = new GregorianCalendar();
+	cDate.setTime(date);
+	int month = cDate.get(Calendar.MONTH);
+	int day = cDate.get(Calendar.DATE);
+	int year = cDate.get(Calendar.YEAR);
+	String dateString = month + " - " + day + " - " + year;
+	return dateString;
 
     }
 

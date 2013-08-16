@@ -122,7 +122,7 @@ public class RequestDAO {
 		    .getDay()));
 	    rqStats.add(aReqStat);
 	    for (int i = 1; i < allRequests.length; i++) {
-		if (!allRequests[i].getDay().equals(aReqStat.getDay())) {
+		if (!(allRequests[i].getDay().equals(aReqStat.getDay()))) {
 		    aReqStat.setDay(allRequests[i].getDay());
 		    aReqStat.setNumberOfServedRequests(numOfServedRequest(aReqStat
 			    .getDay()));

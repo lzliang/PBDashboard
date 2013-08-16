@@ -134,6 +134,18 @@ public class RequestDAO {
 	return null;
     }
 
+    public RequestBean[] getRequestsAfterThisPoint(String aTime)
+	    throws DAOException, EntityNotFoundException {
+	RequestBean[] allRequests = getRequests("Need Help");
+	List<RequestBean> rBeans = new ArrayList<RequestBean>();
+	for (int i = 0; i < allRequests.length; i++) {
+	    if (Long.parseLong(allRequests[i].getHelpRequestTime()) > Long
+		    .parseLong(aTime))
+		rBeans.add(allRequests[i]);
+	}
+	return rBeans.toArray(new RequestBean[rBeans.size()]);
+    }
+
     public RequestStatsHourly[] getRequestStats(String day, int staringHour,
 	    int interval) throws DAOException, EntityNotFoundException {
 	List<RequestStatsHourly> rqStats = new ArrayList<RequestStatsHourly>();

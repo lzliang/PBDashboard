@@ -114,7 +114,7 @@ public class RequestDAO {
     public RequestStats[] getRequestStats() throws DAOException,
 	    EntityNotFoundException {
 	List<RequestStats> rqStats = new ArrayList<RequestStats>();
-	RequestBean[] allRequests = getRequests("Done");
+	RequestBean[] allRequests = getRequests();
 	if (allRequests.length > 0) {
 	    RequestStats aReqStat = new RequestStats();
 	    aReqStat.setDay(allRequests[0].getDay());
@@ -277,18 +277,6 @@ public class RequestDAO {
 	request.setProperty("status", rBean.getStatus());
 	request.setProperty("customerFeedback", rBean.getCustomerFeedback());
 	datastore.put(request);
-
-    }
-
-    public static String millisToDate(String millis) {
-	Date date = new Date(Long.parseLong(millis));
-	Calendar cDate = new GregorianCalendar();
-	cDate.setTime(date);
-	int month = cDate.get(Calendar.MONTH);
-	int day = cDate.get(Calendar.DATE);
-	int year = cDate.get(Calendar.YEAR);
-	String dateString = month + " - " + day + " - " + year;
-	return dateString;
 
     }
 

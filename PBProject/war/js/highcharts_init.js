@@ -1,30 +1,39 @@
-$(function() {
-	$.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(data) {
+window.onload = function() {
+	 jQuery.ajax("http://axispbcusen.appspot.com/_api/stats/servno/all", {
+		  dataType : "json",
+		  type : "GET", //GET is the default but just wanted to show this option
+		  error : function(jqXHR, textStatus, errorThrown) {
+			  alert(textStatus);
+		  },
+		  success : function(data, textStatus, jqXHR) {
+			  
+			  $('#container').highcharts('StockChart', {
+					
 
-		// Create the chart
-		$('#container').highcharts('StockChart', {
-			
+					rangeSelector : {
+						selected : 1
+					},
 
-			rangeSelector : {
-				selected : 1
-			},
+					title : {
+						text : 'In-store Help Feature Analysis'
+					},
+					
+					series : [{
+						name : 'Number of Usage',
+						data :data.data, 
+		                marker : {
+							enabled : true,
+							radius : 3
+						},
+						shadow : true,
+						tooltip : {
+							valueDecimals : 2
+						}
+					}]
+				});
+		  }
+	  });
+}
 
-			title : {
-				text : 'AAPL Stock Price'
-			},
-			
-			series : [{
-				name : 'AAPL Stock Price',
-				data : data,
-				marker : {
-					enabled : true,
-					radius : 3
-				},
-				shadow : true,
-				tooltip : {
-					valueDecimals : 2
-				}
-			}]
-		});
-	});
-});
+
+

@@ -117,13 +117,13 @@ public class RequestDAO {
 	RequestBean[] allRequests = getRequests("Done");
 	if (allRequests.length > 0) {
 	    RequestStats aReqStat = new RequestStats();
-	    aReqStat.setDay(millisToDate(allRequests[0].getDay()));
+	    aReqStat.setDay(allRequests[0].getDay());
 	    aReqStat.setNumberOfServedRequests(numOfServedRequest(aReqStat
 		    .getDay()));
 	    rqStats.add(aReqStat);
 	    for (int i = 1; i < allRequests.length; i++) {
 		if (!allRequests[i].getDay().equals(aReqStat.getDay())) {
-		    aReqStat.setDay(millisToDate(allRequests[i].getDay()));
+		    aReqStat.setDay(allRequests[i].getDay());
 		    aReqStat.setNumberOfServedRequests(numOfServedRequest(aReqStat
 			    .getDay()));
 		    rqStats.add(aReqStat);
@@ -215,9 +215,14 @@ public class RequestDAO {
 	return false;
     }
 
+    public int numOfRequests() throws DAOException, EntityNotFoundException {
+	RequestBean[] allRequests = getRequests();
+	return allRequests.length;
+    }
+
     public int numOfServedRequest() throws DAOException,
 	    EntityNotFoundException {
-	RequestBean[] allRequests = getRequests();
+	RequestBean[] allRequests = getRequests("Done");
 	return allRequests.length;
 
     }

@@ -33,12 +33,13 @@ function makeRequest() {
   var xmlHttp_one = getXMLHttpRequest();
   xmlHttp_one.onreadystatechange=function(){
 	  if(xmlHttp_one.readyState==4){
-	  document.getElementById("request_list_panel").innerHTML = xmlHttp_one.responseText;
+	  document.getElementById("request_list_panel").innerHTML += xmlHttp_one.responseText;
 	  }
 	  }
 	  xmlHttp_one.open("GET","helpRequestAction.do",true);
 	  xmlHttp_one.send(null);
 }
+
 
 
 function update(id) {

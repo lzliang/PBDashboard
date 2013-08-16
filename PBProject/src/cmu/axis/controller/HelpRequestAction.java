@@ -34,124 +34,94 @@ public class HelpRequestAction extends HttpServlet {
 
 	//	private RequestDAO requestDAO;
 	private RequestDAO requestDAO;
-	//	private ProductLocationDAO productLocationDAO;
-	//	
-	//	public HelpRequestAction(Model model) {
-	//		requestDAO = model.getRequestDAO();
-	//		productDAO = model.getProductDAO();
-	//		productLocationDAO = model.getProductLocationDAO();
-	//	}
 
-	//	public String getName() {
-	//		// TODO Auto-generated method stub
-	//		return "helpRequestAction.do";
-	//	}
+	private StringBuilder rt = new StringBuilder();
+	private String latestTime = "0";
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws java.io.IOException {
-//		String result = new String();
+		//		String result = new String();
 
-		StringBuilder rt = new StringBuilder();
 		try {
 			model = new Model(getServletConfig());
 			requestDAO = model.getRequestDAO();
 			
-			
-			
-//			RequestBean requestBean = new RequestBean();
-//			requestBean.setBarcode("018208254965");
-//			requestBean.setEmployeeName("Lynn");
-//			requestBean.setStatus("Need Help");
-//			requestBean.setQuery("x");
-//			requestBean.setDay("Sat Aug 12 23:56:10 EDT 2013");
-//			requestBean.setCustomerID(0);
-//			requestBean.setStoreID(0);
-//			requestBean.setEmployeeID(0);
-////			
-//			requestDAO.addRequest(requestBean);
-//			Date date = new Date();
-//			RequestBean[] test = requestDAO.getRequests();
-//			System.out.println("test  " + test.length);
+			if(latestTime.equals("0")) {
+//				RequestBean requestBean = new RequestBean();
+//				requestBean.setBarcode("745883596720");
+//				requestBean.setEmployeeName("Lynn");
+//				requestBean.setStatus("Need Help");
+//				requestBean.setQuery("x");
+//				requestBean.setDay(String.valueOf(Date.UTC(2013, 8, 16, 3, 28, 30)));
+//				requestBean.setHelpRequestTime(String.valueOf(System.currentTimeMillis()));
+//				requestBean.setCustomerID(0);
+//				requestBean.setStoreID(0);
+//				requestBean.setEmployeeID(0);
+//				requestBean.setDeviceId("xx");
+//				requestDAO.addRequest(requestBean);
 
-			RequestBean[] requestList = requestDAO.getRequests("Need Help");
-			
-//			for(RequestBean bean:requestList) {
-//				System.out.println("REQUEST ID:   " + bean.getRequestID());
-//				
-//			}
-
-			ProductInfo p = new ProductInfo();
-			Map<String, String> productMap = new HashMap<String, String>();
-			String barcode = new String();
-			
-
-			for(RequestBean bean:requestList) {
-				barcode = bean.getBarcode();
 				
-				productMap = p.getProductInfoByBarcode(barcode);
-				if(productMap == null) {
-					continue;
-				}
-				
-				rt.append("<div class=\"card_style\" onclick=\"update(\'"+ barcode +"\')\">");
-				rt.append("<div id=\"request_pic\" class=\"request_pic\">");
-				rt.append("<img height=\"55\" width=\"42\" src=\""+ productMap.get("Picture") +"\" />");
-				rt.append("</div>");
-				rt.append("<div id=\"request_text\" class=\"request_text\">");
-				rt.append("<p><b>Name: </b>"+bean.getCustomerName()+ "</p>");
-				rt.append("<p><b>Product Name: </b>"+ productMap.get("Name") +"</p>");
-			    rt.append("<p><b>Location: </b>"+ bean.getQuery() +"</p>"); 
-				rt.append("</div>");
-				rt.append("<div class=\"request_button\">");
-				rt.append("<button onclick=\"goHelp(this, \'"+bean.getRequestID()+"\')\">Go Help</button>");
-				rt.append("</div>");
-				rt.append("<div class=\"clear\"></div>");
-				rt.append("</div>");
+				RequestBean[] requestList = requestDAO.getRequests("Need Help");
+//				System.out.println("00000    " + latestTime);
+				setRequests(requestList);
+			} else {
+				RequestBean[] requestList = requestDAO.getRequestsAfterThisPoint(latestTime);
+//				System.out.println("1111    "+latestTime + "length "+requestList.length);
+				setRequests(requestList);
+
 			}
-			
-//			for(int i=0; i<requestList.length; i++) {
-//				barcode = requestList[i].getBarcode();
-//
-//				productMap = p.getProductInfoByBarcode(barcode);
-//				if(productMap == null) {
-//					continue;
-//				}
-//				
-//				result += "<div class=\"card_style\" onclick=\"update(\'"+ barcode +"\')\">"
-//						+ "<div id=\"request_pic\" class=\"request_pic\">"
-//						+ "<img height=\"55\" width=\"42\" src=\""+ productMap.get("Picture") +"\">"
-//   						+ "</div>"  
-//						+ "<div id=\"request_text\" class=\"request_text\">"
-//						+ "<p>Name: Joe Doe </p>"
-//						+ "<p>Product Name:"+ productMap.get("Name") +"</p>"
-//   						+ "<p>Location: 01-E45</p>" 
-//   						+ "</div>"
-//   						+ "<div class=\"request_button\">"
-//   						+ "<button onclick=\"goHelp(this, \'"+requestList[i].getRequestID()+"\')\">Go Help</button>"
-//     				    + "</div>"
-//   						+ "<div class=\"clear\"></div>"
-//   						+ "</div>";
-//       			
-//                 
-//			}
-			
-			res.setContentType("text/html");
-			res.getWriter().write(rt.toString());
-			
-
-
-
-
-		
 		} catch (Exception e) {
 			res.setContentType("text/html");
 			res.getWriter().write(rt.toString());
 		}
+		res.setContentType("text/html");
+		res.getWriter().write(rt.toString());
 	}
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws java.io.IOException {
 		doPost(req, res);
+	}
+
+	private void setRequests(RequestBean[] requestList) {
+		rt = new StringBuilder();
+		if(requestList == null) {
+			return;
+		}
+		int length = requestList.length;
+		latestTime = requestList[length-1].getHelpRequestTime();
+//		System.out.println("lastest    " + latestTime);
+
+		ProductInfo p = new ProductInfo();
+		Map<String, String> productMap = new HashMap<String, String>();
+		String barcode = new String();
+
+
+		for(RequestBean bean:requestList) {
+			barcode = bean.getBarcode();
+
+			productMap = p.getProductInfoByBarcode(barcode);
+			if(productMap == null) {
+				continue;
+			}
+
+			rt.append("<div class=\"card_style\" onclick=\"update(\'"+ barcode +"\')\">");
+			rt.append("<div id=\"request_pic\" class=\"request_pic\">");
+			rt.append("<img height=\"55\" width=\"42\" src=\""+ productMap.get("Picture") +"\" />");
+			rt.append("</div>");
+			rt.append("<div id=\"request_text\" class=\"request_text\">");
+			rt.append("<p><b>Name: </b>"+bean.getCustomerName()+ "</p>");
+			rt.append("<p><b>Product Name: </b>"+ productMap.get("Name") +"</p>");
+			rt.append("<p><b>Location: </b>"+ bean.getQuery() +"</p>"); 
+			rt.append("</div>");
+			rt.append("<div class=\"request_button\">");
+			rt.append("<button onclick=\"goHelp(this, \'"+bean.getRequestID()+"\')\">Go Help</button>");
+			rt.append("</div>");
+			rt.append("<div class=\"clear\"></div>");
+			rt.append("</div>");
+		}
+
+
 	}
 
 }

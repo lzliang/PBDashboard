@@ -1,6 +1,7 @@
 package edu.cmu.axis.api;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class Stats {
 	public Response getInfo(@PathParam("intvl")  String intvl) {
 		
 		Map<String, Object> rt = new HashMap<String, Object>();
-		RequestStats[] stats;
+		Map<String,Integer> stats;
 		try{
 			stats = rd.getRequestStats();
 		}
@@ -39,15 +40,14 @@ public class Stats {
 		}
 		LOGGER.severe("RequestStats got from DAO: " + gson.toJson(stats));
 		List<Long[]> statsList = new ArrayList<Long[]>();
-//		Long[] s = {1153440000000L,60L};  
-//		Long[] s1 = {1153699200000L,61L};
-//		statsList.add(s);
-//		statsList.add(s1);
 		if(intvl.trim().toLowerCase().equals("all")){
-			for(int i = 0; i < stats.length; i++){
+			String[] keys = (String[])stats.keySet().toArray();
+			Arrays.sort(keys);
+			LOGGER.severe("Sorted keys: "+ Arrays.toString(keys));
+			for(String day : keys){
 				Long[] curr = new Long[2];
-				curr[0] = Long.parseLong(stats[i].getDay());
-				curr[1] = (long)(stats[i].getNumberOfServedRequests());
+				curr[0] = Long.parseLong(day);
+				curr[1] = (long)(stats.get(day));
 				statsList.add(curr);
 			}
 			rt.put("data",statsList);

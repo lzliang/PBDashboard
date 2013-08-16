@@ -1,6 +1,7 @@
 package edu.cmu.axis.api;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,4 +51,10 @@ public class Util {
 		return sb.toString();
 	}
 
+	public static void main(String[] args){
+		//"numberOfServedRequests":10,"Day":"1376524800000"},{"numberOfServedRequests":26,"Day":"1376481600000"},{"numberOfServedRequests":13,"Day":"1376568000000"},{"numberOfServedRequests":2,"Day":"1376654400000"},{"numberOfServedRequests":30,"Day":"1376611200000"},{"numberOfServedRequests":10,"Day":"1376438400000"}
+		String[] s = {"1376524800000","1376481600000","1376568000000","1376654400000","1376611200000","1376438400000"};
+		Arrays.sort(s);
+		System.out.println(Arrays.toString(s));
+	}
 }

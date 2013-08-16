@@ -1,12 +1,16 @@
 package cmu.axis.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.logging.Logger;
 
 import cmu.axis.databean.RequestBean;
 import cmu.axis.databean.RequestStats;
@@ -22,12 +26,16 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Transaction;
 
+import edu.cmu.axis.api.Feedback;
+
 public class RequestDAO {
 	private final DatastoreService datastore = DatastoreServiceFactory
 			.getDatastoreService();
 	private final Key rootKey = KeyFactory.createKey("Root", "root");
 	private final Query ascendingQuery = new Query("Request", rootKey).addSort(
 			"helpRequestTime", Query.SortDirection.ASCENDING);
+	private final static Logger LOGGER = Logger.getLogger(Feedback.class
+			.getName());
 
 	public void addRequest(RequestBean request) throws DAOException {
 
@@ -113,9 +121,10 @@ public class RequestDAO {
 		return rBeans.toArray(new RequestBean[rBeans.size()]);
 	}
 
-	public RequestStats[] getRequestStats() throws DAOException,
+	public Map<String,Integer> getRequestStats() throws DAOException,
 			EntityNotFoundException {
 		RequestBean[] allRequests = getRequests();
+		LOGGER.severe("sorted keys: " + Arrays.toString(allRequests));
 		if (allRequests.length > 0) {
 			Map<String, Integer> rt = new HashMap<String, Integer>();
 			for (int i = 0; i < allRequests.length; i++) {
@@ -126,15 +135,17 @@ public class RequestDAO {
 					rt.put(currDay, 1);
 				}
 			}
-			RequestStats[] rtBeans = new RequestStats[rt.keySet().size()];
-			int index = 0;
-			for (String day : rt.keySet()) {
-				RequestStats aReqStat = new RequestStats();
-				aReqStat.setDay(day);
-				aReqStat.setNumberOfServedRequests(rt.get(day));
-				rtBeans[index] = aReqStat;
-				index++;
-			}
+			return rt;
+//			RequestStats[] rtBeans = new RequestStats[rt.keySet().size()];
+//			String[] keys = (String[]) rt.keySet().toArray();
+//			Arrays.sort(keys);
+//			LOGGER.severe("sorted keys: " + Arrays.toString(keys));
+//			for (int i = 0; i < keys.length; i++) {
+//				RequestStats aReqStat = new RequestStats();
+//				aReqStat.setDay(keys[i]);
+//				aReqStat.setNumberOfServedRequests(rt.get(keys[i]));
+//				rtBeans[i] = aReqStat;
+//			}
 			// RequestStats aReqStat = new RequestStats();
 			// aReqStat.setDay(allRequests[0].getDay());
 			// aReqStat.setNumberOfServedRequests(numOfServedRequest(aReqStat
@@ -149,7 +160,7 @@ public class RequestDAO {
 			// }
 			// }
 			// return rqStats.toArray(new RequestStats[rqStats.size()]);
-			return rtBeans;
+			//return rtBeans;
 		}
 		return null;
 	}

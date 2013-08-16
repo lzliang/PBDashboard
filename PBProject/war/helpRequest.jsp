@@ -106,7 +106,7 @@ $(function(){
 <script type="text/javascript">
 window.onload = function(){
 initTab();
-setTimeout('makeRequest()',0);
+makeRequest();
 }
 </script>
 </html>

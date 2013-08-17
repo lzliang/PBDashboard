@@ -29,7 +29,7 @@ function getXMLHttpRequest() {
  * AJAX call starts with this function
  */
 function makeRequest() {
-	setTimeout('makeRequest()',8000);
+	setTimeout('refresh()',5000);
   var xmlHttp_one = getXMLHttpRequest();
   xmlHttp_one.onreadystatechange=function(){
 	  if(xmlHttp_one.readyState==4){
@@ -40,6 +40,17 @@ function makeRequest() {
 	  xmlHttp_one.send(null);
 }
 
+function refresh() {
+	setTimeout('refresh()',10000);
+  var xmlHttp_refresh = getXMLHttpRequest();
+  xmlHttp_refresh.onreadystatechange=function(){
+	  if(xmlHttp_refresh.readyState==4){
+	  document.getElementById("request_list_panel").innerHTML += xmlHttp_refresh.responseText;
+	  }
+	  }
+  xmlHttp_refresh.open("GET","requestRefreshAJAX.do",true);
+  xmlHttp_refresh.send(null);
+}
 
 
 function update(id) {

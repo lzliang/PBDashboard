@@ -1,31 +1,19 @@
 package cmu.axis.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.appengine.api.datastore.EntityNotFoundException;
-
 import cmu.axis.amazonapi.ProductInfo;
-import cmu.axis.databean.ProductBean;
 import cmu.axis.databean.RequestBean;
-import cmu.axis.model.DAOException;
 import cmu.axis.model.Model;
-import cmu.axis.model.ProductDAO;
-import cmu.axis.model.ProductLocationDAO;
 import cmu.axis.model.RequestDAO;
 
-@SuppressWarnings("serial")
-public class HelpRequestAction extends HttpServlet {
+public class RequestRefreshAJAX extends HttpServlet {
 
 	private Model model;
 
@@ -37,7 +25,7 @@ public class HelpRequestAction extends HttpServlet {
 	private RequestDAO requestDAO;
 
 	private StringBuilder rt = new StringBuilder();
-//	private String latestTime = "0";
+	
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws java.io.IOException {
@@ -47,48 +35,19 @@ public class HelpRequestAction extends HttpServlet {
 			model = new Model(getServletConfig());
 			requestDAO = model.getRequestDAO();
 			
-//			if(latestTime.equals("0")) {
-//				RequestBean requestBean = new RequestBean();
-//				int j = (int)(Math.random()*10);
-//				if (j%3==0){
-//					requestBean.setBarcode("745883596720");
-//				}
-//				if (j%3==1){
-//					requestBean.setBarcode("700621033516");
-//				}
-//				if (j%3==2){
-//					requestBean.setBarcode("060258352504");
-//				}
-//				
-//				requestBean.setEmployeeName("Lynn");
-//				requestBean.setStatus("Need Help");
-//				requestBean.setQuery("x");
-//				requestBean.setDay(String.valueOf(Date.UTC(2013, 8, 16, 3, 28, 30)));
-//				requestBean.setHelpRequestTime(String.valueOf(System.currentTimeMillis()));
-//				requestBean.setCustomerID(0);
-//				requestBean.setStoreID(0);
-//				requestBean.setEmployeeID(0);
-//				requestBean.setDeviceId("xx");
-//				requestDAO.addRequest(requestBean);
+			HttpSession session = req.getSession();
+			String latestTime = (String)session.getAttribute("latestTime");
+			
+			RequestBean[] requestList = requestDAO.getRequestsAfterThisPoint(latestTime);
+			System.out.println("1111    "+latestTime + "length "+requestList.length);
 
-				
-				RequestBean[] requestList = requestDAO.getRequests("Need Help");
-				System.out.println("00000    ");
-				rt = new StringBuilder();
-				if(requestList == null) {
-					System.out.println("00000    return");
-					return;
-				}
-				System.out.println("00000    no return");
+			rt = new StringBuilder();
+			if(requestList != null && requestList.length != 0) {
 				int length = requestList.length;
-				System.out.println("00000    length" +length);
-			    String latestTime = requestList[length-1].getHelpRequestTime();
-			    HttpSession session = req.getSession();
-			    session.setAttribute("latestTime", latestTime);
+				String newlatestTime = requestList[length-1].getHelpRequestTime();
+				session.setAttribute("latestTime", newlatestTime);
 //				System.out.println("lastest    " + latestTime);
-//			    rt.append("<input type=\"hidden\" id=\"lastestTime\" value=\""+ latestTime +"\" />");
-			    
-			    System.out.println("00000   set session ");
+
 				ProductInfo p = new ProductInfo();
 				Map<String, String> productMap = new HashMap<String, String>();
 				String barcode = new String();
@@ -117,17 +76,12 @@ public class HelpRequestAction extends HttpServlet {
 					rt.append("<div class=\"clear\"></div>");
 					rt.append("</div>");
 				}
-//			} else {
-//				RequestBean[] requestList = requestDAO.getRequestsAfterThisPoint(latestTime);
-//				System.out.println("1111    "+latestTime + "length "+requestList.length);
-//				setRequests(requestList);
-//
-//			}
+			}
+			
+			
 		} catch (Exception e) {
-			e.printStackTrace();
 			res.setContentType("text/html");
 			res.getWriter().write(rt.toString());
-			
 		}
 		res.setContentType("text/html");
 		res.getWriter().write(rt.toString());
@@ -137,6 +91,5 @@ public class HelpRequestAction extends HttpServlet {
 			throws java.io.IOException {
 		doPost(req, res);
 	}
-
 
 }

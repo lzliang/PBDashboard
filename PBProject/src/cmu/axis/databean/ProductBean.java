@@ -2,25 +2,25 @@ package cmu.axis.databean;
 
 public class ProductBean {
     private long productID;
-    private String productName;
-    private String productType;
-    private String productDescription;
     private String barCode;
-    private double price;
+    private String productName;
+    private String productDescription;
+    private String review;
+    private String similarProducts;
 
     public ProductBean() {
-    	
+
     }
-    
-    public ProductBean(String productName, String productType, String productDescription, 
-    				String barCode, double price) {
-    	this.productName = productName;
-    	this.productType = productType;
-    	this.productDescription = productDescription;
-    	this.barCode = barCode;
-    	this.price = price;
+
+    public ProductBean(String productName, String review,
+	    String productDescription, String barCode, String simProds) {
+	this.productName = productName;
+	this.review = review;
+	this.productDescription = productDescription;
+	this.barCode = barCode;
+	this.setSimilarProducts(simProds);
     }
-    
+
     public long getProductID() {
 	return productID;
     }
@@ -37,20 +37,12 @@ public class ProductBean {
 	this.productDescription = productDescription;
     }
 
-    public String getProductType() {
-	return productType;
+    public String getReview() {
+	return review;
     }
 
-    public void setProductType(String productType) {
-	this.productType = productType;
-    }
-
-    public double getPrice() {
-	return price;
-    }
-
-    public void setPrice(double price) {
-	this.price = price;
+    public void setReview(String review) {
+	this.review = review;
     }
 
     public String getProductName() {
@@ -67,6 +59,14 @@ public class ProductBean {
 
     public void setBarCode(String barCode) {
 	this.barCode = barCode;
+    }
+
+    public String getSimilarProducts() {
+	return similarProducts;
+    }
+
+    public void setSimilarProducts(String similarProducts) {
+	this.similarProducts = similarProducts;
     }
 
 }

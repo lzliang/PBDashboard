@@ -2,6 +2,7 @@ package cmu.axis.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ import cmu.axis.model.RequestDAO;
 public class RequestRefreshAJAX extends HttpServlet {
 
 	private Model model;
-
+	private static final Logger log = Logger.getLogger(RequestRefreshAJAX.class.getName());
 
 
 
@@ -40,6 +41,7 @@ public class RequestRefreshAJAX extends HttpServlet {
 			
 			RequestBean[] requestList = requestDAO.getRequestsAfterThisPoint(latestTime);
 			System.out.println("1111    "+latestTime + "length "+requestList.length);
+			log.severe("1111    "+latestTime + "length "+requestList.length);
 
 			rt = new StringBuilder();
 			if(requestList != null && requestList.length != 0) {
@@ -47,6 +49,7 @@ public class RequestRefreshAJAX extends HttpServlet {
 				String newlatestTime = requestList[length-1].getHelpRequestTime();
 				session.setAttribute("latestTime", newlatestTime);
 //				System.out.println("lastest    " + latestTime);
+				log.severe("1111    newlatestTime "+newlatestTime);
 
 				ProductInfo p = new ProductInfo();
 				Map<String, String> productMap = new HashMap<String, String>();
@@ -80,6 +83,7 @@ public class RequestRefreshAJAX extends HttpServlet {
 			
 			
 		} catch (Exception e) {
+			log.severe("1111    exception ");
 			res.setContentType("text/html");
 			res.getWriter().write(rt.toString());
 		}

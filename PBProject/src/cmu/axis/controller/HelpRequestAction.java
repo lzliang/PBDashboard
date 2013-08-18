@@ -1,33 +1,26 @@
 package cmu.axis.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.appengine.api.datastore.EntityNotFoundException;
-
 import cmu.axis.amazonapi.ProductInfo;
-import cmu.axis.databean.ProductBean;
 import cmu.axis.databean.RequestBean;
-import cmu.axis.model.DAOException;
 import cmu.axis.model.Model;
-import cmu.axis.model.ProductDAO;
-import cmu.axis.model.ProductLocationDAO;
 import cmu.axis.model.RequestDAO;
+import edu.cmu.axis.api.Util;
 
 @SuppressWarnings("serial")
 public class HelpRequestAction extends HttpServlet {
 
 	private Model model;
+	private static final Logger log = Logger.getLogger(HelpRequestAction.class.getName());
 
 
 
@@ -71,25 +64,36 @@ public class HelpRequestAction extends HttpServlet {
 //				requestBean.setDeviceId("xx");
 //				requestDAO.addRequest(requestBean);
 
-				
-				RequestBean[] requestList = requestDAO.getRequests("Need Help");
-				System.out.println("00000    ");
+//			RequestBean[] requestList = requestDAO.getRequests("Done");
+			RequestBean[] requestList = requestDAO.getRequests("Need Help");
+//				System.out.println("00000    ");
+			long currentMillis = System.currentTimeMillis();
+			String currentDate = Long.toString(Util.trimTimeStampToDay(currentMillis));
+//			
+//			
+//			RequestBean[] requestList = requestDAO.getRequestsAfterThisPoint(currentDate);
+				log.severe("00000    ");
+		
 				rt = new StringBuilder();
 				HttpSession session = req.getSession();
 				if(requestList == null || requestList.length ==0) {
-					System.out.println("00000    return");
-					session.setAttribute("latestTime", "0");
+//					System.out.println("00000    return");
+					log.severe("00000    return");
+//					log.severe("00000    listLength "+requestList.length);
+					session.setAttribute("latestTime", currentDate);
 					return;
 				}
-				System.out.println("00000    no return");
+//				System.out.println("00000    no return");
+				log.severe("00000    no return");
 				int length = requestList.length;
-				System.out.println("00000    length" +length);
+//				System.out.println("00000    length" +length);
+				log.severe("00000    length "+length);
 			    String latestTime = requestList[length-1].getHelpRequestTime();
 			    session.setAttribute("latestTime", latestTime);
-//				System.out.println("lastest    " + latestTime);
-//			    rt.append("<input type=\"hidden\" id=\"lastestTime\" value=\""+ latestTime +"\" />");
+
 			    
-			    System.out.println("00000   set session ");
+//			    System.out.println("00000   set session ");
+			    log.severe("00000    set session");
 				ProductInfo p = new ProductInfo();
 				Map<String, String> productMap = new HashMap<String, String>();
 				String barcode = new String();
@@ -125,6 +129,7 @@ public class HelpRequestAction extends HttpServlet {
 //
 //			}
 		} catch (Exception e) {
+			log.severe("0000    exception ");
 			e.printStackTrace();
 			res.setContentType("text/html");
 			res.getWriter().write(rt.toString());

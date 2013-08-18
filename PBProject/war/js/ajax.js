@@ -117,18 +117,27 @@ function update(id) {
 
 
 }
-
+var status;
 
 function goHelp(childnode, requestID) {
-
-	if(checkStatus(requestID)=="Serving") {
+	var child=childnode;
+	var parentdiv=child.parentNode.parentNode;
+	var requestPanel=parentdiv.parentNode;
+	
+	checkStatus(requestID);
+//alert('status '+status);
+	
+	if(status == "Serving") {
 
 		alert('Someone else is helping with this request.');
+		parentdiv.parentNode.removeChild(parentdiv);
+
+	} else if(status == "Done") {
+
+		alert('This request is already processed.');
+		parentdiv.parentNode.removeChild(parentdiv);
 
 	} else {
-		var child=childnode;
-		var parentdiv=child.parentNode.parentNode;
-		var requestPanel=parentdiv.parentNode;
 		parentdiv.parentNode.removeChild(parentdiv);
 		requestPanel.style.height="62%";
 
@@ -150,6 +159,7 @@ function checkStatus(requestID) {
 			"http://axispbcusen.appspot.com/_api/help/status/"+requestID,
 			{
 				dataType: "json",
+				async: false, 
 				type: "GET", //GET is the default but just wanted to show this option
 				error: function(jqXHR, textStatus, errorThrown) {
 					alert(errorThrown);
@@ -159,13 +169,13 @@ function checkStatus(requestID) {
 					 * jQuery will automatically parse the returned JSON so 
 					 * data should be our deserialized object.
 					 */
-					var status = data.requestStatus;
+					status = data.requestStatus;
 
 
 					//$("div").html(htmlString);
 
-//					alert(status);
-					return status;
+//					alert('status inside '+status);
+//					return status;
 				}
 			}
 	);

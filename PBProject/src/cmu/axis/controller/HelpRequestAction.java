@@ -79,7 +79,7 @@ public class HelpRequestAction extends HttpServlet {
 				if(requestList == null || requestList.length ==0) {
 //					System.out.println("00000    return");
 					log.severe("00000    return");
-					log.severe("00000    listLength "+requestList.length);
+//					log.severe("00000    listLength "+requestList.length);
 					session.setAttribute("latestTime", currentDate);
 					return;
 				}

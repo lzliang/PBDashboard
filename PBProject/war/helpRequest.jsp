@@ -17,6 +17,13 @@ $(function(){
 	$(".box").children(".h_title").click( function() { $(this).next("ul").slideToggle(); });
 });
 </script>
+<script type="text/javascript" language="javascript" src="js/ajax.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+initTab();
+makeRequest();
+}
+</script>
 
 </head>
 <body>
@@ -99,14 +106,4 @@ $(function(){
   </div>
 </div>
 </body>
-
-<!--  
--->
-<script type="text/javascript" language="javascript" src="js/ajax.js"></script>
-<script type="text/javascript">
-window.onload = function(){
-initTab();
-makeRequest();
-}
-</script>
 </html>

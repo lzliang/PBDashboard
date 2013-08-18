@@ -75,15 +75,16 @@ public class HelpRequestAction extends HttpServlet {
 				RequestBean[] requestList = requestDAO.getRequests("Need Help");
 				System.out.println("00000    ");
 				rt = new StringBuilder();
-				if(requestList == null) {
+				HttpSession session = req.getSession();
+				if(requestList == null || requestList.length ==0) {
 					System.out.println("00000    return");
+					session.setAttribute("latestTime", "0");
 					return;
 				}
 				System.out.println("00000    no return");
 				int length = requestList.length;
 				System.out.println("00000    length" +length);
 			    String latestTime = requestList[length-1].getHelpRequestTime();
-			    HttpSession session = req.getSession();
 			    session.setAttribute("latestTime", latestTime);
 //				System.out.println("lastest    " + latestTime);
 //			    rt.append("<input type=\"hidden\" id=\"lastestTime\" value=\""+ latestTime +"\" />");

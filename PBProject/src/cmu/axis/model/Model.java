@@ -10,6 +10,7 @@ public class Model {
     private final EmployeeDAO employeeDAO = new EmployeeDAO();
     private final OtherPricesDAO otherPricesDAO = new OtherPricesDAO();
     private final ProductDAO productDAO = new ProductDAO();
+    private final AmazonProductsDAO amazonProductDAO = new AmazonProductsDAO();
     private final ProductLocationDAO productLocationDAO = new ProductLocationDAO();
     private final RequestDAO requestDAO = new RequestDAO();
     private final RatingHistoryDAO ratingHistoryDAO = new RatingHistoryDAO();
@@ -61,5 +62,9 @@ public class Model {
 
     public StoreDAO getStoreDAO() {
 	return storeDAO;
+    }
+
+    public AmazonProductsDAO getAmazonProductDAO() {
+	return amazonProductDAO;
     }
 }

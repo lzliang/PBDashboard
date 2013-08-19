@@ -1,3 +1,6 @@
+var host = window.location.hostname;
+//alert(host);
+
 /*
  * creates a new XMLHttpRequest object which is the backbone of AJAX,
  * or returns false if the browser doesn't support it
@@ -77,7 +80,7 @@ function update(id) {
 
 
 
-	jQuery.ajax("http://axispbcusen.appspot.com/_api/info/"+id, {
+	jQuery.ajax("http://"+host+"/_api/info/"+id, {
 		dataType : "json",
 		type : "GET", //GET is the default but just wanted to show this option
 		error : function(jqXHR, textStatus, errorThrown) {
@@ -156,7 +159,7 @@ function goHelp(childnode, requestID) {
 function checkStatus(requestID) {
 
 	jQuery.ajax(
-			"http://axispbcusen.appspot.com/_api/help/status/"+requestID,
+			"http://"+host+"/_api/help/status/"+requestID,
 			{
 				dataType: "json",
 				async: false, 
@@ -185,7 +188,7 @@ function checkStatus(requestID) {
 function complete(requestID) {
 
 	jQuery.ajax(
-			"http://axispbcusen.appspot.com/_api/help/done/"+requestID,
+			"http://"+host+"/_api/help/done/"+requestID,
 			{
 				dataType: "json",
 				type: "GET", //GET is the default but just wanted to show this option

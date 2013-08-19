@@ -2,7 +2,7 @@ package cmu.axis.databean;
 
 public class AmazonProducts {
     private long productID;
-    private String barCode;
+    private String barcode;
     private String productName;
     private String productDescription;
     private String review;
@@ -14,7 +14,7 @@ public class AmazonProducts {
 
     public AmazonProducts(String bCode, String pName, String pDesc, String rev,
 	    String simProds) {
-	this.barCode = bCode;
+	this.barcode = bCode;
 	this.productName = pName;
 	this.productDescription = pDesc;
 	this.review = rev;
@@ -30,11 +30,11 @@ public class AmazonProducts {
     }
 
     public String getBarCode() {
-	return barCode;
+	return barcode;
     }
 
     public void setBarCode(String barCode) {
-	this.barCode = barCode;
+	this.barcode = barCode;
     }
 
     public String getProductName() {

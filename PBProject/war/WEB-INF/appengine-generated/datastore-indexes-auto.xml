@@ -6,5 +6,8 @@
     <datastore-index kind="Request" ancestor="true" source="auto">
         <property name="helpRequestTime" direction="asc"/>
     </datastore-index>
-
+    <datastore-index kind="AmazonProduct" ancestor="true" source="auto">
+        <property name="barcode" direction="asc"/>
+    </datastore-index>
+    
 </datastore-indexes>

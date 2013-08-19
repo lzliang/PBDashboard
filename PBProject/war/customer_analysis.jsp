@@ -71,9 +71,11 @@ $(function(){
 				<div class="h_title">Customer Analysis</div>
 				
                 <div style="text-align:center">	
-                    <img src="//chart.googleapis.com/chart?chs=500x400&cht=p&chco=3366CC|AA0033|FFCC33|FF0000|008000&chd=s:HbMHI&chdl=11-20|21-30|31-40|41-50|60%2B&chtt=Customer+Analysis&chts=676767,14" width="500" height="400" alt="Customer Analysis" />
+                <script src="js/piechart_init.js"></script>
+                    <script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
-                   
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                     
                     </div>
                     

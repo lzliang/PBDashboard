@@ -74,12 +74,11 @@ $(function(){
 				<div class="h_title">Staff Evaluation</div>
 				
                 <div style="text-align:center">	
-                    <div id="chart"></div>
+                <script src="js/barchart_init.js"></script>
+                    <script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
-                    <div id="page_button">
-       						 <button>Previous</button>
-                             <button onclick="onLoadCallback();">Next</button>
-       					 </div>
+<div id="container" style="width: 610px; min-height: 400px; margin: 0 auto"></div>
                     
                     </div>
                     

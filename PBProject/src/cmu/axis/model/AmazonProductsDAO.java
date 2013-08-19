@@ -5,6 +5,7 @@ import java.util.List;
 
 import cmu.axis.databean.AmazonProducts;
 
+import com.google.appengine.api.datastore.DatastoreNeedIndexException;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -51,7 +52,8 @@ public class AmazonProductsDAO {
 	}
     }
 
-    public AmazonProducts[] getProducts() throws DAOException {
+    public AmazonProducts[] getProducts() throws DAOException,
+	    DatastoreNeedIndexException, EntityNotFoundException {
 	try {
 	    List<AmazonProducts> products = runAscendingQuery();
 	    return products.toArray(new AmazonProducts[products.size()]);
@@ -62,7 +64,7 @@ public class AmazonProductsDAO {
     }
 
     public AmazonProducts getProduct(String barcode) throws DAOException,
-	    EntityNotFoundException {
+	    EntityNotFoundException, DatastoreNeedIndexException {
 	try {
 	    AmazonProducts aProduct = new AmazonProducts();
 	    List<AmazonProducts> products = runAscendingQuery();

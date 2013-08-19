@@ -96,7 +96,6 @@ public class AmazonProductsDAO {
 	product.setProperty("productName", pBean.getProductName());
 	product.setProperty("review", pBean.getReview());
 	product.setProperty("productDescription", pBean.getProductDescription());
-	product.setProperty("barcode", pBean.getBarCode());
 	product.setProperty("similarProducts", pBean.getSimilarProducts());
 	datastore.put(product);
     }

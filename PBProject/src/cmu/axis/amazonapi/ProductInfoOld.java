@@ -11,6 +11,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
+@Deprecated
 public class ProductInfoOld {
 	private static final String AWS_ACCESS_KEY_ID = "AKIAI3NCEPGAPX2DE7SQ";
 	private static final String AWS_SECRET_KEY = "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";

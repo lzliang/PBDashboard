@@ -80,7 +80,7 @@ public class AmazonProductsDAO {
     }
 
     public boolean doesExist(String barcode) throws DAOException,
-	    EntityNotFoundException {
+	    EntityNotFoundException, DatastoreNeedIndexException {
 	AmazonProducts[] allProducts = getProducts();
 	for (int i = 0; i < allProducts.length; i++) {
 	    if (allProducts[i].getBarCode().equalsIgnoreCase(barcode))

@@ -3,17 +3,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
 import org.jsoup.select.Elements;
+
+import cmu.axis.databean.AmazonProducts;
+import cmu.axis.model.AmazonProductsDAO;
+
+import com.google.appengine.api.datastore.Text;
+import com.google.gson.Gson;
+
+import edu.cmu.axis.api.Feedback;
 
 public class Reviews {
 	String overallRating;
 	List<review> reviewList;
-	
+	private Gson gson = new Gson();
+	private AmazonProductsDAO apd = new AmazonProductsDAO();
+	private final static Logger LOGGER = Logger.getLogger(Feedback.class.getName());
 	public class review {
 		String rating;
 		String customerName;
@@ -24,6 +34,20 @@ public class Reviews {
 	}
 
 	public List<Map<String,String>> getReviews(String barcode) {
+		try {
+			if(apd.doesExist(barcode)){
+				AmazonProducts ap = apd.getProduct(barcode);
+				String reviewJson = ap.getReview().getValue();
+				if(reviewJson!= null && !reviewJson.equals("")){
+					//List<Map<String,String>> obj = gson.fromJson(reviewJson, List.class);
+					//List<Map<String,String>> reviews = new ArrayList<Map<String,String>>();
+					return gson.fromJson(reviewJson, List.class);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.info(e.getMessage());
+			// do nothing else
+		}
 		ProductInfo pi = new ProductInfo();
 		List<Map<String,String>> tempList = new ArrayList<Map<String,String>>();
 		
@@ -53,7 +77,6 @@ public class Reviews {
 			}
 
 		}
-		// System.out.print(date);
 
 		// get title
 		List<String> titles = new ArrayList<String>();
@@ -67,9 +90,6 @@ public class Reviews {
 			}
 
 		}
-
-		// System.out.print(title);
-
 		// get individual rating
 		List<String> indi_ratings = new ArrayList<String>();
 		int rating_index = 0;
@@ -82,7 +102,6 @@ public class Reviews {
 			}
 
 		}
-		// System.out.print(indi_ratings);
 
 		// get customer name
 		List<String> cust_names = new ArrayList<String>();
@@ -93,8 +112,6 @@ public class Reviews {
 				cust_names.add(e.getElementsByAttribute("style").text());
 
 		}
-		// System.out.print(cust_names);
-
 		
 		//get content
 		List<String> contents = new ArrayList<String>();
@@ -124,7 +141,20 @@ public class Reviews {
 			tempList.add(currReview);
 		}
 		
-		//this.reviewList = tempList;
+		try {
+			AmazonProducts ap = apd.getProduct(barcode);
+			if(ap == null){
+				ap.setBarCode(barcode);
+				ap.setReview(new Text(gson.toJson(tempList)));
+				apd.addProduct(ap);
+			}else{
+				ap.setReview(new Text(gson.toJson(tempList)));
+				apd.updateProduct(ap.getProductID(), ap);
+			}
+		} catch (Exception e){
+			LOGGER.info("Can not store review into data store: " + e.getMessage());
+		}
+		
 		
 		return tempList;
 

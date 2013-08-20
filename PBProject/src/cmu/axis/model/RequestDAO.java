@@ -325,7 +325,7 @@ public class RequestDAO {
 
 	private List<RequestBean> runAscendingQuery() {
 		List<Entity> entities = datastore.prepare(ascendingQuery).asList(
-				FetchOptions.Builder.withLimit(100));
+				FetchOptions.Builder.withLimit(500));
 		List<RequestBean> requests = new ArrayList<RequestBean>();
 		for (Entity e : entities) {
 			requests.add(makeBean(e));

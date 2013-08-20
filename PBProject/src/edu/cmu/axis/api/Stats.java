@@ -71,28 +71,28 @@ public class Stats {
 	public Response testAPI(@PathParam("barcode") String barcode) throws DAOException {
 		AmazonProductsDAO apd = new AmazonProductsDAO();
 		ProductInfo pi = new ProductInfo();
-		Reviews r = new Reviews();
-		
-		Map<String, Map<String, String>> sim = pi.getSimilarities(barcode);
-		LOGGER.info(gson.toJson(sim));
-		// TESTing traverse
-		for (String key : sim.keySet()) {
-			Map<String, String> m = sim.get(key);
-			for (String mk : m.keySet()) {
-				String v = m.get(mk);
-			}
-		}
-		List<Map<String, String>> reviews = r.getReviews(barcode);
-		if (reviews != null) {
-			// testing list traverse
-			for (Map<String, String> m : reviews) {
-				for (String mk : m.keySet()) {
-					String v = m.get(mk);
-				}
-			}
-		}
+//		Reviews r = new Reviews();
+//		
+//		Map<String, Map<String, String>> sim = pi.getSimilarities(barcode);
+//		LOGGER.info(gson.toJson(sim));
+//		// TESTing traverse
+//		for (String key : sim.keySet()) {
+//			Map<String, String> m = sim.get(key);
+//			for (String mk : m.keySet()) {
+//				String v = m.get(mk);
+//			}
+//		}
+//		List<Map<String, String>> reviews = r.getReviews(barcode);
+//		if (reviews != null) {
+//			// testing list traverse
+//			for (Map<String, String> m : reviews) {
+//				for (String mk : m.keySet()) {
+//					String v = m.get(mk);
+//				}
+//			}
+//		}
 		return Response.status(200).header("Access-Control-Allow-Origin", "*")
-				.entity(gson.toJson("true")).build();
+				.entity(gson.toJson(apd.getProducts())).build();
 	}
 
 }

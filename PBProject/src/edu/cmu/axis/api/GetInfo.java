@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,6 +21,8 @@ import com.google.gson.GsonBuilder;
 @Path("/info")
 public class GetInfo {
 	Gson gson = new Gson();
+	private final static Logger LOGGER = Logger.getLogger(Feedback.class
+			.getName());
 	//finished
 	@GET
 	@Path("/{barcode}")
@@ -35,9 +38,11 @@ public class GetInfo {
 			List<Map<String,String>> reviews = new ArrayList<Map<String, String>>();
 			try{
 				reviews = r.getReviews(barcode);
+				LOGGER.info("reviews: " + gson.toJson(reviews));
 			}catch (Exception e){
-				
+				LOGGER.info("can not get the reviews: " + e.getMessage());
 			}
+			LOGGER.info("reviews line 45: " + gson.toJson(reviews));
 			productInfo.remove("Reviews");			
 			rt.put("Reviews", reviews);
 			productInfo.put("Status","success");

@@ -46,6 +46,11 @@
 							onClick="clearForm(this.form)">Reset</button>
 					</td>
 				</tr>
+				<tr>
+				<th>test</th>
+					<td><input type="text" 
+						value="${test}" /></td>
+				</tr>
 				
 			</table>
 

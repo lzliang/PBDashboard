@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.appengine.api.users.User;
 
@@ -25,6 +26,7 @@ public class Controller extends HttpServlet {
         Action.add(new LogoutAction(model));
         Action.add(new ToDoListAction(model));
         Action.add(new AddProductAction(model));
+        Action.add(new DashboardLoginAction(model));
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,10 +49,28 @@ public class Controller extends HttpServlet {
         String      action      = getActionName(servletPath);
         User        user        = model.getUserDAO().getCurrentUser();
         
+        HttpSession session     = request.getSession(true);
+        String userName = (String)session.getAttribute("userName");
+        String password = (String)session.getAttribute("password");
+        
         if (user == null) {
         	// If the user hasn't logged in, so login is the only option
 			return Action.perform("login.do",request);
         }
+        
+        if (action.equals("start")) {
+            // If he's logged in but back at the /start page, send him to manage his pics
+            if (userName != null && userName.equals("manager") && password !=null && password.equals("axis")) {
+            	System.out.println(1);
+                    return "helpRequest.jsp";          
+            }
+            if (userName != null && userName.equals("employee")&& password !=null && password.equals("axis")) {
+            	System.out.println(2);   
+            	return "helpRequest.jsp"; 
+            }               
+            System.out.println(3);       
+            return Action.perform("dashboardLogin.do",request);
+    }
         
       	// Let the logged in user run his chosen action
 		return Action.perform(action,request);

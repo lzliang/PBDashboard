@@ -10,6 +10,12 @@
 <link rel="stylesheet" type="text/css" href="css/navi.css" media="screen" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
+window.onload = function(){
+	var name = "${userName}";
+	if(name=="") {
+		window.location = "http://"+window.location.hostname;
+	}
+}
 $(function(){
 	$(".box .h_title").not(this).next("ul").hide("normal");
 	$(".box .h_title").not(this).next("#home").show("normal");
@@ -25,11 +31,11 @@ $(function(){
 	<div id="header">
 		<div id="top">
 			<div class="left">
-				<p>Welcome, <strong>Paweł B.</strong> [ <a href="">logout</a> ]</p>
+				<p>Welcome, <strong>${userName}</strong> [ <a href="">logout</a> ]</p>
 			</div>
 			<div class="right">
 				<div class="align-right">
-					<p>Last login: <strong>08-01-2013 13:12</strong></p>
+					<p>Last login: <strong>08-23-2013 13:12</strong></p>
 				</div>
 			</div>
 		</div>

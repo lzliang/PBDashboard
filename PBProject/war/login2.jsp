@@ -38,14 +38,18 @@ $(document).pngFix( );
 	
 	<!--  start login-inner -->
 	<div id="login-inner">
+	<form method="post" action="dashboardLogin.do">
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
+		<jsp:include page="error-list.jsp" />
+		</tr>
+		<tr>
 			<th>Username</th>
-			<td><input type="text"  class="login-inp" /></td>
+			<td><input type="text" name="userName" class="login-inp" /></td>
 		</tr>
 		<tr>
 			<th>Password</th>
-			<td><input type="password" value="************"  onfocus="this.value=''" class="login-inp" /></td>
+			<td><input type="password" name="password" value=""  onfocus="this.value=''" class="login-inp" /></td>
 		</tr>
 		<tr>
 			<th></th>
@@ -53,9 +57,10 @@ $(document).pngFix( );
 		</tr>
 		<tr>
 			<th></th>
-			<td><a href="helpRequest.jsp"><input type="button" class="submit-login"  /></a></td>
+			<td><input type="submit" class="submit-login"  /></td>
 		</tr>
 		</table>
+		</form>
 	</div>
  	<!--  end login-inner -->
 	<div class="clear"></div>

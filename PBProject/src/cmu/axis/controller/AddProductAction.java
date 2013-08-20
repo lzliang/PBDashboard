@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
@@ -75,6 +76,10 @@ public class AddProductAction extends Action {
 //	    System.out.println(productDAO.getProducts().length);
 	    
 	    productDAO.addProduct(productBean);
+//	    HttpSession session = request.getSession();
+//		System.out.println("name "+form.getUserName()+"  password: "+form.getPassword());
+//		session.setAttribute("test","333");
+//	    request.setAttribute("test", "3333");
 	    
 	    
 	    

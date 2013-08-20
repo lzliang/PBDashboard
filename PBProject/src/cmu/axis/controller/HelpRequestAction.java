@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cmu.axis.amazonapi.ProductInfo;
+import cmu.axis.databean.AmazonProducts;
 import cmu.axis.databean.RequestBean;
+import cmu.axis.model.AmazonProductsDAO;
 import cmu.axis.model.Model;
 import cmu.axis.model.RequestDAO;
 import edu.cmu.axis.api.Util;
@@ -28,6 +30,8 @@ public class HelpRequestAction extends HttpServlet {
 
 	//	private RequestDAO requestDAO;
 	private RequestDAO requestDAO;
+	
+	private AmazonProductsDAO amazonDAO;
 
 	private StringBuilder rt = new StringBuilder();
 //	private String latestTime = "0";
@@ -39,7 +43,31 @@ public class HelpRequestAction extends HttpServlet {
 		try {
 			model = new Model(getServletConfig());
 			requestDAO = model.getRequestDAO();
+//			amazonDAO = model.getAmazonProductDAO();
+//			
+//			AmazonProducts amazonBean = new AmazonProducts();
+//			amazonBean.setBarCode("745883596720");
+//			amazonBean.setProductDescription("test description");
+//			amazonBean.setProductID(123);
+//			amazonBean.setProductName("test Name");
+//			amazonBean.setReview("test reviews");
+//			amazonBean.setSimilarProducts("test similarProducts");
+//			
+//			amazonDAO.addProduct(amazonBean);
 			
+//			log.severe("ready to use amazonDAO");
+//			
+//			if(amazonDAO.doesExist("745883596720")) {
+//				log.severe("barcode 745... exists   ");
+//				System.out.println("barcode 745... exists   ");
+//			}else{
+//				log.severe("barcode 745... NOT exists   ");
+//				System.out.println("barcode 745...NOT exists   ");
+//			}
+//			
+//			AmazonProducts[] amazonProducts = amazonDAO.getProducts();
+//			log.severe("amazon products length" + amazonProducts.length);
+//			System.out.println("amazon products length" + amazonProducts.length);
 //			if(latestTime.equals("0")) {
 //				RequestBean requestBean = new RequestBean();
 //				int j = (int)(Math.random()*10);

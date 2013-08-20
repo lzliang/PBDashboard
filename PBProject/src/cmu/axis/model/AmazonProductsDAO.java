@@ -16,6 +16,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.datastore.Transaction;
+import com.google.gson.Gson;
 
 public class AmazonProductsDAO {
 	private final DatastoreService datastore = DatastoreServiceFactory
@@ -23,16 +24,15 @@ public class AmazonProductsDAO {
 	private final Key rootKey = KeyFactory.createKey("Root", "root");
 	private final Query ascendingQuery = new Query("AmazonProduct", rootKey)
 			.addSort("barcode", Query.SortDirection.ASCENDING);
-	private final static Logger LOGGER = Logger.getLogger(AmazonProductsDAO.class
-			.getName());
+	private final static Logger LOGGER = Logger
+			.getLogger(AmazonProductsDAO.class.getName());
+	private Gson gson = new Gson();
 
 	public void addProduct(AmazonProducts product) throws DAOException {
 		Transaction t = null;
 		try {
 			t = datastore.beginTransaction();
-
 			Entity e = new Entity("AmazonProduct", rootKey);
-			// e.setProperty("customerId", customer.getCustomerId());
 			e.setProperty("productName", product.getProductName());
 			e.setProperty("review", product.getReview());
 			e.setProperty("productDescription", product.getProductDescription());
@@ -93,6 +93,15 @@ public class AmazonProductsDAO {
 
 	}
 
+	public boolean alternateDoesExist(String barcode) throws DAOException,
+			EntityNotFoundException {
+		AmazonProducts product = getProduct(barcode);
+		if (product != null)
+			return true;
+		else
+			return false;
+	}
+
 	public void updateProduct(long pID, AmazonProducts pBean)
 			throws DAOException, EntityNotFoundException {
 		Key pKey = KeyFactory.createKey(rootKey, "AmazonProduct", pID);
@@ -114,24 +123,27 @@ public class AmazonProductsDAO {
 	}
 
 	private List<AmazonProducts> runAscendingQuery() {
+		LOGGER.severe("in runAscendingQuery()");
 		List<Entity> entities = datastore.prepare(ascendingQuery).asList(
 				FetchOptions.Builder.withLimit(100));
 		List<AmazonProducts> products = new ArrayList<AmazonProducts>();
+		LOGGER.severe("entities: " + gson.toJson(entities));
 		for (Entity e : entities) {
+			LOGGER.severe("right before makeBean");
 			products.add(makeBean(e));
 		}
 		return products;
 	}
 
 	private AmazonProducts makeBean(Entity e) {
-		AmazonProducts pbean = new AmazonProducts();
+		LOGGER.severe("int the makeBean method");
+		AmazonProducts pbean = new AmazonProducts();		
 		pbean.setProductID(e.getKey().getId());
-		pbean.setProductName((String) e.getProperty("productName"));
-		pbean.setReview(new Text((String) e.getProperty("review")));
-		pbean.setProductDescription(new Text((String)e.getProperty("productDescription")));
+		pbean.setProductName((String) e.getProperty("productName"));	
+		pbean.setReview((Text) e.getProperty("review"));
+		pbean.setProductDescription((Text) e.getProperty("productDescription"));
 		pbean.setBarCode((String) e.getProperty("barcode"));
-		pbean.setSimilarProducts(new Text((String) (e
-				.getProperty("similarProducts"))));
+		pbean.setSimilarProducts((Text) e.getProperty("similarProducts"));
 		return pbean;
 	}
 }

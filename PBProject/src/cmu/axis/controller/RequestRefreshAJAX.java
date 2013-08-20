@@ -1,7 +1,11 @@
 package cmu.axis.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
@@ -55,7 +59,12 @@ public class RequestRefreshAJAX extends HttpServlet {
 				Map<String, String> productMap = new HashMap<String, String>();
 				String barcode = new String();
 
-
+				long current = System.currentTimeMillis();
+				DateFormat dfm = new SimpleDateFormat("mm");
+				dfm.setTimeZone(TimeZone.getTimeZone("GMT-4"));
+				DateFormat dfs = new SimpleDateFormat("ss");
+				dfs.setTimeZone(TimeZone.getTimeZone("GMT-4"));
+				
 				for(RequestBean bean:requestList) {
 					barcode = bean.getBarcode();
 
@@ -75,6 +84,15 @@ public class RequestRefreshAJAX extends HttpServlet {
 					rt.append("</div>");
 					rt.append("<div class=\"request_button\">");
 					rt.append("<button onclick=\"goHelp(this, \'"+bean.getRequestID()+"\')\">Go Help</button>");
+					
+					long time = current-Long.valueOf(bean.getHelpRequestTime());
+					if(time>=60000) {
+						rt.append("<p class=\"waiting_text\">"+ dfm.format(new Date(time))+ " mins ago</p>");
+					} else {
+						rt.append("<p class=\"waiting_text\">"+ dfs.format(new Date(time))+ " secs ago</p>");
+						
+					}
+					
 					rt.append("</div>");
 					rt.append("<div class=\"clear\"></div>");
 					rt.append("</div>");

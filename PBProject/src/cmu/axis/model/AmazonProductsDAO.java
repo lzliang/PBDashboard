@@ -55,9 +55,11 @@ public class AmazonProductsDAO {
 
 	public AmazonProducts[] getProducts() throws DAOException {
 		try {
+			LOGGER.severe("in the getProducts()");
 			List<AmazonProducts> products = runAscendingQuery();
 			return products.toArray(new AmazonProducts[products.size()]);
 		} catch (Exception e) {
+			LOGGER.severe(e.getMessage());
 			e.printStackTrace();
 			throw new DAOException(e);
 		}
@@ -81,6 +83,7 @@ public class AmazonProductsDAO {
 
 	public boolean doesExist(String barcode) throws DAOException,
 			EntityNotFoundException {
+		LOGGER.severe("in the doesExist: " + barcode);
 		AmazonProducts[] allProducts = getProducts();
 		for (int i = 0; i < allProducts.length; i++) {
 			if (allProducts[i].getBarCode().equalsIgnoreCase(barcode))

@@ -138,14 +138,26 @@ public class Reviews {
 		}
 		// System.out.print(contents);
 
-		for (int i = 0; i < dates.size(); i++) {
-			Map<String, String> currReview = new HashMap<String, String>();
-			currReview.put("Date", dates.get(i));
-			currReview.put("CustomerName", cust_names.get(i));
-			currReview.put("Rating", indi_ratings.get(i));
-			currReview.put("Title", titles.get(i));
-			currReview.put("Content", contents.get(i));
-			tempList.add(currReview);
+		if(dates.size()>5){
+			for (int i = 0; i < 5; i++) {
+				Map<String, String> currReview = new HashMap<String, String>();
+				currReview.put("Date", dates.get(i));
+				currReview.put("CustomerName", cust_names.get(i));
+				currReview.put("Rating", indi_ratings.get(i));
+				currReview.put("Title", titles.get(i));
+				currReview.put("Content", contents.get(i));
+				tempList.add(currReview);
+			}
+		}else{
+			for (int i = 0; i < dates.size(); i++) {
+				Map<String, String> currReview = new HashMap<String, String>();
+				currReview.put("Date", dates.get(i));
+				currReview.put("CustomerName", cust_names.get(i));
+				currReview.put("Rating", indi_ratings.get(i));
+				currReview.put("Title", titles.get(i));
+				currReview.put("Content", contents.get(i));
+				tempList.add(currReview);
+			}
 		}
 
 		try {

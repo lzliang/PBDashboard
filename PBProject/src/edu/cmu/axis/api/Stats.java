@@ -14,7 +14,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import cmu.axis.databean.RequestStats;
+import cmu.axis.amazonapi.ProductInfo;
+import cmu.axis.amazonapi.Reviews;
+import cmu.axis.model.AmazonProductsDAO;
+import cmu.axis.model.DAOException;
 import cmu.axis.model.RequestDAO;
 
 import com.google.gson.Gson;
@@ -60,6 +63,36 @@ public class Stats {
 		rt.put("status", "success");
 		return Response.status(200).header("Access-Control-Allow-Origin", "*")
 				.entity(gson.toJson(rt)).build();
+	}
+
+	@GET
+	@Path("/test/{barcode}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response testAPI(@PathParam("barcode") String barcode) throws DAOException {
+		AmazonProductsDAO apd = new AmazonProductsDAO();
+		ProductInfo pi = new ProductInfo();
+		Reviews r = new Reviews();
+		
+		Map<String, Map<String, String>> sim = pi.getSimilarities(barcode);
+		LOGGER.info(gson.toJson(sim));
+		// TESTing traverse
+		for (String key : sim.keySet()) {
+			Map<String, String> m = sim.get(key);
+			for (String mk : m.keySet()) {
+				String v = m.get(mk);
+			}
+		}
+		List<Map<String, String>> reviews = r.getReviews(barcode);
+		if (reviews != null) {
+			// testing list traverse
+			for (Map<String, String> m : reviews) {
+				for (String mk : m.keySet()) {
+					String v = m.get(mk);
+				}
+			}
+		}
+		return Response.status(200).header("Access-Control-Allow-Origin", "*")
+				.entity(gson.toJson("true")).build();
 	}
 
 }

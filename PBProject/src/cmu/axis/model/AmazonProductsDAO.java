@@ -5,7 +5,6 @@ import java.util.List;
 
 import cmu.axis.databean.AmazonProducts;
 
-import com.google.appengine.api.datastore.DatastoreNeedIndexException;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -14,14 +13,17 @@ import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.datastore.Transaction;
+
+
 
 public class AmazonProductsDAO {
     private final DatastoreService datastore = DatastoreServiceFactory
 	    .getDatastoreService();
     private final Key rootKey = KeyFactory.createKey("Root", "root");
     private final Query ascendingQuery = new Query("AmazonProduct", rootKey)
-	    .addSort("barCode", Query.SortDirection.ASCENDING);
+	    .addSort("barcode", Query.SortDirection.ASCENDING);
 
     public void addProduct(AmazonProducts product) throws DAOException {
 	Transaction t = null;
@@ -52,8 +54,7 @@ public class AmazonProductsDAO {
 	}
     }
 
-    public AmazonProducts[] getProducts() throws DAOException,
-	    DatastoreNeedIndexException, EntityNotFoundException {
+    public AmazonProducts[] getProducts() throws DAOException {
 	try {
 	    List<AmazonProducts> products = runAscendingQuery();
 	    return products.toArray(new AmazonProducts[products.size()]);
@@ -64,7 +65,7 @@ public class AmazonProductsDAO {
     }
 
     public AmazonProducts getProduct(String barcode) throws DAOException,
-	    EntityNotFoundException, DatastoreNeedIndexException {
+	    EntityNotFoundException {
 	try {
 	    AmazonProducts aProduct = new AmazonProducts();
 	    List<AmazonProducts> products = runAscendingQuery();
@@ -124,11 +125,11 @@ public class AmazonProductsDAO {
 	AmazonProducts pbean = new AmazonProducts();
 	pbean.setProductID(e.getKey().getId());
 	pbean.setProductName((String) e.getProperty("productName"));
-	pbean.setReview((String) e.getProperty("review"));
-	pbean.setProductDescription((String) e
+	pbean.setReview( (Text) e.getProperty("review"));
+	pbean.setProductDescription((Text) e
 		.getProperty("productDescription"));
 	pbean.setBarCode((String) e.getProperty("barcode"));
-	pbean.setSimilarProducts((String) (e.getProperty("similarProducts")));
+	pbean.setSimilarProducts((Text) (e.getProperty("similarProducts")));
 	return pbean;
     }
 

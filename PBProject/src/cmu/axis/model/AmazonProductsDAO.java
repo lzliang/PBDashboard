@@ -16,8 +16,6 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.datastore.Transaction;
 
-
-
 public class AmazonProductsDAO {
     private final DatastoreService datastore = DatastoreServiceFactory
 	    .getDatastoreService();
@@ -125,9 +123,8 @@ public class AmazonProductsDAO {
 	AmazonProducts pbean = new AmazonProducts();
 	pbean.setProductID(e.getKey().getId());
 	pbean.setProductName((String) e.getProperty("productName"));
-	pbean.setReview( (Text) e.getProperty("review"));
-	pbean.setProductDescription((Text) e
-		.getProperty("productDescription"));
+	pbean.setReview((Text) e.getProperty("review"));
+	pbean.setProductDescription((Text) e.getProperty("productDescription"));
 	pbean.setBarCode((String) e.getProperty("barcode"));
 	pbean.setSimilarProducts((Text) (e.getProperty("similarProducts")));
 	return pbean;

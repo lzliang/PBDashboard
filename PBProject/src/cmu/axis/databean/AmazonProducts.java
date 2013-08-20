@@ -15,7 +15,6 @@ public class AmazonProducts {
 
 	}
 
-
 	public AmazonProducts(String bCode, String pName, Text pDesc, Text rev,
 			Text simProds) {
 		this.barcode = bCode;
@@ -24,7 +23,6 @@ public class AmazonProducts {
 		this.review = rev;
 		this.similarProducts = simProds;
 	}
-
 
 	public long getProductID() {
 		return productID;
@@ -50,29 +48,21 @@ public class AmazonProducts {
 		this.productName = productName;
 	}
 
+	public Text getProductDescription() {
+		return productDescription;
+	}
 
-    public Text getProductDescription() {
-	return productDescription;
-    }
+	public void setProductDescription(Text productDescription) {
+		this.productDescription = productDescription;
+	}
 
-
-
-    public void setProductDescription(Text productDescription) {
-	this.productDescription = productDescription;
-    }
-
-
-
-    public Text getReview() {
-	return review;
-    }
-
-
+	public Text getReview() {
+		return review;
+	}
 
 	public void setReview(Text review) {
 		this.review = review;
 	}
-
 
 	public Text getSimilarProducts() {
 		return similarProducts;

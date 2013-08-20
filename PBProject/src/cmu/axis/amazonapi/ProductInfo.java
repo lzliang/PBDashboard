@@ -35,15 +35,10 @@ public class ProductInfo {
 	private Gson gson = new Gson();
 
 	public Map<String, String> getProductInfoByBarcode(String barcode) {
-		LOGGER.info("line 41");
 		try {
-			LOGGER.info("line 42: ");
 			if (apd.doesExist(barcode)) {
-				LOGGER.info("line 43: ");
 				AmazonProducts ap = apd.getProduct(barcode);
-				LOGGER.info("line 44: " + gson.toJson(ap));
 				String productJson = ap.getProductDescription().getValue();
-				LOGGER.info("line 46: " + productJson);
 				if (productJson != null && !productJson.equals("")) {
 					Map<String, String> product = gson.fromJson(productJson,
 							Map.class);
@@ -225,7 +220,7 @@ public class ProductInfo {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		try { // TODO test
+		try {
 			AmazonProducts ap = apd.getProduct(barcode);
 			if (ap == null) {
 				ap = new AmazonProducts();

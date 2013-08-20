@@ -1,4 +1,5 @@
 package cmu.axis.amazonapi;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,9 @@ public class Reviews {
 	List<review> reviewList;
 	private Gson gson = new Gson();
 	private AmazonProductsDAO apd = new AmazonProductsDAO();
-	private final static Logger LOGGER = Logger.getLogger(Feedback.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(Feedback.class
+			.getName());
+
 	public class review {
 		String rating;
 		String customerName;
@@ -33,14 +36,17 @@ public class Reviews {
 
 	}
 
-	public List<Map<String,String>> getReviews(String barcode) {
+	public List<Map<String, String>> getReviews(String barcode) {
 		try {
-			if(apd.doesExist(barcode)){
+			if (apd.doesExist(barcode)) {
 				AmazonProducts ap = apd.getProduct(barcode);
 				String reviewJson = ap.getReview().getValue();
-				if(reviewJson!= null && !reviewJson.equals("")){
-					//List<Map<String,String>> obj = gson.fromJson(reviewJson, List.class);
-					//List<Map<String,String>> reviews = new ArrayList<Map<String,String>>();
+				LOGGER.info("reviews: " + reviewJson);
+				if (reviewJson != null && !reviewJson.equals("")) {
+					// List<Map<String,String>> obj = gson.fromJson(reviewJson,
+					// List.class);
+					// List<Map<String,String>> reviews = new
+					// ArrayList<Map<String,String>>();
 					return gson.fromJson(reviewJson, List.class);
 				}
 			}
@@ -49,9 +55,10 @@ public class Reviews {
 			// do nothing else
 		}
 		ProductInfo pi = new ProductInfo();
-		List<Map<String,String>> tempList = new ArrayList<Map<String,String>>();
-		
+		List<Map<String, String>> tempList = new ArrayList<Map<String, String>>();
+
 		String reviewUrl = pi.getProductInfoByBarcode(barcode).get("Reviews");
+		LOGGER.info("review URL: " + reviewUrl);
 		String rawData = URLConnection.getData(reviewUrl);
 		Document document = Jsoup.parse(rawData);
 		// System.out.print(document);
@@ -112,8 +119,8 @@ public class Reviews {
 				cust_names.add(e.getElementsByAttribute("style").text());
 
 		}
-		
-		//get content
+
+		// get content
 		List<String> contents = new ArrayList<String>();
 		document.getElementById("productReviews").getElementsByTag("span")
 				.remove();
@@ -126,50 +133,47 @@ public class Reviews {
 				.remove();
 
 		for (Element e : document.getElementById("productReviews")
-				.getElementsByAttributeValue("style", "margin-left:0.5em;")){
-			contents.add(e.text().substring(0, e.text().length()-3));
+				.getElementsByAttributeValue("style", "margin-left:0.5em;")) {
+			contents.add(e.text().substring(0, e.text().length() - 3));
 		}
-//		System.out.print(contents);
-		
-		for(int i=0; i<dates.size();i++){
-			Map<String,String> currReview = new HashMap<String,String>();
-			currReview.put("Date", dates.get(i));
-			currReview.put("CustomerName", cust_names.get(i));
-			currReview.put("Rating",indi_ratings.get(i));
-			currReview.put("Title", titles.get(i));
-			currReview.put("Content", contents.get(i));
-			tempList.add(currReview);
+		// System.out.print(contents);
+
+		if(dates.size()>5){
+			for (int i = 0; i < 5; i++) {
+				Map<String, String> currReview = new HashMap<String, String>();
+				currReview.put("Date", dates.get(i));
+				currReview.put("CustomerName", cust_names.get(i));
+				currReview.put("Rating", indi_ratings.get(i));
+				currReview.put("Title", titles.get(i));
+				currReview.put("Content", contents.get(i));
+				tempList.add(currReview);
+			}
+		}else{
+			for (int i = 0; i < dates.size(); i++) {
+				Map<String, String> currReview = new HashMap<String, String>();
+				currReview.put("Date", dates.get(i));
+				currReview.put("CustomerName", cust_names.get(i));
+				currReview.put("Rating", indi_ratings.get(i));
+				currReview.put("Title", titles.get(i));
+				currReview.put("Content", contents.get(i));
+				tempList.add(currReview);
+			}
 		}
-		
+
 		try {
 			AmazonProducts ap = apd.getProduct(barcode);
-			if(ap == null){
+			if (ap == null) {
 				ap.setBarCode(barcode);
 				ap.setReview(new Text(gson.toJson(tempList)));
 				apd.addProduct(ap);
-			}else{
+			} else {
 				ap.setReview(new Text(gson.toJson(tempList)));
 				apd.updateProduct(ap.getProductID(), ap);
 			}
-		} catch (Exception e){
-			LOGGER.info("Can not store review into data store: " + e.getMessage());
+		} catch (Exception e) {
+			LOGGER.info("Can not store review into data store: "
+					+ e.getMessage());
 		}
-		
-		
 		return tempList;
-
 	}
-
-	public static void main(String[] args) {
-		Reviews reviews = new Reviews();
-		reviews.getReviews("813810010424");
-		System.out.println(reviews.overallRating);
-		System.out.println(reviews.reviewList.get(0).customerName);
-		System.out.println(reviews.reviewList.get(0).content);
-		System.out.println(reviews.reviewList.get(0).date);
-		System.out.println(reviews.reviewList.get(0).rating);
-		System.out.println(reviews.reviewList.get(0).title);
-
-	}
-
 }

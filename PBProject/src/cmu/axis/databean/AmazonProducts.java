@@ -1,18 +1,20 @@
 package cmu.axis.databean;
 
+import com.google.appengine.api.datastore.Text;
+
 public class AmazonProducts {
     private long productID;
     private String barcode;
     private String productName;
-    private String productDescription;
-    private String review;
+    private Text productDescription;
+    private Text review;
     private String similarProducts;
 
     public AmazonProducts() {
 
     }
 
-    public AmazonProducts(String bCode, String pName, String pDesc, String rev,
+    public AmazonProducts(String bCode, String pName, Text pDesc, Text rev,
 	    String simProds) {
 	this.barcode = bCode;
 	this.productName = pName;
@@ -45,19 +47,19 @@ public class AmazonProducts {
 	this.productName = productName;
     }
 
-    public String getProductDescription() {
+    public Text getProductDescription() {
 	return productDescription;
     }
 
-    public void setProductDescription(String productDescription) {
+    public void setProductDescription(Text productDescription) {
 	this.productDescription = productDescription;
     }
 
-    public String getReview() {
+    public Text getReview() {
 	return review;
     }
 
-    public void setReview(String review) {
+    public void setReview(Text review) {
 	this.review = review;
     }
 

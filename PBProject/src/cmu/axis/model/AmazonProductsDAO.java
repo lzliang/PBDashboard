@@ -14,6 +14,7 @@ import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.datastore.Transaction;
 
 public class AmazonProductsDAO {
@@ -21,7 +22,7 @@ public class AmazonProductsDAO {
 	    .getDatastoreService();
     private final Key rootKey = KeyFactory.createKey("Root", "root");
     private final Query ascendingQuery = new Query("AmazonProduct", rootKey)
-	    .addSort("barCode", Query.SortDirection.ASCENDING);
+	    .addSort("barcode", Query.SortDirection.ASCENDING);
 
     public void addProduct(AmazonProducts product) throws DAOException {
 	Transaction t = null;
@@ -124,9 +125,8 @@ public class AmazonProductsDAO {
 	AmazonProducts pbean = new AmazonProducts();
 	pbean.setProductID(e.getKey().getId());
 	pbean.setProductName((String) e.getProperty("productName"));
-	pbean.setReview((String) e.getProperty("review"));
-	pbean.setProductDescription((String) e
-		.getProperty("productDescription"));
+	pbean.setReview((Text) e.getProperty("review"));
+	pbean.setProductDescription((Text) e.getProperty("productDescription"));
 	pbean.setBarCode((String) e.getProperty("barcode"));
 	pbean.setSimilarProducts((String) (e.getProperty("similarProducts")));
 	return pbean;

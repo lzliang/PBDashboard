@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import cmu.axis.model.DAOException;
 import cmu.axis.model.Model;
@@ -28,12 +29,17 @@ public class LogoutAction extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         
-        try {
-	        // Now log him out from Google, too, otherwise, we'll just log him back in on next access
-	        return userDAO.getLogoutURL();
-        } catch (DAOException e) {
-        	errors.add(e.getMessage());
-        	return "error.jsp";
-        }
+        HttpSession session = request.getSession();
+        session.setAttribute("userName", "");
+        session.setAttribute("password", "");
+        
+        return "login2.jsp";
+//        try {
+//	        // Now log him out from Google, too, otherwise, we'll just log him back in on next access
+//	        return userDAO.getLogoutURL();
+//        } catch (DAOException e) {
+//        	errors.add(e.getMessage());
+//        	return "error.jsp";
+//        }
 	}
 }

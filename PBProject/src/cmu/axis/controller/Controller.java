@@ -53,10 +53,10 @@ public class Controller extends HttpServlet {
         String userName = (String)session.getAttribute("userName");
         String password = (String)session.getAttribute("password");
         
-        if (user == null) {
-        	// If the user hasn't logged in, so login is the only option
-			return Action.perform("login.do",request);
-        }
+//        if (user == null) {
+//        	// If the user hasn't logged in, so login is the only option
+//			return Action.perform("login.do",request);
+//        }
         
         if (action.equals("start")) {
             // If he's logged in but back at the /start page, send him to manage his pics

@@ -35,11 +35,11 @@ makeRequest();
   <div id="header">
     <div id="top">
       <div class="left">
-        <p>Welcome, <strong>${userName}</strong> [ <a href="">logout</a> ]</p>
+        <p>Welcome, <strong>${userName}</strong> [ <a href="logout.do">logout</a> ]</p>
       </div>
       <div class="right">
         <div class="align-right">
-          <p>Last login: <strong>08-23-2013 13:12</strong></p>
+          <p>Last login: <strong>${loginTime}</strong></p>
         </div>
       </div>
     </div>

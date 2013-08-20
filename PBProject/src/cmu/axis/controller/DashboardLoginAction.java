@@ -1,10 +1,18 @@
 package cmu.axis.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+
+
+
 
 
 
@@ -53,16 +61,25 @@ public class DashboardLoginAction extends Action  {
 			
 			HttpSession session = request.getSession();
 			System.out.println("name "+form.getUserName()+"  password: "+form.getPassword());
-			session.setAttribute("userName",form.getUserName());
-			session.setAttribute("password", form.getPassword());
 			
-			if(session.getAttribute("userName").equals("manager") && session.getAttribute("password").equals("axis")) {
+			
+			if((form.getUserName().equals("manager") && form.getPassword().equals("axis")) 
+					|| (form.getUserName().equals("employee") && form.getPassword().equals("axis"))) {
+				session.setAttribute("userName",form.getUserName());
+				session.setAttribute("password", form.getPassword());
+				
+				long start = System.currentTimeMillis() - 480000;
+				// do your work...
+
+				DateFormat df = new SimpleDateFormat("MM-dd-yyyy HH:mm");
+				df.setTimeZone(TimeZone.getTimeZone("GMT-4"));
+//				System.out.println(df.format(new Date(start)));
+				session.setAttribute("loginTime", df.format(new Date(start)));
+				
 				return "helpRequest.jsp";
-			} else if (session.getAttribute("userName").equals("employee") && session.getAttribute("password").equals("axis")) {
-				return "helpRequest.jsp";
-			}
+			} 
 			
-			
+			errors.add("Password is invalid.");
 			return "login2.jsp";
 			
 			

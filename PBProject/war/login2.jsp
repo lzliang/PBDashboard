@@ -45,7 +45,7 @@ $(document).pngFix( );
 		</tr>
 		<tr>
 			<th>Username</th>
-			<td><input type="text" name="userName" class="login-inp" /></td>
+			<td><input type="text" name="userName" value="${form.userName}" class="login-inp" /></td>
 		</tr>
 		<tr>
 			<th>Password</th>

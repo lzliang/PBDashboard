@@ -123,10 +123,12 @@ public class AmazonProductsDAO {
 	AmazonProducts pbean = new AmazonProducts();
 	pbean.setProductID(e.getKey().getId());
 	pbean.setProductName((String) e.getProperty("productName"));
-	pbean.setReview((Text) e.getProperty("review"));
-	pbean.setProductDescription((Text) e.getProperty("productDescription"));
+	pbean.setReview(new Text((String) e.getProperty("review")));
+	pbean.setProductDescription(new Text((String) e
+		.getProperty("productDescription")));
 	pbean.setBarCode((String) e.getProperty("barcode"));
-	pbean.setSimilarProducts((Text) (e.getProperty("similarProducts")));
+	pbean.setSimilarProducts(new Text((String) (e
+		.getProperty("similarProducts"))));
 	return pbean;
     }
 

@@ -17,15 +17,13 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.datastore.Transaction;
 
-import edu.cmu.axis.api.Feedback;
-
 public class AmazonProductsDAO {
 	private final DatastoreService datastore = DatastoreServiceFactory
 			.getDatastoreService();
 	private final Key rootKey = KeyFactory.createKey("Root", "root");
 	private final Query ascendingQuery = new Query("AmazonProduct", rootKey)
 			.addSort("barcode", Query.SortDirection.ASCENDING);
-	private final static Logger LOGGER = Logger.getLogger(Feedback.class
+	private final static Logger LOGGER = Logger.getLogger(AmazonProductsDAO.class
 			.getName());
 
 	public void addProduct(AmazonProducts product) throws DAOException {

@@ -462,6 +462,12 @@ text-align: right;
 margin-top: 10px;
 }
 
+.waiting_text {
+font-size: 9px;
+text-align: right;
+margin-top: 10px;
+}
+
 
 .similar_item {
 	float:left;

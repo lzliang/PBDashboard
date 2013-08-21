@@ -1,10 +1,10 @@
-<!-- Indices written at Tue, 20 Aug 2013 14:28:51 EDT -->
+<!-- Indices written at Tue, 20 Aug 2013 18:03:47 EDT -->
 
 <datastore-indexes>
 
     <!-- Used 1 time in query history -->
-    <datastore-index kind="AmazonProduct" ancestor="true" source="auto">
-        <property name="barcode" direction="asc"/>
+    <datastore-index kind="Request" ancestor="true" source="auto">
+        <property name="helpRequestTime" direction="asc"/>
     </datastore-index>
 
 </datastore-indexes>

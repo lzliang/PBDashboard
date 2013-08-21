@@ -134,7 +134,6 @@ public class AmazonProductsDAO {
 	}
 
 	private AmazonProducts makeBean(Entity e) {
-		LOGGER.severe("int the makeBean method");
 		AmazonProducts pbean = new AmazonProducts();
 		pbean.setProductID(e.getKey().getId());
 		pbean.setProductName((String) e.getProperty("productName"));

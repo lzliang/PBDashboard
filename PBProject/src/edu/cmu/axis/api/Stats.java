@@ -81,7 +81,7 @@ public class Stats {
 		}
 		Map<String, Object> rt = new HashMap<String, Object>();
 		List<Map<String, String>> lstReq = new ArrayList<Map<String, String>>();
-		LOGGER.severe("requests" + gson.toJson(requests));
+		LOGGER.severe("requests " + gson.toJson(requests));
 		if (requests != null && requests.length != 0) {
 			for (int i = 0; i < requests.length; i++) {
 				if (requests[i] != null) {

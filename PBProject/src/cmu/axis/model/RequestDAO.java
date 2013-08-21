@@ -94,8 +94,7 @@ public class RequestDAO {
 		for (RequestBean reqBean : reqBeans) {
 			if (reqBean.getStatus().equals(status))
 				rBeans.add(reqBean);
-		}
-		LOGGER.severe("getRequests() returning data: " + gson.toJson(rBeans)); 
+		} 
 		return rBeans.toArray(new RequestBean[rBeans.size()]);
 	}
 
@@ -137,31 +136,6 @@ public class RequestDAO {
 				}
 			}
 			return rt;
-			// RequestStats[] rtBeans = new RequestStats[rt.keySet().size()];
-			// String[] keys = (String[]) rt.keySet().toArray();
-			// Arrays.sort(keys);
-			// LOGGER.severe("sorted keys: " + Arrays.toString(keys));
-			// for (int i = 0; i < keys.length; i++) {
-			// RequestStats aReqStat = new RequestStats();
-			// aReqStat.setDay(keys[i]);
-			// aReqStat.setNumberOfServedRequests(rt.get(keys[i]));
-			// rtBeans[i] = aReqStat;
-			// }
-			// RequestStats aReqStat = new RequestStats();
-			// aReqStat.setDay(allRequests[0].getDay());
-			// aReqStat.setNumberOfServedRequests(numOfServedRequest(aReqStat
-			// .getDay()));
-			// rqStats.add(aReqStat);
-			// for (int i = 1; i < allRequests.length; i++) {
-			// if (!allRequests[i].getDay().equals(aReqStat.getDay())) {
-			// aReqStat.setDay(allRequests[i].getDay());
-			// aReqStat.setNumberOfServedRequests(numOfServedRequest(aReqStat
-			// .getDay()));
-			// rqStats.add(aReqStat);
-			// }
-			// }
-			// return rqStats.toArray(new RequestStats[rqStats.size()]);
-			// return rtBeans;
 		}
 		return null;
 	}
@@ -235,6 +209,7 @@ public class RequestDAO {
 			throws DAOException, EntityNotFoundException {
 		LOGGER.severe("getting feedbacks for employee: " + empName + " with status: " + status);
 		RequestBean[] listRequests = getRequests(status);
+		LOGGER.severe("got: " + gson.toJson(listRequests));
 		List<RequestBean> desiredRequests = new ArrayList<RequestBean>();
 		for (int i = 0; i < listRequests.length; i++) {
 			if (listRequests[i].getEmployeeName().equals(empName))

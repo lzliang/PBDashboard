@@ -48,7 +48,7 @@ public class GoHelpAJAX extends HttpServlet {
 			res.setContentType("text/html");
 			res.getWriter().write("<div class=\"card_style\" onclick=\"update(\'"+ barcode +"\')\">"
 					+ "<div id=\"request_pic\" class=\"request_pic\">"
-					+ "<img height=\"55\" width=\"42\" src=\""+ productMap.get("Picture") +"\">"
+					+ "<img width=\"50\" src=\""+ productMap.get("Picture") +"\">"
 						+ "</div>"  
 					+ "<div id=\"request_text\" class=\"request_text\">"
 					+ "<p>Name: Joe Doe </p>"

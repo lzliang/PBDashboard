@@ -237,7 +237,7 @@ function loadFeedback() {
 					+ "</li>";
 			});
 
-			document.getElementById("comment_list").innerHTML=selectString;
+			document.getElementById("feedback_list").innerHTML=selectString;
 		}
 	});
 }

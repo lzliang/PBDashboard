@@ -75,7 +75,7 @@ public class RequestRefreshAJAX extends HttpServlet {
 
 					rt.append("<div class=\"card_style\" onclick=\"update(\'"+ barcode +"\')\">");
 					rt.append("<div id=\"request_pic\" class=\"request_pic\">");
-					rt.append("<img height=\"55\" width=\"42\" src=\""+ productMap.get("Picture") +"\" />");
+					rt.append("<img width=\"50\" src=\""+ productMap.get("Picture") +"\" />");
 					rt.append("</div>");
 					rt.append("<div id=\"request_text\" class=\"request_text\">");
 					rt.append("<p><b>Name: </b>"+bean.getCustomerName()+ "</p>");

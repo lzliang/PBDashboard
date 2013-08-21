@@ -57,7 +57,7 @@ public class ProductDetailsAJAX extends HttpServlet {
 //			String randomLocation = randomLocation();
 			StringBuilder rt = new StringBuilder();
 			rt.append("<div class=\"details_pic left\">");
-			rt.append("<p><img height=\"85\" width=\"85\" src=\""
+			rt.append("<p><img width=\"90\" src=\""
 					+ productMap.get("Picture") + "\"></p></div>");
 			rt.append("<div style=\"margin:15px 15px; float:left;\">");
 			rt.append(" <p>Product Name: " + productMap.get("Name") + "</p>");

@@ -51,7 +51,7 @@ public class SimilarProductAJAX extends HttpServlet {
 				if (productMap.get(key) != null) {
 					rt.append("<div id=\"similar_item\" class=\"similar_item\">");
 					rt.append("<div id=\"similar_pic\">");
-					rt.append("<img height=\"100\" width=\"77\" src=\"");
+					rt.append("<img width=\"80\" src=\"");
 					rt.append(productMap.get(key).get(
 							"Picture") + "\"/>" + "</div>");
 					rt.append("<p>");

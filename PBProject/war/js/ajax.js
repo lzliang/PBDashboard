@@ -208,5 +208,37 @@ function complete(requestID) {
 }
 
 
+function loadFeedback() {
+	jQuery.ajax("http://"+host+"/_api/stats/feedback/employee", {
+		dataType : "json",
+		type : "GET", //GET is the default but just wanted to show this option
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert(errorThrown);
+		},
+		success : function(data, textStatus, jqXHR) {
+			var selectString = "";
 
+			data.Reviews.forEach(function(val, index, array) {
+				selectString += "<li>"
+					+ "<div class=\"comment\">"
+					+ "<div class=\"comment_left\">"
+					+ "<img style=\"margin-left:15px\" height=\"50\" width=\"50\" src=\"img/user.png\" />"
+					+ "<div class=\"comment-meta\">"
+					+ "<p class=\"comment-author\"><span>"+val.CustomerName+"</span></p>"
+					+ "<p class=\"comment-date\">"+val.Date+"</p> "
+					+ "</div>"
+					+ "</div>"
+					+ "<div class=\"comment_right\">"
+					+ "<p><b>"+val.Title+"</b></p>"
+					+ "<p>"+val.Content+"</p>"
+					+ "<p><img src=\"img/"+val.Rating.charAt(0)+"_Star.gif\" width=\"92\" height=\"20\" /> </p>"
+					+ "</div>"
+					+ "</div>"
+					+ "</li>";
+			});
+
+			document.getElementById("comment_list").innerHTML=selectString;
+		}
+	});
+}
 

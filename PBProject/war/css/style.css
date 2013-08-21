@@ -434,6 +434,7 @@ cursor: pointer;
 	float:left;
 	margin:0px 10px;
 	height:100%;
+	width:12%;
 	padding-top: 2%;
 }
 
@@ -443,7 +444,8 @@ cursor: pointer;
 }
 
 .request_button {
-	float:right;
+	float:left;
+	width:18%;
 	margin:10px 10px;
 }
 

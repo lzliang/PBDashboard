@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import cmu.axis.amazonapi.ProductInfo;
 import cmu.axis.amazonapi.Reviews;
+import cmu.axis.databean.RequestBean;
 import cmu.axis.model.AmazonProductsDAO;
 import cmu.axis.model.DAOException;
 import cmu.axis.model.RequestDAO;
@@ -66,31 +67,65 @@ public class Stats {
 	}
 
 	@GET
+	@Path("/feedback/{employeeName}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getEmployeeFeedbacks(
+			@PathParam("employeeName") String employeeName) throws DAOException {
+		LOGGER.severe("getting feedbacks for employee: " + employeeName);
+		RequestBean[] requests = null;
+		try {
+			requests = rd.getRequest(employeeName, "Done");
+			LOGGER.severe("requests with employee " + gson.toJson(requests));
+		} catch (Exception e) {
+			Util.returnError(null, e);
+		}
+		Map<String, Object> rt = new HashMap<String, Object>();
+		List<Map<String, String>> lstReq = new ArrayList<Map<String, String>>();
+		if (requests != null && requests.length != 0) {
+			for (int i = 0; i < requests.length; i++) {
+				if (requests[i] != null) {
+					String feedback = requests[i].getCustomerFeedback();
+					String cusName = requests[i].getCustomerName();
+					HashMap<String, String> currReq = gson.fromJson(feedback,
+							HashMap.class);
+					currReq.put("customerName", cusName);
+					lstReq.add(currReq);
+				}
+			}
+		}
+		rt.put("status", "success");
+		rt.put("data", lstReq);
+		return Response.status(200).header("Access-Control-Allow-Origin", "*")
+				.entity(gson.toJson(rt)).build();
+	}
+
+	@GET
 	@Path("/test/{barcode}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response testAPI(@PathParam("barcode") String barcode) throws DAOException {
+	public Response testAPI(@PathParam("barcode") String barcode)
+			throws DAOException {
 		AmazonProductsDAO apd = new AmazonProductsDAO();
 		ProductInfo pi = new ProductInfo();
-//		Reviews r = new Reviews();
-//		
-//		Map<String, Map<String, String>> sim = pi.getSimilarities(barcode);
-//		LOGGER.info(gson.toJson(sim));
-//		// TESTing traverse
-//		for (String key : sim.keySet()) {
-//			Map<String, String> m = sim.get(key);
-//			for (String mk : m.keySet()) {
-//				String v = m.get(mk);
-//			}
-//		}
-//		List<Map<String, String>> reviews = r.getReviews(barcode);
-//		if (reviews != null) {
-//			// testing list traverse
-//			for (Map<String, String> m : reviews) {
-//				for (String mk : m.keySet()) {
-//					String v = m.get(mk);
-//				}
-//			}
-//		}
+		// Reviews r = new Reviews();
+		//
+		// Map<String, Map<String, String>> sim = pi.getSimilarities(barcode);
+		// LOGGER.info(gson.toJson(sim));
+		// // TESTing traverse
+		// for (String key : sim.keySet()) {
+		// Map<String, String> m = sim.get(key);
+		// for (String mk : m.keySet()) {
+		// String v = m.get(mk);
+		// }
+		// }
+		// List<Map<String, String>> reviews = r.getReviews(barcode);
+		// if (reviews != null) {
+		// // testing list traverse
+		// for (Map<String, String> m : reviews) {
+		// for (String mk : m.keySet()) {
+		// String v = m.get(mk);
+		// }
+		// }
+		// }
 		return Response.status(200).header("Access-Control-Allow-Origin", "*")
 				.entity(gson.toJson(apd.getProducts())).build();
 	}

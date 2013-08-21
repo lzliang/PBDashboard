@@ -32,7 +32,6 @@ public class Feedback {
 		
 		HashMap<String, String> fb = gson
 				.fromJson(inputRequest, HashMap.class);
-		
 		LOGGER.severe("fb: " + fb);
 		Map<String,String> rt = new HashMap<String,String>();
 		

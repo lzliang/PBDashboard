@@ -31,6 +31,8 @@ public class GoHelpAJAX extends HttpServlet {
 			RequestBean requestBean = requestDAO.getRequest(requestID);
 			String barcode = requestBean.getBarcode();
 			requestBean.setStatus("Serving");
+			requestBean.setEmployeeID(123);
+			requestBean.setEmployeeName("employee");
 			requestDAO.updateRequest(requestID, requestBean);
 		
 			ProductInfo p = new ProductInfo();

@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -6,7 +5,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="author" content="Paweł 'kilab' Balicki - kilab.pl" />
-<title>SimpleAdmin</title>
+<title>Performance</title>
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="css/navi.css" media="screen" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
@@ -27,45 +26,7 @@ $(function(){
 </head>
 <body>
 <div class="wrap">
-	<div id="header">
-		<div id="top">
-			<div class="left">
-				<p>Welcome, <strong>${userName}.</strong> [ <a href="logout.do">logout</a> ]</p>
-			</div>
-			<div class="right">
-				<div class="align-right">
-					<p>Last login: <strong>${loginTime}</strong></p>
-				</div>
-			</div>
-		</div>
-		<div id="nav">
-			<ul>
-				<li class="upp"><a href="helpRequest.jsp">In-store Help</a>					
-				</li>
-				<c:if test="${userName == 'manager'}">
-        <li class="upp"><a href="statistics.jsp">Statistics</a>
-          <ul>
-            <li>&#8250; <a href="statistics.jsp">Help Feature Analysis</a></li>
-            <li>&#8250; <a href="staff_evaluation.jsp">Staff Evaluation</a></li>
-            <li>&#8250; <a href="customer_analysis.jsp">Customer Analysis</a></li>
-            <li>&#8250; <a href="other_graphics.jsp">Other Graphics</a></li>
-          </ul>
-        </li>
-        </c:if>
-        
-        <c:if test="${userName == 'employee'}">
-        <li class="upp"><a href="employee_details.jsp">My performance</a>
-        </li>
-        </c:if>
-				<li class="upp"><a href="#">Settings</a>
-					<ul>
-						<li>&#8250; <a href="">Site Configuration</a></li>
-						<li>&#8250; <a href="">Contact Form</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div>
+	<jsp:include page="header.jsp" />
 	
 	<div id="content">
 		
@@ -110,14 +71,8 @@ $(function(){
 		<div class="clear"></div>
 	</div>
 
-	<div id="footer">
-		<div class="left">
-			<p>Admin Panel: <a href="">http://axispbcusen.appspot.com/</a></p>
-		</div>
-		<div class="right">
-			<p><a href="">Example link 1</a> | <a href="">Example link 2</a></p>
-		</div>
-	</div>
+	<jsp:include page="footer.jsp" />
+	
 </div>
 
 </body>

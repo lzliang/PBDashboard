@@ -27,6 +27,7 @@ public class Controller extends HttpServlet {
         Action.add(new ToDoListAction(model));
         Action.add(new AddProductAction(model));
         Action.add(new DashboardLoginAction(model));
+        Action.add(new EmployeeDetailsAction(model));
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,18 +58,24 @@ public class Controller extends HttpServlet {
 //        	// If the user hasn't logged in, so login is the only option
 //			return Action.perform("login.do",request);
 //        }
+        System.out.println(1);
+        
+        if (userName == null || userName.equals("")) {
+//        	// If the user hasn't logged in, so login is the only option
+        	 System.out.println(33333);   
+        	return Action.perform("dashboardLogin.do",request);
+        }
         
         if (action.equals("start")) {
             // If he's logged in but back at the /start page, send him to manage his pics
             if (userName != null && userName.equals("manager") && password !=null && password.equals("axis")) {
-            	System.out.println(1);
                     return "helpRequest.jsp";          
             }
             if (userName != null && userName.equals("employee")&& password !=null && password.equals("axis")) {
             	System.out.println(2);   
             	return "helpRequest.jsp"; 
             }               
-            System.out.println(3);       
+               
             return Action.perform("dashboardLogin.do",request);
     }
         

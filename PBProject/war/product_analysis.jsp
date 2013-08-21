@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="author" content="Paweł 'kilab' Balicki - kilab.pl" />
-<title>Statistics</title>
+<title>Product Analysis</title>
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="css/navi.css" media="screen" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
@@ -22,9 +22,6 @@ $(function(){
 	$(".box").children(".h_title").click( function() { $(this).next("ul").slideToggle(); });
 });
 </script>
-
-
-
 </head>
 <body>
 <div class="wrap">
@@ -40,23 +37,27 @@ $(function(){
       
       
 		  <div class="full_w">
-				<div class="h_title">Help Feature Analysis</div>
-					
-					<script src="js/highcharts_init.js"></script>
-					<script src="http://code.highcharts.com/stock/highstock.js"></script>
-<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+				<div class="h_title">Product Analysis</div>
+				
+                <div style="text-align:center">	
+                <script src="js/piechart_init2.js"></script>
+                    <script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
-
-<div id="container" style="height: 500px; min-width: 500px"></div>
-					
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                    
+                    </div>
+                    
+                    
 			</div>
-		  <div class="clear"></div>
+		  
 	  </div>
-		<div id="json" class="clear"></div>
+		<div class="clear"></div>
 	</div>
 
-<jsp:include page="footer.jsp" />	
+	<jsp:include page="footer.jsp" />
 
+	
 </div>
 
 </body>

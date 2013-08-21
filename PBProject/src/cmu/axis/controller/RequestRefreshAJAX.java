@@ -23,10 +23,6 @@ public class RequestRefreshAJAX extends HttpServlet {
 	private Model model;
 	private static final Logger log = Logger.getLogger(RequestRefreshAJAX.class.getName());
 
-
-
-
-	//	private RequestDAO requestDAO;
 	private RequestDAO requestDAO;
 
 	private StringBuilder rt = new StringBuilder();
@@ -34,7 +30,6 @@ public class RequestRefreshAJAX extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws java.io.IOException {
-		//		String result = new String();
 
 		try {
 			model = new Model(getServletConfig());

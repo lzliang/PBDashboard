@@ -141,12 +141,12 @@ function goHelp(childnode, requestID) {
 		parentdiv.parentNode.removeChild(parentdiv);
 
 	} else {
-		parentdiv.parentNode.removeChild(parentdiv);
-		requestPanel.style.height="62%";
 
 		var xmlHttp_help = getXMLHttpRequest();
 		xmlHttp_help.onreadystatechange=function(){
 			if(xmlHttp_help.readyState==4){
+				parentdiv.parentNode.removeChild(parentdiv);
+				requestPanel.style.height="62%";
 				document.getElementById("helping_request").innerHTML=xmlHttp_help.responseText;
 			}
 		}

@@ -27,51 +27,17 @@ public class HelpRequestAction extends HttpServlet {
 	private Model model;
 	private static final Logger log = Logger.getLogger(HelpRequestAction.class.getName());
 
-
-
-
-
-	//	private RequestDAO requestDAO;
 	private RequestDAO requestDAO;
-	
-	private AmazonProductsDAO amazonDAO;
 
 	private StringBuilder rt = new StringBuilder();
-//	private String latestTime = "0";
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws java.io.IOException {
-		//		String result = new String();
 
 		try {
 			model = new Model(getServletConfig());
 			requestDAO = model.getRequestDAO();
-//			amazonDAO = model.getAmazonProductDAO();
-//			
-//			AmazonProducts amazonBean = new AmazonProducts();
-//			amazonBean.setBarCode("745883596720");
-//			amazonBean.setProductDescription("test description");
-//			amazonBean.setProductID(123);
-//			amazonBean.setProductName("test Name");
-//			amazonBean.setReview("test reviews");
-//			amazonBean.setSimilarProducts("test similarProducts");
-//			
-//			amazonDAO.addProduct(amazonBean);
-			
-//			log.severe("ready to use amazonDAO");
-//			
-//			if(amazonDAO.doesExist("745883596720")) {
-//				log.severe("barcode 745... exists   ");
-//				System.out.println("barcode 745... exists   ");
-//			}else{
-//				log.severe("barcode 745... NOT exists   ");
-//				System.out.println("barcode 745...NOT exists   ");
-//			}
-//			
-//			AmazonProducts[] amazonProducts = amazonDAO.getProducts();
-//			log.severe("amazon products length" + amazonProducts.length);
-//			System.out.println("amazon products length" + amazonProducts.length);
-//			if(latestTime.equals("0")) {
+		
 //				RequestBean requestBean = new RequestBean();
 //				int j = (int)(Math.random()*10);
 //				if (j%3==0){
@@ -94,37 +60,28 @@ public class HelpRequestAction extends HttpServlet {
 //				requestBean.setEmployeeID(0);
 //				requestBean.setDeviceId("xx");
 //				requestDAO.addRequest(requestBean);
-
-//			RequestBean[] requestList = requestDAO.getRequests("Done");
+			
 			RequestBean[] requestList = requestDAO.getRequests("Need Help");
-//				System.out.println("00000    ");
+
 			long currentMillis = System.currentTimeMillis();
 			String currentDate = Long.toString(Util.trimTimeStampToDay(currentMillis));
-//			
-//			
-//			RequestBean[] requestList = requestDAO.getRequestsAfterThisPoint(currentDate);
-				log.severe("00000    ");
+
 		
 				rt = new StringBuilder();
-				HttpSession session = req.getSession();
+//				HttpSession session = req.getSession();
 				if(requestList == null || requestList.length ==0) {
-//					System.out.println("00000    return");
-					log.severe("00000    return");
-//					log.severe("00000    listLength "+requestList.length);
-					session.setAttribute("latestTime", currentDate);
+//					session.setAttribute("latestTime", currentDate);
+					res.setContentType("text/html");
+					res.getWriter().write("");
 					return;
 				}
-//				System.out.println("00000    no return");
-				log.severe("00000    no return");
-				int length = requestList.length;
-//				System.out.println("00000    length" +length);
-				log.severe("00000    length "+length);
-			    String latestTime = requestList[length-1].getHelpRequestTime();
-			    session.setAttribute("latestTime", latestTime);
 
-			    
-//			    System.out.println("00000   set session ");
-			    log.severe("00000    set session");
+				int length = requestList.length;
+
+//			    String latestTime = requestList[length-1].getHelpRequestTime();
+//			    session.setAttribute("latestTime", latestTime);
+
+
 				ProductInfo p = new ProductInfo();
 				Map<String, String> productMap = new HashMap<String, String>();
 				String barcode = new String();
@@ -166,15 +123,8 @@ public class HelpRequestAction extends HttpServlet {
 					rt.append("</div>");
 					rt.append("<div class=\"clear\"></div>");
 					rt.append("</div>");
-				}
-//			} else {
-//				RequestBean[] requestList = requestDAO.getRequestsAfterThisPoint(latestTime);
-//				System.out.println("1111    "+latestTime + "length "+requestList.length);
-//				setRequests(requestList);
-//
-//			}
+				}		
 		} catch (Exception e) {
-			log.severe("0000    exception ");
 			e.printStackTrace();
 			res.setContentType("text/html");
 			res.getWriter().write(rt.toString());

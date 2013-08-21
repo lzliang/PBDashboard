@@ -69,11 +69,9 @@ public class DashboardLoginAction extends Action  {
 				session.setAttribute("password", form.getPassword());
 				
 				long start = System.currentTimeMillis() - 480000;
-				// do your work...
 
 				DateFormat df = new SimpleDateFormat("MM-dd-yyyy HH:mm");
 				df.setTimeZone(TimeZone.getTimeZone("GMT-4"));
-//				System.out.println(df.format(new Date(start)));
 				session.setAttribute("loginTime", df.format(new Date(start)));
 				
 				return "helpRequest.jsp";

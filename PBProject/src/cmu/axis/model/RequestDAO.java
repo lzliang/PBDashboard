@@ -240,6 +240,7 @@ public class RequestDAO {
 			if (listRequests[i].getEmployeeName().equals(empName))
 				desiredRequests.add(listRequests[i]);
 		}
+		LOGGER.severe("at the end of getRequest with name and status: " + gson.toJson(desiredRequests));
 		return desiredRequests.toArray(new RequestBean[desiredRequests.size()]);
 	}
 

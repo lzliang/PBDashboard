@@ -218,20 +218,18 @@ function loadFeedback() {
 		success : function(data, textStatus, jqXHR) {
 			var selectString = "";
 
-			data.Reviews.forEach(function(val, index, array) {
+			data.data.forEach(function(val, index, array) {
 				selectString += "<li>"
 					+ "<div class=\"comment\">"
 					+ "<div class=\"comment_left\">"
 					+ "<img style=\"margin-left:15px\" height=\"50\" width=\"50\" src=\"img/user.png\" />"
 					+ "<div class=\"comment-meta\">"
-					+ "<p class=\"comment-author\"><span>"+val.CustomerName+"</span></p>"
-					+ "<p class=\"comment-date\">"+val.Date+"</p> "
+					+ "<p class=\"comment-author\"><span>"+val.customerName+"</span></p>"
 					+ "</div>"
 					+ "</div>"
 					+ "<div class=\"comment_right\">"
-					+ "<p><b>"+val.Title+"</b></p>"
-					+ "<p>"+val.Content+"</p>"
-					+ "<p><img src=\"img/"+val.Rating.charAt(0)+"_Star.gif\" width=\"92\" height=\"20\" /> </p>"
+					+ "<p>"+val.feedback+"</p>"
+					+ "<p><img src=\"img/"+val.emp_rating+"_Star.gif\" width=\"92\" height=\"20\" /> </p>"
 					+ "</div>"
 					+ "</div>"
 					+ "</li>";

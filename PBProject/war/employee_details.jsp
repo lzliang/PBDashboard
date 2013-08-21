@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="css/navi.css" media="screen" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/tab.js"></script>
+<script type="text/javascript" language="javascript" src="js/ajax.js"></script>
 <script type="text/javascript">
 window.onload = function(){
 	var name = "${userName}";
@@ -68,10 +69,11 @@ $(function(){
            
 			<div class="clear"></div>
           
-        <c:if test="${userName == 'manager'}">    
-        <div class="full_w scrollable">
-        <div class="h_title">Other Information</div>
+        <c:if test="${userName == 'manager'}"> 
+        <div class="full_w scrollable content">
+        <div class="h_title">User Feedbacks</div>
         <div class="comment_list scroll_panel">
+        <script type="text/javascript">loadFeedback();</script>   
             <ol id="feedback_list" ></ol>
             </div>
         </div>

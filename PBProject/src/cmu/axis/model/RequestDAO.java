@@ -209,10 +209,10 @@ public class RequestDAO {
 			throws DAOException, EntityNotFoundException {
 		LOGGER.severe("getting feedbacks for employee: " + empName + " with status: " + status);
 		RequestBean[] listRequests = getRequests(status);
-		LOGGER.severe("got: " + gson.toJson(listRequests));
 		List<RequestBean> desiredRequests = new ArrayList<RequestBean>();
 		for (int i = 0; i < listRequests.length; i++) {
-			if (listRequests[i].getEmployeeName().equals(empName))
+			String currName = listRequests[i].getEmployeeName();
+			if (currName != null && currName.equals(empName))
 				desiredRequests.add(listRequests[i]);
 		}
 		LOGGER.severe("at the end of getRequest with name and status: " + gson.toJson(desiredRequests));

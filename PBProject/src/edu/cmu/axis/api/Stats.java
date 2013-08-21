@@ -89,6 +89,9 @@ public class Stats {
 					String cusName = requests[i].getCustomerName();
 					HashMap<String, String> currReq = gson.fromJson(feedback,
 							HashMap.class);
+					if(currReq== null || currReq.get("feedback") == null || currReq.get("feedback").equals("")){
+						continue;
+					}
 					currReq.put("customerName", cusName);
 					lstReq.add(currReq);
 				}

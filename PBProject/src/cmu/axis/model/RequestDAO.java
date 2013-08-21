@@ -227,14 +227,15 @@ public class RequestDAO {
 	return null;
     }
 
-    public RequestBean getRequest(String empName, String status)
+    public RequestBean[] getRequest(String empName, String status)
 	    throws DAOException, EntityNotFoundException {
-	RequestBean[] servingRequests = getRequests(status);
-	for (int i = 0; i < servingRequests.length; i++) {
-	    if (servingRequests[i].getEmployeeName().equals(empName))
-		return servingRequests[i];
+	RequestBean[] listRequests = getRequests(status);
+	List<RequestBean> desiredRequests = new ArrayList<RequestBean>();
+	for (int i = 0; i < listRequests.length; i++) {
+	    if (listRequests[i].getEmployeeName().equals(empName))
+		desiredRequests.add(listRequests[i]);
 	}
-	return null;
+	return desiredRequests.toArray(new RequestBean[desiredRequests.size()]);
     }
 
     public RequestBean getRequestbyEmpID(long empID) throws DAOException,

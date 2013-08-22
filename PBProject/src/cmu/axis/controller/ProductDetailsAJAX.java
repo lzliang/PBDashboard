@@ -60,8 +60,14 @@ public class ProductDetailsAJAX extends HttpServlet {
 			rt.append("<div><div class=\"details_pic left\">");
 			rt.append("<p><img width=\"90\" src=\""
 					+ productMap.get("Picture") + "\"></p></div>");
-			rt.append("<div class=\"coupon_pic\"> <img width=\"55\" src=\"img/coupon.png\" /></div>");
-			rt.append("<div class=\"coupon_text\"><b>$"+couponPrice+"</b></div></div>");
+			
+			if(barcode.equals("027242842755")){
+				rt.append("<div class=\"coupon_pic\"> <img width=\"55\" src=\"img/coupon.png\" /></div>");
+				rt.append("<div class=\"coupon_text\"><b>$"+couponPrice+"</b></div>");
+				
+			}
+			
+			rt.append("</div>");
 			rt.append("<div style=\"margin:15px 15px; float:left;\">");
 			rt.append(" <p><b>Product Name: </b>" + productMap.get("Name") + "</p>");
 			rt.append(" <p><b>Price: </b>$" + productPrice + "</p>");

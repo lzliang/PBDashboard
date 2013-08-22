@@ -21,7 +21,7 @@
             <li>&#8250; <a href="statistics.jsp">Help Feature Analysis</a></li>
             <li>&#8250; <a href="staff_evaluation.jsp">Staff Evaluation</a></li>
             <li>&#8250; <a href="product_analysis.jsp">Product Analysis</a></li>
-            <li>&#8250; <a href="other_graphics.jsp">Other Graphics</a></li>
+            <li>&#8250; <a href="other_graphics.jsp">Customer Distribution</a></li>
           </ul>
         </li>
         </c:if>

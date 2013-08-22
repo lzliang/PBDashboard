@@ -68,7 +68,7 @@ public class Controller extends HttpServlet {
         if (action.equals("start")) {
             // If he's logged in but back at the /start page, send him to manage his pics
             if (userName != null && userName.equals("manager") && password !=null && password.equals("axis")) {
-                    return "helpRequest.jsp";          
+                    return "statistics.jsp";          
             }
             if (userName != null && userName.equals("employee")&& password !=null && password.equals("axis")) {
             	System.out.println(2);   

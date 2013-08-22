@@ -38,15 +38,23 @@ public class SimilarProductAJAX extends HttpServlet {
 
 			StringBuilder rt = new StringBuilder();
 
+			String newName= new String();
 			for (String key : simprodKeys) {
 				if (productMap.get(key) != null) {
-					rt.append("<div id=\"similar_item\" class=\"similar_item\">");
-					rt.append("<div id=\"similar_pic\" style=\"text-align:center\">");
-					rt.append("<img width=\"80\" src=\"");
+					rt.append("<div class=\"similar_item\">");
+					rt.append("<div class=\"similar_pic\">");
+					rt.append("<img height=\"100\" src=\"");
 					rt.append(productMap.get(key).get(
 							"Picture") + "\"/>" + "</div>");
-					rt.append("<p>");
+					rt.append("<p title=\"");
 					rt.append(productMap.get(key).get("Name"));
+					rt.append("\">");
+					if(productMap.get(key).get("Name").length()>50){
+						newName=productMap.get(key).get("Name").substring(0, 49)+"...";
+					}else{
+						newName=productMap.get(key).get("Name");
+					}
+					rt.append(newName);
 					rt.append("</p>" + "<p>");
 					rt.append(productMap.get(key).get("Price"));
 					rt.append("</p>" + "</div>" + "</div>");	

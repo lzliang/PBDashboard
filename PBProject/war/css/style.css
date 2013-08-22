@@ -475,8 +475,14 @@ margin-top: 10px;
 
 .similar_item {
 	float:left;
-	margin: 15px 12px;
+	margin: 30px 12px;
 	width:17%;
+	height:100%;
+}
+
+.similar_pic {
+	text-align:center;
+	height:50%;
 }
 
 .price_compare_item {

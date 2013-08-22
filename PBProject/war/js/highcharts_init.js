@@ -9,11 +9,6 @@ window.onload = function() {
 			  
 			  $('#container').highcharts('StockChart', {
 					
-
-					rangeSelector : {
-						selected : 1
-					},
-
 					title : {
 						text : 'In-store Help Feature Analysis'
 					},

@@ -98,10 +98,10 @@ public class RequestRefreshAJAX extends HttpServlet {
 		} catch (Exception e) {
 			log.severe("1111    exception ");
 			res.setContentType("text/html");
-			res.getWriter().write(rt.toString());
+			res.getWriter().write("");
 		}
 		res.setContentType("text/html");
-		res.getWriter().write(rt.toString());
+		res.getWriter().write("");
 	}
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)

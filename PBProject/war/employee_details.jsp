@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -69,7 +68,7 @@ $(function(){
            
 			<div class="clear"></div>
           
-        <c:if test="${userName == 'manager'}"> 
+        
         <div class="full_w scrollable content">
         <div class="h_title">User Feedbacks</div>
         <div class="comment_list scroll_panel">
@@ -77,7 +76,7 @@ $(function(){
             <ol id="feedback_list" ></ol>
             </div>
         </div>
-        </c:if>
+       
             
             
             

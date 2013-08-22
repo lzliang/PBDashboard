@@ -85,6 +85,16 @@
     <servlet-name>RequestRefreshAJAX</servlet-name>
     <url-pattern>/requestRefreshAJAX.do</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>GetHelpingAJAX</servlet-name>
+    <servlet-class>cmu.axis.controller.GetHelpingAJAX</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetHelpingAJAX</servlet-name>
+    <url-pattern>/getHelpingAJAX.do</url-pattern>
+  </servlet-mapping>
 
   
   

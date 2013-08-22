@@ -9,15 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.appengine.api.datastore.EntityNotFoundException;
-
 import cmu.axis.amazonapi.ProductInfo;
 import cmu.axis.databean.RequestBean;
 import cmu.axis.model.DAOException;
 import cmu.axis.model.Model;
 import cmu.axis.model.RequestDAO;
 
-public class GoHelpAJAX extends HttpServlet {
+import com.google.appengine.api.datastore.EntityNotFoundException;
+
+public class GetHelpingAJAX extends HttpServlet {
 	private Model model;
 	private RequestDAO requestDAO;
 	
@@ -27,24 +27,26 @@ public class GoHelpAJAX extends HttpServlet {
 		try {
 			model = new Model(getServletConfig());
 			requestDAO = model.getRequestDAO();
-			
-			long requestID = Long.valueOf(req.getParameter("id"));
-			RequestBean requestBean = requestDAO.getRequest(requestID);
-			String barcode = requestBean.getBarcode();
-			requestBean.setStatus("Serving");
-			
+
 			HttpSession session = req.getSession();
-			String userName = (String)session.getAttribute("userName");
+			String userName = (String) session.getAttribute("userName");
 			
-//			requestBean.setEmployeeID(123);
-			requestBean.setEmployeeName(userName);
-			requestDAO.updateRequest(requestID, requestBean);
+			RequestBean requestBean = requestDAO.getRequest(userName);
+			
+			if(requestBean==null) {
+				res.setContentType("text/html");
+				res.getWriter().write("");
+				return;
+			}
+			
+			String barcode = requestBean.getBarcode();
+
 		
 			ProductInfo p = new ProductInfo();
 			Map<String, String> productMap = new HashMap<String, String>();
 			productMap = p.getProductInfoByBarcode(barcode);
 			
-			if(productMap == null) {
+			if(productMap == null || productMap.size()==0) {
 				res.setContentType("text/html");
 				res.getWriter().write("");
 				return;
@@ -61,7 +63,7 @@ public class GoHelpAJAX extends HttpServlet {
 						+ "<p><b>Location: </b>"+ requestBean.getQuery()+"</p>" 
 						+ "</div>"
 						+ "<div class=\"request_button\">"
-						+ "<button style=\"background: #80C65A\" onclick=\"complete(\'"+ requestID +"\')\">Complete</button>"
+						+ "<button style=\"background: #80C65A\" onclick=\"complete(\'"+ requestBean.getRequestID() +"\')\">Complete</button>"
 						+ "<p class=\"helping_text\">In progress...</p>"
  				    + "</div>"
 						+ "<div class=\"clear\"></div>"
@@ -84,6 +86,5 @@ public class GoHelpAJAX extends HttpServlet {
 			throws java.io.IOException {
 		doPost(req, res);
 	}
-	
 	
 }

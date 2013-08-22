@@ -55,6 +55,16 @@ function refresh() {
 	xmlHttp_refresh.send(null);
 }
 
+function getHelping() {
+	var xmlHttp_helping = getXMLHttpRequest();
+	xmlHttp_helping.onreadystatechange=function(){
+		if(xmlHttp_helping.readyState==4){
+			document.getElementById("helping_request").innerHTML = xmlHttp_helping.responseText;
+		}
+	}
+	xmlHttp_helping.open("GET","getHelpingAJAX.do",true);
+	xmlHttp_helping.send(null);
+}
 
 function update(id) {
 //	setTimeout('makeRequest()',2000);
@@ -224,7 +234,7 @@ function loadFeedback() {
 					+ "<div class=\"comment_left\">"
 					+ "<img style=\"margin-left:15px\" height=\"50\" width=\"50\" src=\"img/user.png\" />"
 					+ "<div class=\"comment-meta\">"
-					+ "<p class=\"comment-author\"><span>"+val.customerName+"</span></p>"
+					+ "<p class=\"comment-author\"><span>Anonymous</span></p>"
 					+ "</div>"
 					+ "</div>"
 					+ "<div class=\"comment_right\">"

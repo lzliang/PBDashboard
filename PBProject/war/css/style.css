@@ -503,6 +503,8 @@ margin-top: 10px;
 	color:red;
 }
 
+
+<!--fast navigation-->
 .fast_nav {
 	text-align:center;
 }
@@ -574,6 +576,17 @@ box-shadow: inset 0 -4px 0 #000;
 	float:left;
 }
 
+.coupon_text {
+	margin-top: 26px;
+	color: red;
+	font-size: 20px;
+	float: right;
+}
+
+.coupon_pic {
+	float:right;
+	margin: 0px 4% 0px -4px;
+}
 
 <!--Reviews-->
 #.avatar {

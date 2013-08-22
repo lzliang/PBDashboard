@@ -47,7 +47,7 @@ $(function(){
 <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
 
 
-<div id="container" style="height: 500px; min-width: 500px"></div>
+<div id="container" style="height: 400px; min-width: 500px"></div>
 					
 			</div>
 		  <div class="clear"></div>

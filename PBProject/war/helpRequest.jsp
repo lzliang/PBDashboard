@@ -25,6 +25,7 @@ window.onload = function(){
 		window.location = "http://"+window.location.hostname;
 	}
 initTab();
+getHelping();
 makeRequest();
 }
 </script>

@@ -61,8 +61,9 @@ public class HelpRequestAction extends HttpServlet {
 //				requestBean.setDeviceId("xx");
 //				requestDAO.addRequest(requestBean);
 			
-			RequestBean[] requestList = requestDAO.getRequests("Need Help");
+//			RequestBean[] requestList = requestDAO.getRequests("Need Help");
 //			RequestBean[] serving = requestDAO.
+			RequestBean[] requestList = requestDAO.getRequestsExcept("Done");
 
 			long currentMillis = System.currentTimeMillis();
 			String currentDate = Long.toString(Util.trimTimeStampToDay(currentMillis));
@@ -81,7 +82,9 @@ public class HelpRequestAction extends HttpServlet {
 
 //			    String latestTime = requestList[length-1].getHelpRequestTime();
 //			    session.setAttribute("latestTime", latestTime);
-
+				HttpSession session = req.getSession();
+				String userName = (String) session.getAttribute("userName");
+						
 
 				ProductInfo p = new ProductInfo();
 				Map<String, String> productMap = new HashMap<String, String>();
@@ -96,6 +99,9 @@ public class HelpRequestAction extends HttpServlet {
 				for(RequestBean bean:requestList) {
 					barcode = bean.getBarcode();
 
+					if(bean.getStatus().equals("Serving")&&bean.getEmployeeName().equals(userName)){
+						continue;
+					}
 					productMap = p.getProductInfoByBarcode(barcode);
 					if(productMap == null) {
 						continue;
@@ -111,15 +117,21 @@ public class HelpRequestAction extends HttpServlet {
 					rt.append("<p><b>Location: </b>"+ bean.getQuery() +"</p>"); 
 					rt.append("</div>");
 					rt.append("<div class=\"request_button\">");
-					rt.append("<button onclick=\"goHelp(this, \'"+bean.getRequestID()+"\')\">Go Help</button>");
-					
-					long time = current-Long.valueOf(bean.getHelpRequestTime());
-					if(time>=60000) {
-						rt.append("<p class=\"waiting_text\">"+ dfm.format(new Date(time))+ " mins ago</p>");
+					if(bean.getStatus().equals("Serving")){
+						rt.append("<p style=\"margin-top:5px; margin-left:6px;\">Serving...</p>");
 					} else {
-						rt.append("<p class=\"waiting_text\">"+ dfs.format(new Date(time))+ " secs ago</p>");
-						
+						rt.append("<button onclick=\"goHelp(this, \'"+bean.getRequestID()+"\')\">Go Help</button>");
+						long time = current-Long.valueOf(bean.getHelpRequestTime());
+						if(time>=60000) {
+							rt.append("<p class=\"waiting_text\">"+ dfm.format(new Date(time))+ " mins ago</p>");
+						} else {
+							rt.append("<p class=\"waiting_text\">"+ dfs.format(new Date(time))+ " secs ago</p>");
+							
+						}
 					}
+					
+					
+					
 					
 					rt.append("</div>");
 					rt.append("<div class=\"clear\"></div>");

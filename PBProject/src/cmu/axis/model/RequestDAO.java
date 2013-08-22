@@ -88,13 +88,25 @@ public class RequestDAO {
 
 	public RequestBean[] getRequests(String status) throws DAOException,
 			EntityNotFoundException {
-		LOGGER.severe("getRequests() with status: " + status); 
+		LOGGER.severe("getRequests() with status: " + status);
 		List<RequestBean> rBeans = new ArrayList<RequestBean>();
 		List<RequestBean> reqBeans = runAscendingQuery();
 		for (RequestBean reqBean : reqBeans) {
 			if (reqBean.getStatus().equals(status))
 				rBeans.add(reqBean);
-		} 
+		}
+		return rBeans.toArray(new RequestBean[rBeans.size()]);
+	}
+
+	public RequestBean[] getRequestsExcept(String status) throws DAOException,
+			EntityNotFoundException {
+		LOGGER.severe("getRequests() with status: " + status);
+		List<RequestBean> rBeans = new ArrayList<RequestBean>();
+		List<RequestBean> reqBeans = runAscendingQuery();
+		for (RequestBean reqBean : reqBeans) {
+			if (!reqBean.getStatus().equals(status))
+				rBeans.add(reqBean);
+		}
 		return rBeans.toArray(new RequestBean[rBeans.size()]);
 	}
 
@@ -207,7 +219,8 @@ public class RequestDAO {
 
 	public RequestBean[] getRequest(String empName, String status)
 			throws DAOException, EntityNotFoundException {
-		LOGGER.severe("getting feedbacks for employee: " + empName + " with status: " + status);
+		LOGGER.severe("getting feedbacks for employee: " + empName
+				+ " with status: " + status);
 		RequestBean[] listRequests = getRequests(status);
 		List<RequestBean> desiredRequests = new ArrayList<RequestBean>();
 		for (int i = 0; i < listRequests.length; i++) {
@@ -215,7 +228,8 @@ public class RequestDAO {
 			if (currName != null && currName.equals(empName))
 				desiredRequests.add(listRequests[i]);
 		}
-		LOGGER.severe("at the end of getRequest with name and status: " + gson.toJson(desiredRequests));
+		LOGGER.severe("at the end of getRequest with name and status: "
+				+ gson.toJson(desiredRequests));
 		return desiredRequests.toArray(new RequestBean[desiredRequests.size()]);
 	}
 

@@ -40,11 +40,12 @@ $(function(){
 				<div class="h_title">Customer Analysis</div>
 				
                 <div style="text-align:center">	
-                <script src="js/piechart_init.js"></script>
-                    <script src="http://code.highcharts.com/highcharts.js"></script>
-<script src="http://code.highcharts.com/modules/exporting.js"></script>
+                <script src="js/areaStock_init.js"></script>
+                    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<div id="container" style="height: 400px; min-width: 500px"></div>
                     
                     </div>
                     

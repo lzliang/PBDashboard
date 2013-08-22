@@ -27,7 +27,7 @@ $(document).pngFix( );
 
 	<!-- start logo -->
 	<div id="logo-login">
-		<a href="index.html"><img src="img/login/logo.png" width="156" height="40" alt="" /></a>
+		<img src="img/login/logo.png" height="60" style="margin: -10px -22px;" />
 	</div>
 	<!-- end logo -->
 	

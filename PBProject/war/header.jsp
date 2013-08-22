@@ -16,7 +16,7 @@
 				<li class="upp"><a href="helpRequest.jsp">In-store Help</a>					
 				</li>
 				<c:if test="${userName == 'manager'}">
-        <li class="upp"><a href="statistics.jsp">Statistics</a>
+        <li class="upp"><a href="statistics.jsp">Analytics</a>
           <ul>
             <li>&#8250; <a href="statistics.jsp">Help Feature Analysis</a></li>
             <li>&#8250; <a href="staff_evaluation.jsp">Staff Evaluation</a></li>

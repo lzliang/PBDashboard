@@ -74,7 +74,11 @@ public class DashboardLoginAction extends Action  {
 				df.setTimeZone(TimeZone.getTimeZone("GMT-4"));
 				session.setAttribute("loginTime", df.format(new Date(start)));
 				
-				return "helpRequest.jsp";
+				if(form.getUserName().equals("employee")){
+					return "helpRequest.jsp";					
+				} else {
+					return "statistics.jsp";
+				}
 			} 
 			
 			errors.add("Password is invalid.");

@@ -62,6 +62,7 @@ public class HelpRequestAction extends HttpServlet {
 //				requestDAO.addRequest(requestBean);
 			
 			RequestBean[] requestList = requestDAO.getRequests("Need Help");
+//			RequestBean[] serving = requestDAO.
 
 			long currentMillis = System.currentTimeMillis();
 			String currentDate = Long.toString(Util.trimTimeStampToDay(currentMillis));

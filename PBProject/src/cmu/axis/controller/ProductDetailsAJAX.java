@@ -58,14 +58,16 @@ public class ProductDetailsAJAX extends HttpServlet {
 			
 			StringBuilder rt = new StringBuilder();
 			rt.append("<div><div class=\"details_pic left\">");
-			rt.append("<p><img width=\"90\" src=\""
+			rt.append("<p><img height=\"65\" src=\""
 					+ productMap.get("Picture") + "\"></p></div>");
 			
-			if(barcode.equals("027242842755")){
-				rt.append("<div class=\"coupon_pic\"> <img width=\"55\" src=\"img/coupon.png\" /></div>");
-				rt.append("<div class=\"coupon_text\"><b>$"+couponPrice+"</b></div>");
-				
-			}
+			rt.append("<div><div class=\"coupon_btn\"> <button onclick=\"getCoupon(this, \'"+barcode+"\')\">Instant Offer</button></div></div>");
+			
+//			if(barcode.equals("027242842755")){
+//				rt.append("<div class=\"coupon_pic\"> <img width=\"55\" src=\"img/coupon.png\" /></div>");
+//				rt.append("<div class=\"coupon_text\"><b>$"+couponPrice+"</b></div>");
+//				
+//			}
 			
 			rt.append("</div>");
 			rt.append("<div style=\"margin:15px 15px; float:left;\">");

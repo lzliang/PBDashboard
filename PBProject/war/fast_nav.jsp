@@ -3,7 +3,7 @@
 					<li><a class="chart" href="statistics.jsp">Help Feature Analysis</a></li>
                     <li><a class="pgr" href="staff_evaluation.jsp">Staff Evaluation</a></li>
 					<li><a class="safari" href="product_analysis.jsp">Product Analysis</a></li>
-					<li><a class="windows" href="other_graphics.jsp">Customer Distribution</a></li>
+					<li><a class="windows" href="other_graphics.jsp">Customer Conversion</a></li>
 				</ul>
       
       </div>

@@ -156,7 +156,7 @@ function goHelp(childnode, requestID) {
 		xmlHttp_help.onreadystatechange=function(){
 			if(xmlHttp_help.readyState==4){
 				parentdiv.parentNode.removeChild(parentdiv);
-				requestPanel.style.height="62%";
+				requestPanel.style.height="64%";
 				document.getElementById("helping_request").innerHTML=xmlHttp_help.responseText;
 			}
 		}
@@ -208,9 +208,9 @@ function complete(requestID) {
 				success: function(data, textStatus, jqXHR) {
 
 					document.getElementById('helping_request').innerHTML = "";
-					document.getElementById('request_list_panel').style.height="85%";
+					document.getElementById('request_list_panel').style.height="88%";
 
-					alert('OK');
+//					alert('OK');
 //					return status;
 				}
 			}
@@ -248,5 +248,19 @@ function loadFeedback() {
 			document.getElementById("feedback_list").innerHTML=selectString;
 		}
 	});
+}
+
+function getCoupon(childnode, barcode) {
+	var child=childnode;
+	var parentdiv=child.parentNode.parentNode;
+
+	if(barcode=="027242842755") {
+		parentdiv.innerHTML = "<div class=\"coupon_pic\"> <img width=\"55\" src=\"img/coupon.png\" /></div>"
+			+"<div class=\"coupon_text_yes\"><b>Instant Offer: $179.99</b></div>";
+	} else {
+		parentdiv.innerHTML = "<div class=\"coupon_text_no\"><p>No instant offer for this product.</p></div>";
+	}
+	
+	
 }
 

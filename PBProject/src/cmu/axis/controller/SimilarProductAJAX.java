@@ -43,14 +43,14 @@ public class SimilarProductAJAX extends HttpServlet {
 				if (productMap.get(key) != null) {
 					rt.append("<div class=\"similar_item\">");
 					rt.append("<div class=\"similar_pic\">");
-					rt.append("<img height=\"100\" src=\"");
+					rt.append("<img height=\"90\" src=\"");
 					rt.append(productMap.get(key).get(
 							"Picture") + "\"/>" + "</div>");
 					rt.append("<p title=\"");
 					rt.append(productMap.get(key).get("Name"));
 					rt.append("\">");
-					if(productMap.get(key).get("Name").length()>50){
-						newName=productMap.get(key).get("Name").substring(0, 49)+"...";
+					if(productMap.get(key).get("Name").length()>52){
+						newName=productMap.get(key).get("Name").substring(0, 52)+"...";
 					}else{
 						newName=productMap.get(key).get("Name");
 					}

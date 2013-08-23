@@ -1,10 +1,14 @@
 package edu.cmu.axis.api;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 
 import javax.ws.rs.GET;
@@ -83,16 +87,23 @@ public class Stats {
 		List<Map<String, String>> lstReq = new ArrayList<Map<String, String>>();
 		LOGGER.severe("requests " + gson.toJson(requests));
 		if (requests != null && requests.length != 0) {
-			for (int i = 0; i < requests.length; i++) {
+			for (int i = requests.length - 1; i >= 0; i--) {
 				if (requests[i] != null) {
 					String feedback = requests[i].getCustomerFeedback();
 					String cusName = requests[i].getCustomerName();
+					//String date = requests[i].getDay();
+					long datel = Long.parseLong(requests[i].getDay());
+					DateFormat dfm = new SimpleDateFormat("MM-dd-yy");
+					dfm.setTimeZone(TimeZone.getTimeZone("GMT-4"));
+					String date = dfm.format(new Date(datel));
 					HashMap<String, String> currReq = gson.fromJson(feedback,
 							HashMap.class);
-					if(currReq== null || currReq.get("feedback") == null || currReq.get("feedback").equals("")){
+					if (currReq == null || currReq.get("feedback") == null
+							|| currReq.get("feedback").equals("")) {
 						continue;
 					}
 					currReq.put("customerName", cusName);
+					currReq.put("date", date);
 					lstReq.add(currReq);
 				}
 			}
